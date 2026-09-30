@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Requests — BPC Back Office</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body>
+<header class="admin-top">
+  <div class="mark">B</div>
+  <div><small>Boston Pain Center</small><strong>Back Office</strong></div>
+  <div class="spacer"></div>
+  <a class="pub" href="/">View public site</a>
+  <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign out</button>
+</header>
+
+<main class="admin-wrap">
+  <div class="notice err" id="loadError" hidden></div>
+
+  <div class="stats" id="stats">
+    <div class="stat"><div class="n" id="statNew">–</div><div class="l">New</div></div>
+    <div class="stat"><div class="n" id="statContacted">–</div><div class="l">Contacted</div></div>
+    <div class="stat"><div class="n" id="statScheduled">–</div><div class="l">Scheduled</div></div>
+    <div class="stat"><div class="n" id="statTotal">–</div><div class="l">Total requests</div></div>
+  </div>
+
+  <div class="toolbar">
+    <button class="chip active" data-f="all">All</button>
+    <button class="chip" data-f="new">New</button>
+    <button class="chip" data-f="contacted">Contacted</button>
+    <button class="chip" data-f="scheduled">Scheduled</button>
+    <button class="chip" data-f="done">Done</button>
+    <button class="chip" data-f="archived">Archived</button>
+    <div class="spacer"></div>
+    <button class="btn btn-ghost btn-sm" id="sampleBtn">+ Sample request</button>
+  </div>
+
+  <div class="card">
+    <table class="reqs">
+      <thead>
+        <tr><th>Reference</th><th>Received</th><th>Name</th><th>Type</th><th>Service</th><th>Status</th></tr>
+      </thead>
+      <tbody id="rows"></tbody>
+    </table>
+    <div class="empty" id="emptyState" hidden>
+      <strong>No requests yet</strong>
+      <p>Consultation and second-opinion requests will appear here once live intake is turned on.<br>
+      Use “+ Sample request” to preview the workflow.</p>
+    </div>
+  </div>
+</main>
+
+<script src="admin.js"></script>
+<script>
+(function () {
+  var A = window.BPCAdmin;
+  var all = [];
+  var filter = 'all';
+  var rowsEl = document.getElementById('rows');
+  var emptyEl = document.getElementById('emptyState');
+  var errEl = document.getElementById('loadError');
+
+  document.getElementById('logoutBtn').addEventListener('click', A.logout);
+
+  document.querySelectorAll('.chip').forEach(function (chip) {
+    chip.addEventListener('click', function () {
+      document.querySelectorAll('.chip').forEach(function (c) { c.classList.remove('active'); });
+      chip.classList.add('active');
+      filter = chip.getAttribute('data-f');
+      render();
+    });
+  });
+
+  document.getElementById('sampleBtn').addEventListener('click', function () {
+    var btn = this;
+    btn.disabled = true;
+    A.api('/api/bpc-requests', { method: 'POST', body: JSON.stringify({ sample: true }) })
+      .then(function () { return load(); })
+      .catch(function (e) { showError(e); })
+      .finally(function () { btn.disabled = false; });
+  });
+
+  function showError(e) {
+    errEl.textContent = e.code === 'blob_not_configured'
+      ? 'Storage is not connected yet. Add the BLOB_READ_WRITE_TOKEN environment variable in Vercel, then redeploy.'
+      : 'Could not load requests. Please refresh and try again.';
+    errEl.hidden = false;
+  }
+
+  function load() {
+    errEl.hidden = true;
+    return A.api('/api/bpc-requests')
+      .then(function (data) { all = data.requests || []; render(); })
+      .catch(function (e) { if (e.message !== 'auth') showError(e); });
+  }
+
+  function render() {
+    var counts = { new: 0, contacted: 0, scheduled: 0 };
+    all.forEach(function (r) { if (counts[r.status] !== undefined) counts[r.status]++; });
+    document.getElementById('statNew').textContent = counts.new;
+    document.getElementById('statContacted').textContent = counts.contacted;
+    document.getElementById('statScheduled').textContent = counts.scheduled;
+    document.getElementById('statTotal').textContent = all.length;
+
+    var list = all.filter(function (r) { return filter === 'all' || r.status === filter; });
+    emptyEl.hidden = list.length > 0;
+    rowsEl.innerHTML = list.map(function (r) {
+      return '<tr data-id="' + A.esc(r.id) + '">' +
+        '<td data-l="Reference"><span class="ref">' + A.esc(r.ref) + '</span></td>' +
+        '<td data-l="Received">' + A.esc(A.fmtDate(r.createdAt)) + '</td>' +
+        '<td data-l="Name">' + A.esc(r.name) + '</td>' +
+        '<td data-l="Type">' + A.esc(A.TYPE_LABELS[r.type] || r.type) + '</td>' +
+        '<td data-l="Service">' + A.esc(r.service || '—') + '</td>' +
+        '<td data-l="Status">' + A.pill(r.status, r.sample) + '</td>' +
+        '</tr>';
+    }).join('');
+    rowsEl.querySelectorAll('tr').forEach(function (tr) {
+      tr.addEventListener('click', function () {
+        location.href = '/admin/request.html?id=' + encodeURIComponent(tr.getAttribute('data-id'));
+      });
+    });
+  }
+
+  load();
+})();
+</script>
+</body>
+</html>

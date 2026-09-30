@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Sign in — BPC Back Office</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="admin-login">
+<main class="login-card">
+  <div class="login-brand">
+    <div class="login-mark">B</div>
+    <div><small>Boston Pain Center</small><strong>Back Office</strong></div>
+  </div>
+  <h1>Staff sign-in</h1>
+  <p>Consultation requests, statuses and notes. Authorized staff only.</p>
+  <form id="loginForm" autocomplete="off">
+    <label>Username
+      <input id="username" autocomplete="username" autocapitalize="off" spellcheck="false">
+    </label>
+    <label>Password
+      <input id="password" type="password" autocomplete="current-password">
+    </label>
+    <div class="login-error" id="loginError" hidden></div>
+    <button class="btn btn-primary" type="submit" id="loginBtn">Sign in</button>
+  </form>
+</main>
+<script>
+(function () {
+  var form = document.getElementById('loginForm');
+  var err = document.getElementById('loginError');
+  var btn = document.getElementById('loginBtn');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    err.hidden = true;
+    btn.disabled = true;
+    fetch('/api/bpc-login', {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        username: document.getElementById('username').value,
+        password: document.getElementById('password').value
+      })
+    }).then(function (r) {
+      btn.disabled = false;
+      if (r.ok) { location.href = '/admin/'; return; }
+      err.textContent = r.status === 401
+        ? 'Wrong username or password.'
+        : 'Sign-in is not available right now. Please try again later.';
+      err.hidden = false;
+      document.getElementById('password').value = '';
+      document.getElementById('password').focus();
+    }).catch(function () {
+      btn.disabled = false;
+      err.textContent = 'Could not reach the server. Check your connection and try again.';
+      err.hidden = false;
+    });
+  });
+})();
+</script>
+</body>
+</html>
