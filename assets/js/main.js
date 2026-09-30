@@ -4,7 +4,7 @@
 
 /* ---------- mobile menu ---------- */
 var menuBtn=document.querySelector('.menu-btn'), mainNav=document.getElementById('mainNav');
-if(menuBtn&&mainNav){menuBtn.addEventListener('click',function(){mainNav.classList.toggle('open');});}
+if(menuBtn&&mainNav){menuBtn.addEventListener('click',function(){mainNav.classList.toggle('open');});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mainNav.classList.remove('open');});});}
 
 /* ---------- language toggle (EN/ES) ---------- */
 var LANG_KEY='bpc-lang';
