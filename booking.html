@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title data-en="Schedule &amp; Pay | Boston Pain Center" data-es="Agendar y pagar | Boston Pain Center">Agendar y pagar | Boston Pain Center</title>
-<meta name="description" data-en="Book your consultation and pay securely at booking through Stripe." data-es="Reserve su consulta y pague de forma segura al reservar a través de Stripe." content="Reserve su consulta y pague de forma segura al reservar a través de Stripe.">
+<title data-en="Request a Consultation | Boston Pain Center" data-es="Solicitar una consulta | Boston Pain Center">Solicitar una consulta | Boston Pain Center</title>
+<meta name="description" data-en="Request a consultation or second opinion — for local and international patients, including those without insurance." data-es="Solicite una consulta o segunda opinión — para pacientes locales e internacionales, incluyendo quienes no tienen seguro." content="Solicite una consulta o segunda opinión — para pacientes locales e internacionales, incluyendo quienes no tienen seguro.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -43,23 +43,22 @@
   </div></div>
 </header>
 <main id="main"><div class="page-hero"><div class="wrap">
-  <div class="breadcrumb"><a href="index.html" data-en="Home" data-es="Inicio">Inicio</a> / Reserve su visita en minutos</div>
-  <span class="eyebrow" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">Agendar y pagar</span>
-  <h1 data-en="Book your visit in minutes" data-es="Reserve su visita en minutos">Reserve su visita en minutos</h1>
-  <p class="lead" data-en="Choose your service, pick your details, and pay securely at booking through Stripe." data-es="Elija su servicio, complete sus datos y pague de forma segura al reservar a través de Stripe.">Elija su servicio, complete sus datos y pague de forma segura al reservar a través de Stripe.</p>
+  <div class="breadcrumb"><a href="index.html" data-en="Home" data-es="Inicio">Inicio</a> / Solicite su consulta</div>
+  <span class="eyebrow" data-en="Request a Consultation" data-es="Solicitar una consulta">Solicitar una consulta</span>
+  <h1 data-en="Request your consultation" data-es="Solicite su consulta">Solicite su consulta</h1>
+  <p class="lead" data-en="Consultations and second opinions for local and international patients — including those without insurance. Send your request and we will contact you to confirm." data-es="Consultas y segundas opiniones para pacientes locales e internacionales — incluyendo quienes no tienen seguro. Envíe su solicitud y nos pondremos en contacto para confirmar.">Consultas y segundas opiniones para pacientes locales e internacionales — incluyendo quienes no tienen seguro. Envíe su solicitud y nos pondremos en contacto para confirmar.</p>
 </div></div>
 <section><div class="wrap" id="bookingApp">
   <div class="steps" id="bookSteps">
     <div class="step" data-en="1. Choose service" data-es="1. Elija el servicio">1. Elija el servicio</div>
     <div class="step" data-en="2. Your details" data-es="2. Sus datos">2. Sus datos</div>
-    <div class="step" data-en="3. Pay &amp; confirm" data-es="3. Pagar y confirmar">3. Pagar y confirmar</div>
+    <div class="step" data-en="3. Request sent" data-es="3. Solicitud enviada">3. Solicitud enviada</div>
   </div>
-  <div class="notice notice-demo"><h4 data-en="Demonstration booking" data-es="Reserva de demostración">Reserva de demostración</h4>
-  <p data-en="This booking flow is a demonstration until a HIPAA-compliant backend is connected. Please do not enter sensitive medical details." data-es="Este flujo de reserva es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.">Este flujo de reserva es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.</p></div>
+  <div class="notice notice-demo"><h4 data-en="Demonstration request" data-es="Solicitud de demostración">Solicitud de demostración</h4>
+  <p data-en="This request form is a demonstration until a HIPAA-compliant backend is connected. Please do not enter sensitive medical details." data-es="Este formulario de solicitud es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.">Este formulario de solicitud es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.</p></div>
   <div id="svcGrid" class="service-pick"></div>
   <div id="bookStep2" style="display:none"><div class="form-card">
-    <h3><span data-en="Booking:" data-es="Reserva:">Reserva:</span> <span id="chosenSvcName"></span></h3>
-    <p><strong id="chosenSvcPrice"></strong></p>
+    <h3><span data-en="Request:" data-es="Solicitud:">Solicitud:</span> <span id="chosenSvcName"></span></h3>
     <form id="bookingForm" novalidate>
       <div class="grid grid-2">
         <div class="field"><label data-en="Full name *" data-es="Nombre completo *">Nombre completo *</label><input data-required autocomplete="name"><span class="err" data-en="Required." data-es="Requerido.">Requerido.</span></div>
@@ -72,15 +71,15 @@
       <div class="field"><label data-en="Visit type" data-es="Tipo de visita">Tipo de visita</label>
         <select><option data-en="In person" data-es="En persona">En persona</option><option data-en="Telehealth (where eligible)" data-es="Telesalud (donde sea elegible)">Telesalud (donde sea elegible)</option></select></div>
       <div class="field"><label data-en="Brief reason for visit" data-es="Motivo breve de la visita">Motivo breve de la visita</label><textarea rows="3" data-en-ph="e.g. lower back pain for 6 months" data-es-ph="ej. dolor lumbar desde hace 6 meses" placeholder="ej. dolor lumbar desde hace 6 meses"></textarea></div>
-      <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this is a demonstration booking and not a secure medical record." data-es="Entiendo que esta es una reserva de demostración y no un registro médico seguro.">Entiendo que esta es una reserva de demostración y no un registro médico seguro.</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">Por favor confirme para continuar.</span></div>
-      <button class="btn btn-gold" type="submit" data-en="Continue to Payment" data-es="Continuar al pago">Continuar al pago</button>
+      <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this is a demonstration request and not a secure medical record." data-es="Entiendo que esta es una solicitud de demostración y no un registro médico seguro.">Entiendo que esta es una solicitud de demostración y no un registro médico seguro.</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">Por favor confirme para continuar.</span></div>
+      <button class="btn btn-gold" type="submit" data-en="Send Request" data-es="Enviar solicitud">Enviar solicitud</button>
     </form>
   </div></div>
   <div id="bookStep3" style="display:none"><div class="form-card" style="text-align:center">
-    <h2 data-en="Booking registered!" data-es="¡Reserva registrada!">¡Reserva registrada!</h2>
+    <h2 data-en="Request received!" data-es="¡Solicitud recibida!">¡Solicitud recibida!</h2>
     <p data-en="Service:" data-es="Servicio:">Servicio:</p><p><strong id="bookSvcEcho"></strong></p>
-    <p data-en="Your booking reference:" data-es="Su referencia de reserva:">Su referencia de reserva:</p><div class="ref-number" id="bookRef">BPC-BOOK-…</div>
-    <div id="payZone" style="margin-top:1rem"></div>
+    <p data-en="Your request reference:" data-es="Su referencia de solicitud:">Su referencia de solicitud:</p><div class="ref-number" id="bookRef">BPC-BOOK-…</div>
+    <p data-en="For international patients without insurance, consultations and second opinions are offered on a self-pay basis. Fees are confirmed when we contact you." data-es="Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios se confirman cuando nos pongamos en contacto.">Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios se confirman cuando nos pongamos en contacto.</p>
     <p class="kbd-hint" style="margin-top:1.2rem" data-en="We will contact you to confirm your appointment time." data-es="Nos pondremos en contacto para confirmar el horario de su cita.">Nos pondremos en contacto para confirmar el horario de su cita.</p>
   </div></div>
 </div></section>
@@ -102,7 +101,7 @@
       <li><a href="ketamine-infusion.html" data-en="Ketamine Infusion Center" data-es="Centro de infusión de ketamina">Centro de infusión de ketamina</a></li>
     </ul></div>
     <div><h4 data-en="Patients" data-es="Pacientes">Pacientes</h4><ul>
-      <li><a href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">Agendar y pagar</a></li>
+      <li><a href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">Solicitar una consulta</a></li>
       <li><a href="telehealth.html" data-en="Telehealth" data-es="Telesalud">Telesalud</a></li>
       <li><a href="second-opinions.html" data-en="Second Opinions" data-es="Segundas opiniones">Segundas opiniones</a></li>
       <li><a href="patient-resources.html" data-en="Patient Resources" data-es="Recursos para pacientes">Recursos para pacientes</a></li>
@@ -123,7 +122,6 @@
     <span><a href="privacy-disclaimer.html" data-en="Privacy &amp; Disclaimer" data-es="Privacidad y descargo">Privacidad y descargo</a> · <span data-en="Educational content only — not medical advice." data-es="Contenido educativo únicamente — no es consejo médico.">Contenido educativo únicamente — no es consejo médico.</span></span>
   </div>
 </div></footer>
-<script src="assets/js/payment-config.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

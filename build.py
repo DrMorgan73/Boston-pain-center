@@ -106,7 +106,7 @@ def footer_html():
       <li><a href="ketamine-infusion.html" data-en="Ketamine Infusion Center" data-es="Centro de infusión de ketamina">Centro de infusión de ketamina</a></li>
     </ul></div>
     <div><h4 data-en="Patients" data-es="Pacientes">Pacientes</h4><ul>
-      <li><a href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">Agendar y pagar</a></li>
+      <li><a href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">Solicitar una consulta</a></li>
       <li><a href="telehealth.html" data-en="Telehealth" data-es="Telesalud">Telesalud</a></li>
       <li><a href="second-opinions.html" data-en="Second Opinions" data-es="Segundas opiniones">Segundas opiniones</a></li>
       <li><a href="patient-resources.html" data-en="Patient Resources" data-es="Recursos para pacientes">Recursos para pacientes</a></li>
@@ -150,7 +150,6 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 {header_html(active)}
 <main id="main">{body}</main>
 {footer_html()}
-<script src="assets/js/payment-config.js"></script>
 <script src="assets/js/main.js"></script>
 </body>
 </html>'''
@@ -168,7 +167,7 @@ def cta_band(h_en, h_es, p_en, p_es):
   {t(h_en, h_es, 'h2')}
   {t(p_en, p_es, 'p')}
   <div class="hero-ctas">
-    <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a>
+    <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a>
     <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="contact.html" data-en="Contact Us" data-es="Contáctenos">{'Contáctenos' if PAGE_LANG=='es' else 'Contact Us'}</a>
   </div>
 </div></div></section>'''
@@ -251,7 +250,7 @@ def build_index():
   {t('Comprehensive pain management, regenerative medicine, and interventional care — built around you and your goals.',
      'Manejo integral del dolor, medicina regenerativa y cuidado intervencionista — centrados en usted y sus objetivos.', 'p', 'lead')}
   <div class="hero-ctas">
-    <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a>
+    <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a>
     <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="telehealth.html" data-en="Telehealth Visit" data-es="Visita por telesalud">{'Visita por telesalud' if PAGE_LANG=='es' else 'Telehealth Visit'}</a>
     <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="second-opinions.html" data-en="Second Opinion" data-es="Segunda opinión">{'Segunda opinión' if PAGE_LANG=='es' else 'Second Opinion'}</a>
   </div>
@@ -328,13 +327,13 @@ def build_index():
   </div>
 </div></div></section>
 {cta_band('Ready to take the first step?', '¿Listo para dar el primer paso?',
-          'Choose your service, pick a time, and pay securely at booking through Stripe.',
-          'Elija su servicio, seleccione un horario y pague de forma segura al reservar a través de Stripe.')}
+          'Request a consultation or second opinion — including for international patients without insurance.',
+          'Solicite una consulta o segunda opinión — incluyendo para pacientes internacionales sin seguro.')}
 '''
     return page('Boston Pain Center | Regenerate. Restore. Relieve.',
                 'Boston Pain Center | Regenerar. Restaurar. Aliviar.', 'home', body,
-                desc_en='Comprehensive pain management and regenerative medicine in Boston, MA. Schedule and pay online.',
-                desc_es='Manejo integral del dolor y medicina regenerativa en Boston, MA. Agende y pague en línea.')
+                desc_en='Comprehensive pain management and regenerative medicine in Boston, MA. Request a consultation or second opinion online.',
+                desc_es='Manejo integral del dolor y medicina regenerativa en Boston, MA. Solicite una consulta o segunda opinión en línea.')
 
 # ============================ ABOUT ============================
 def build_about():
@@ -400,7 +399,7 @@ def physician_page(slug, name, initials, extra_sections_en_es):
   <div class="card">{t('Schedule with '+name, 'Agendar con '+name, 'h3')}
   {t('Consultations are available in person and by telehealth, where appropriate.',
      'Consultas disponibles en persona y por telesalud, cuando sea apropiado.', 'p')}
-  <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a></div>
+  <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a></div>
   <div class="card" style="margin-top:18px">{t('A note on credentials', 'Una nota sobre las credenciales', 'h3')}
   {t('Titles, training, certifications, affiliations, and licensing are published only after verification. Nothing on this page should be read as a credential claim until verified information appears here.',
      'Títulos, formación, certificaciones, afiliaciones y licencias se publican solo después de la verificación. Nada en esta página debe interpretarse como una credencial hasta que aparezca aquí la información verificada.', 'p')}</div>
@@ -460,9 +459,9 @@ def service_page(active, eyebrow_en, eyebrow_es, h1_en, h1_es, lead_en, lead_es,
   <div style="margin-top:28px">{t('Frequently asked questions', 'Preguntas frecuentes', 'h2')}{faq(faqs)}</div>
 </div><div>
   <div class="card">{t('Take the next step', 'Dé el siguiente paso', 'h3')}
-  {t('Book a consultation and pay securely at booking through Stripe.',
-     'Reserve una consulta y pague de forma segura al reservar a través de Stripe.', 'p')}
-  <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a>
+  {t('Request a consultation to discuss your options — including second opinions for international patients.',
+     'Solicite una consulta para discutir sus opciones — incluyendo segundas opiniones para pacientes internacionales.', 'p')}
+  <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a>
   <div style="margin-top:.8rem"><a href="second-opinions.html" data-en="Or request a second opinion →" data-es="O solicite una segunda opinión →">{'O solicite una segunda opinión →' if PAGE_LANG=='es' else 'Or request a second opinion →'}</a></div></div>
   <div class="card" style="margin-top:18px">{t('Good to know', 'Conviene saber', 'h3')}
   {t('Every plan starts with an individualized physician evaluation. Educational content on this site is not medical advice for your specific situation.',
@@ -727,9 +726,9 @@ def build_telehealth():
   </div>
 </div><div>
   <div class="card">{t('Book a telehealth visit', 'Reserve una visita por telesalud', 'h3')}
-  {t('Choose the telehealth consultation at booking and pay securely through Stripe.',
-     'Elija la consulta por telesalud al reservar y pague de forma segura a través de Stripe.', 'p')}
-  <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a></div>
+  {t('Request a telehealth consultation — available for international patients without insurance.',
+     'Solicite una consulta por telesalud — disponible para pacientes internacionales sin seguro.', 'p')}
+  <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a></div>
 </div></div></div></section>
 '''
     return page('Telehealth | Boston Pain Center', 'Telesalud | Boston Pain Center', 'telehealth', body,
@@ -755,10 +754,12 @@ def build_second():
 </div>
 <div class="card" style="margin-top:26px"><div class="two-col"><div>
   {t('How a second opinion works', 'Cómo funciona una segunda opinión', 'h3')}
-  {t('1. Book a second-opinion review. 2. Share your records and imaging through our secure process. 3. Receive a documented assessment with recommendations — by video or in person.',
-     '1. Reserve una revisión de segunda opinión. 2. Comparta sus registros e imágenes a través de nuestro proceso seguro. 3. Reciba una evaluación documentada con recomendaciones — por video o en persona.', 'p')}
+  {t('1. Request a second-opinion review. 2. Share your records and imaging through our secure process. 3. Receive a documented assessment with recommendations — by video or in person.',
+     '1. Solicite una revisión de segunda opinión. 2. Comparta sus registros e imágenes a través de nuestro proceso seguro. 3. Reciba una evaluación documentada con recomendaciones — por video o en persona.', 'p')}
+  {t('For international patients without insurance, consultations and second opinions are offered on a self-pay basis. Fees are confirmed with you before your review begins.',
+     'Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios se confirman con usted antes de comenzar su revisión.', 'p')}
 </div><div style="align-self:center">
-  <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a>
+  <a class="btn btn-gold" href="booking.html" data-en="Request a Second Opinion" data-es="Solicitar una segunda opinión">{'Solicitar una segunda opinión' if PAGE_LANG=='es' else 'Request a Second Opinion'}</a>
   <div style="margin-top:.8rem"><a href="professional-portal.html" data-en="Physicians: use the Professional Portal →" data-es="Médicos: use el Portal profesional →">{'Médicos: use el Portal profesional →' if PAGE_LANG=='es' else 'Physicians: use the Professional Portal →'}</a></div>
 </div></div></div>
 </div></section>
@@ -949,24 +950,23 @@ def build_resources():
                 desc_es='Listas de verificación y guías descargables.')
 
 def build_booking():
-    body = page_hero('Schedule & Pay', 'Agendar y pagar',
-        'Book your visit in minutes', 'Reserve su visita en minutos',
-        'Choose your service, pick your details, and pay securely at booking through Stripe.',
-        'Elija su servicio, complete sus datos y pague de forma segura al reservar a través de Stripe.')
+    body = page_hero('Request a Consultation', 'Solicitar una consulta',
+        'Request your consultation', 'Solicite su consulta',
+        'Consultations and second opinions for local and international patients — including those without insurance. Send your request and we will contact you to confirm.',
+        'Consultas y segundas opiniones para pacientes locales e internacionales — incluyendo quienes no tienen seguro. Envíe su solicitud y nos pondremos en contacto para confirmar.')
     body += f'''
 <section><div class="wrap" id="bookingApp">
   <div class="steps" id="bookSteps">
     <div class="step" data-en="1. Choose service" data-es="1. Elija el servicio">{'1. Elija el servicio' if PAGE_LANG=='es' else '1. Choose service'}</div>
     <div class="step" data-en="2. Your details" data-es="2. Sus datos">{'2. Sus datos' if PAGE_LANG=='es' else '2. Your details'}</div>
-    <div class="step" data-en="3. Pay &amp; confirm" data-es="3. Pagar y confirmar">{'3. Pagar y confirmar' if PAGE_LANG=='es' else '3. Pay &amp; confirm'}</div>
+    <div class="step" data-en="3. Request sent" data-es="3. Solicitud enviada">{'3. Solicitud enviada' if PAGE_LANG=='es' else '3. Request sent'}</div>
   </div>
-  <div class="notice notice-demo"><h4 data-en="Demonstration booking" data-es="Reserva de demostración">{'Reserva de demostración' if PAGE_LANG=='es' else 'Demonstration booking'}</h4>
-  {t('This booking flow is a demonstration until a HIPAA-compliant backend is connected. Please do not enter sensitive medical details.',
-     'Este flujo de reserva es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.', 'p')}</div>
+  <div class="notice notice-demo"><h4 data-en="Demonstration request" data-es="Solicitud de demostración">{'Solicitud de demostración' if PAGE_LANG=='es' else 'Demonstration request'}</h4>
+  {t('This request form is a demonstration until a HIPAA-compliant backend is connected. Please do not enter sensitive medical details.',
+     'Este formulario de solicitud es una demostración hasta que se conecte un sistema compatible con HIPAA. Por favor no ingrese detalles médicos sensibles.', 'p')}</div>
   <div id="svcGrid" class="service-pick"></div>
   <div id="bookStep2" style="display:none"><div class="form-card">
-    <h3><span data-en="Booking:" data-es="Reserva:">{'Reserva:' if PAGE_LANG=='es' else 'Booking:'}</span> <span id="chosenSvcName"></span></h3>
-    <p><strong id="chosenSvcPrice"></strong></p>
+    <h3><span data-en="Request:" data-es="Solicitud:">{'Solicitud:' if PAGE_LANG=='es' else 'Request:'}</span> <span id="chosenSvcName"></span></h3>
     <form id="bookingForm" novalidate>
       <div class="grid grid-2">
         <div class="field"><label data-en="Full name *" data-es="Nombre completo *">{'Nombre completo *' if PAGE_LANG=='es' else 'Full name *'}</label><input data-required autocomplete="name"><span class="err" data-en="Required." data-es="Requerido.">{'Requerido.' if PAGE_LANG=='es' else 'Required.'}</span></div>
@@ -979,22 +979,23 @@ def build_booking():
       <div class="field"><label data-en="Visit type" data-es="Tipo de visita">{'Tipo de visita' if PAGE_LANG=='es' else 'Visit type'}</label>
         <select><option data-en="In person" data-es="En persona">{'En persona' if PAGE_LANG=='es' else 'In person'}</option><option data-en="Telehealth (where eligible)" data-es="Telesalud (donde sea elegible)">{'Telesalud (donde sea elegible)' if PAGE_LANG=='es' else 'Telehealth (where eligible)'}</option></select></div>
       <div class="field"><label data-en="Brief reason for visit" data-es="Motivo breve de la visita">{'Motivo breve de la visita' if PAGE_LANG=='es' else 'Brief reason for visit'}</label><textarea rows="3" {tph('e.g. lower back pain for 6 months', 'ej. dolor lumbar desde hace 6 meses')}></textarea></div>
-      <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this is a demonstration booking and not a secure medical record." data-es="Entiendo que esta es una reserva de demostración y no un registro médico seguro.">{'Entiendo que esta es una reserva de demostración y no un registro médico seguro.' if PAGE_LANG=='es' else 'I understand this is a demonstration booking and not a secure medical record.'}</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">{'Por favor confirme para continuar.' if PAGE_LANG=='es' else 'Please acknowledge to continue.'}</span></div>
-      <button class="btn btn-gold" type="submit" data-en="Continue to Payment" data-es="Continuar al pago">{'Continuar al pago' if PAGE_LANG=='es' else 'Continue to Payment'}</button>
+      <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this is a demonstration request and not a secure medical record." data-es="Entiendo que esta es una solicitud de demostración y no un registro médico seguro.">{'Entiendo que esta es una solicitud de demostración y no un registro médico seguro.' if PAGE_LANG=='es' else 'I understand this is a demonstration request and not a secure medical record.'}</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">{'Por favor confirme para continuar.' if PAGE_LANG=='es' else 'Please acknowledge to continue.'}</span></div>
+      <button class="btn btn-gold" type="submit" data-en="Send Request" data-es="Enviar solicitud">{'Enviar solicitud' if PAGE_LANG=='es' else 'Send Request'}</button>
     </form>
   </div></div>
   <div id="bookStep3" style="display:none"><div class="form-card" style="text-align:center">
-    {t('Booking registered!', '¡Reserva registrada!', 'h2')}
+    {t('Request received!', '¡Solicitud recibida!', 'h2')}
     {t('Service:', 'Servicio:', 'p')}<p><strong id="bookSvcEcho"></strong></p>
-    {t('Your booking reference:', 'Su referencia de reserva:', 'p')}<div class="ref-number" id="bookRef">BPC-BOOK-…</div>
-    <div id="payZone" style="margin-top:1rem"></div>
+    {t('Your request reference:', 'Su referencia de solicitud:', 'p')}<div class="ref-number" id="bookRef">BPC-BOOK-…</div>
+    {t('For international patients without insurance, consultations and second opinions are offered on a self-pay basis. Fees are confirmed when we contact you.',
+       'Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios se confirman cuando nos pongamos en contacto.', 'p')}
     <p class="kbd-hint" style="margin-top:1.2rem" data-en="We will contact you to confirm your appointment time." data-es="Nos pondremos en contacto para confirmar el horario de su cita.">{'Nos pondremos en contacto para confirmar el horario de su cita.' if PAGE_LANG=='es' else 'We will contact you to confirm your appointment time.'}</p>
   </div></div>
 </div></section>
 '''
-    return page('Schedule & Pay | Boston Pain Center', 'Agendar y pagar | Boston Pain Center', 'booking', body,
-                desc_en='Book your consultation and pay securely at booking through Stripe.',
-                desc_es='Reserve su consulta y pague de forma segura al reservar a través de Stripe.')
+    return page('Request a Consultation | Boston Pain Center', 'Solicitar una consulta | Boston Pain Center', 'booking', body,
+                desc_en='Request a consultation or second opinion — for local and international patients, including those without insurance.',
+                desc_es='Solicite una consulta o segunda opinión — para pacientes locales e internacionales, incluyendo quienes no tienen seguro.')
 
 def build_contact():
     body = page_hero('Contact', 'Contacto',
@@ -1022,7 +1023,6 @@ def build_contact():
       <option data-en="New appointment" data-es="Nueva cita">{'Nueva cita' if PAGE_LANG=='es' else 'New appointment'}</option>
       <option data-en="Telehealth" data-es="Telesalud">{'Telesalud' if PAGE_LANG=='es' else 'Telehealth'}</option>
       <option data-en="Second opinion" data-es="Segunda opinión">{'Segunda opinión' if PAGE_LANG=='es' else 'Second opinion'}</option>
-      <option data-en="Billing / payment" data-es="Facturación / pago">{'Facturación / pago' if PAGE_LANG=='es' else 'Billing / payment'}</option>
       <option data-en="Other" data-es="Otro">{'Otro' if PAGE_LANG=='es' else 'Other'}</option></select>
       <span class="err" data-en="Please choose a topic." data-es="Elija un tema.">{'Elija un tema.' if PAGE_LANG=='es' else 'Please choose a topic.'}</span></div>
     <div class="field"><label data-en="Message *" data-es="Mensaje *">{'Mensaje *' if PAGE_LANG=='es' else 'Message *'}</label><textarea rows="5" data-required {tph('How can we help?', '¿Cómo podemos ayudarle?')}></textarea><span class="err" data-en="Required — please do not include sensitive medical details." data-es="Requerido — no incluya detalles médicos sensibles.">{'Requerido — no incluya detalles médicos sensibles.' if PAGE_LANG=='es' else 'Required — please do not include sensitive medical details.'}</span></div>
@@ -1033,9 +1033,9 @@ def build_contact():
     {t('Thank you — we will be in touch. Your reference number:', 'Gracias — nos pondremos en contacto. Su número de referencia:', 'p')}
     <div class="ref-number">BPC-…</div></div></div>
 </div><div>
-  <div class="card">{t('Prefer to book directly?', '¿Prefiere reservar directamente?', 'h3')}
-  {t('Choose your service and pay securely at booking.', 'Elija su servicio y pague de forma segura al reservar.', 'p')}
-  <a class="btn btn-gold" href="booking.html" data-en="Schedule &amp; Pay" data-es="Agendar y pagar">{'Agendar y pagar' if PAGE_LANG=='es' else 'Schedule &amp; Pay'}</a></div>
+  <div class="card">{t('Prefer to request directly?', '¿Prefiere solicitar directamente?', 'h3')}
+  {t('Request a consultation or second opinion — including for international patients without insurance.', 'Solicite una consulta o segunda opinión — incluyendo para pacientes internacionales sin seguro.', 'p')}
+  <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a></div>
   <div class="card" style="margin-top:18px">{t('Hours', 'Horario', 'h3')}
   {t('Hours to be verified before launch.', 'Horario por verificar antes del lanzamiento.', 'p', 'kbd-hint')}</div>
 </div></div></div></section>
@@ -1053,9 +1053,7 @@ def build_privacy():
 <section><div class="wrap" style="max-width:820px">
   <div class="card">{t('Privacy notice (website)', 'Aviso de privacidad (sitio web)', 'h3')}
   {t('This website is informational. Demonstration forms on this site do not transmit to a secure medical-record system. Please do not submit sensitive medical details through website forms until a HIPAA-compliant backend is connected and announced.',
-     'Este sitio web es informativo. Los formularios de demostración de este sitio no se transmiten a un sistema seguro de registros médicos. Por favor no envíe detalles médicos sensibles a través de los formularios del sitio hasta que se conecte y anuncie un sistema compatible con HIPAA.', 'p')}
-  {t('Payment information entered at booking is processed by Stripe on Stripe’s secure pages. Boston Pain Center does not see or store your card details.',
-     'La información de pago ingresada al reservar es procesada por Stripe en las páginas seguras de Stripe. Boston Pain Center no ve ni almacena los datos de su tarjeta.', 'p')}</div>
+     'Este sitio web es informativo. Los formularios de demostración de este sitio no se transmiten a un sistema seguro de registros médicos. Por favor no envíe detalles médicos sensibles a través de los formularios del sitio hasta que se conecte y anuncie un sistema compatible con HIPAA.', 'p')}</div>
   <div class="card" style="margin-top:18px">{t('Medical disclaimer', 'Descargo médico', 'h3')}
   {t('Content on this site — including articles, video tips, and podcast episodes — is for general education only and is not medical advice for your situation. It does not create a physician–patient relationship. Always seek the advice of your physician or another qualified health provider with questions about a medical condition.',
      'El contenido de este sitio — incluyendo artículos, consejos en video y episodios del podcast — es solo para educación general y no es consejo médico para su situación. No crea una relación médico–paciente. Siempre busque el consejo de su médico u otro proveedor de salud calificado si tiene preguntas sobre una condición médica.', 'p')}

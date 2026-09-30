@@ -154,14 +154,8 @@ if(bookingRoot){
   var svcGrid=document.getElementById('svcGrid'),stepsEl=document.getElementById('bookSteps'),
       step2=document.getElementById('bookStep2'),step3=document.getElementById('bookStep3'),
       chosen=null,pricing=null;
-  var LINKS=(typeof BPC_STRIPE_LINKS!=='undefined')?BPC_STRIPE_LINKS:{};
   function setStep(n){
     stepsEl.querySelectorAll('.step').forEach(function(s,i){s.classList.toggle('on',i<n);});
-  }
-  function priceLabel(s){
-    var l=langNow();
-    if(s.price&&String(s.price).trim()!=='')return esc(s.price);
-    return '<span class="price-tbc">'+esc(l==='es'?'Precio por confirmar — Boston Pain Center':'Price to be confirmed — Boston Pain Center')+'</span>';
   }
   function svcName(s){return esc(langNow()==='es'?s.name_es:s.name_en);}
   function svcDesc(s){return esc(langNow()==='es'?s.desc_es:s.desc_en);}
@@ -170,8 +164,7 @@ if(bookingRoot){
     function renderGrid(){
       svcGrid.innerHTML=p.services.map(function(s){
         return '<div class="service-opt'+(chosen&&chosen.id===s.id?' selected':'')+'" data-svc="'+esc(s.id)+'" role="button" tabindex="0">'+
-        '<h4>'+svcName(s)+'</h4><p style="font-size:.88rem;color:var(--muted)">'+svcDesc(s)+'</p>'+
-        '<div class="price">'+priceLabel(s)+'</div></div>';
+        '<h4>'+svcName(s)+'</h4><p style="font-size:.88rem;color:var(--muted)">'+svcDesc(s)+'</p></div>';
       }).join('');
       svcGrid.querySelectorAll('.service-opt').forEach(function(el){
         function pick(){chosen=p.services.filter(function(s){return s.id===el.getAttribute('data-svc');})[0];
@@ -183,7 +176,6 @@ if(bookingRoot){
     function showStep2(){
       setStep(2);
       document.getElementById('chosenSvcName').textContent=svcName(chosen);
-      document.getElementById('chosenSvcPrice').innerHTML=priceLabel(chosen);
       step2.style.display='';step3.style.display='none';
       step2.scrollIntoView({behavior:'smooth',block:'start'});
     }
@@ -204,24 +196,13 @@ if(bookingRoot){
       if(!ok){if(firstBad)firstBad.focus();return;}
       var ref=makeRef('BPC-BOOK');
       setStep(3);
-      var l=langNow();
       document.getElementById('bookRef').textContent=ref;
       document.getElementById('bookSvcEcho').textContent=svcName(chosen);
-      var payZone=document.getElementById('payZone');
-      var link=LINKS[chosen.stripe_key]||'';
-      if(link){
-        payZone.innerHTML='<p>'+esc(l==='es'?'Complete su pago seguro a través de Stripe:':'Complete your secure payment through Stripe:')+'</p>'+
-        '<a class="btn btn-gold" target="_blank" rel="noopener" href="'+esc(link)+'">'+esc(l==='es'?'Pagar ahora con Stripe':'Pay now with Stripe')+'</a>'+
-        '<p class="kbd-hint" style="margin-top:.8rem">'+esc(l==='es'?'El pago se procesa en la página segura de Stripe. Boston Pain Center nunca ve ni almacena los datos de su tarjeta.':'Payment is processed on Stripe\u2019s secure page. Boston Pain Center never sees or stores your card details.')+'</p>';
-      }else{
-        payZone.innerHTML='<div class="notice notice-info" style="margin:1rem 0 0"><h4>'+esc(l==='es'?'Pago en línea activándose pronto':'Online payment activating soon')+'</h4>'+
-        '<p style="margin:.3rem 0 0">'+esc(l==='es'?'Su reserva está registrada. Para completar el pago, por favor llame a Boston Pain Center.':'Your booking is registered. To complete payment, please call Boston Pain Center.')+'</p></div>';
-      }
       form.style.display='none';step2.style.display='none';step3.style.display='';
       step3.scrollIntoView({behavior:'smooth',block:'start'});
     });
   }).catch(function(){
-    svcGrid.innerHTML='<div class="notice notice-demo">Pricing information is temporarily unavailable. Please call to book.</div>';
+    svcGrid.innerHTML='<div class="notice notice-demo">Service information is temporarily unavailable. Please contact us to request a consultation.</div>';
   });
 }
 
