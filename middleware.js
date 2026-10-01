@@ -50,6 +50,9 @@ export default async function middleware(request) {
   const { pathname } = new URL(request.url);
   // The sign-in page itself must stay public.
   if (pathname === '/admin/login.html') return undefined;
+  // Static assets (styles, scripts, images) carry no sensitive data — let them
+  // through so the sign-in page renders correctly before authentication.
+  if (/^\/admin\/.+\.(css|js|svg|png|jpg|jpeg|webp|ico|woff2?)$/i.test(pathname)) return undefined;
   const session = getCookie(request.headers.get('cookie'), 'bpc_session');
   if (session && (await validSession(session))) return undefined;
   return Response.redirect(new URL('/admin/login.html', request.url));
