@@ -1,10 +1,43 @@
-/* Boston Pain Center — site interactions v1.0 */
+/* Boston Pain Center — site interactions v2.0 */
 (function(){
 "use strict";
 
 /* ---------- mobile menu ---------- */
 var menuBtn=document.querySelector('.menu-btn'), mainNav=document.getElementById('mainNav');
 if(menuBtn&&mainNav){menuBtn.addEventListener('click',function(){mainNav.classList.toggle('open');});mainNav.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){mainNav.classList.remove('open');});});}
+
+/* ---------- dropdown parent buttons (touch + keyboard) ---------- */
+document.querySelectorAll('.has-drop > .nav-parent').forEach(function(btn){
+  btn.addEventListener('click',function(){
+    var li=btn.closest('.has-drop');
+    var wasOpen=li.classList.contains('open');
+    document.querySelectorAll('.has-drop.open').forEach(function(o){
+      o.classList.remove('open');
+      var b=o.querySelector('.nav-parent');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
+    if(!wasOpen){li.classList.add('open');btn.setAttribute('aria-expanded','true');}
+  });
+});
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.has-drop')){
+    document.querySelectorAll('.has-drop.open').forEach(function(o){
+      o.classList.remove('open');
+      var b=o.querySelector('.nav-parent');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
+  }
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){
+    document.querySelectorAll('.has-drop.open').forEach(function(o){
+      o.classList.remove('open');
+      var b=o.querySelector('.nav-parent');
+      if(b)b.setAttribute('aria-expanded','false');
+    });
+    if(mainNav)mainNav.classList.remove('open');
+  }
+});
 
 /* ---------- language toggle (EN/ES) ---------- */
 var LANG_KEY='bpc-lang';

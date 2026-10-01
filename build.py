@@ -57,7 +57,7 @@ def nav_html(active):
                 for k, h, ke, ks in drop)
             is_active = ' active' if any(k == active for k, _, _, _ in drop) else ''
             out.append(
-                f'<li class="has-drop"><button class="nav-parent{is_active}" data-en="{esc(en)}" data-es="{esc(es)}" aria-haspopup="true">{esc(label)}</button>'
+                f'<li class="has-drop"><button class="nav-parent{is_active}" data-en="{esc(en)}" data-es="{esc(es)}" aria-haspopup="true" aria-expanded="false">{esc(label)}</button>'
                 f'<div class="drop">{kids}</div></li>')
         else:
             cls = 'active' if key == active else ''
@@ -142,7 +142,7 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 <meta name="description" data-en="{esc(desc_en)}" data-es="{esc(desc_es)}" content="{esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
@@ -168,7 +168,7 @@ def cta_band(h_en, h_es, p_en, p_es):
   {t(p_en, p_es, 'p')}
   <div class="hero-ctas">
     <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a>
-    <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="contact.html" data-en="Contact Us" data-es="Contáctenos">{'Contáctenos' if PAGE_LANG=='es' else 'Contact Us'}</a>
+    <a class="btn btn-ghost-light" href="contact.html" data-en="Contact Us" data-es="Contáctenos">{'Contáctenos' if PAGE_LANG=='es' else 'Contact Us'}</a>
   </div>
 </div></div></section>'''
 
@@ -251,8 +251,8 @@ def build_index():
      'Manejo integral del dolor, medicina regenerativa y cuidado intervencionista — centrados en usted y sus objetivos.', 'p', 'lead')}
   <div class="hero-ctas">
     <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a>
-    <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="telehealth.html" data-en="Telehealth Visit" data-es="Visita por telesalud">{'Visita por telesalud' if PAGE_LANG=='es' else 'Telehealth Visit'}</a>
-    <a class="btn btn-outline" style="border-color:#fff;color:#fff" href="second-opinions.html" data-en="Second Opinion" data-es="Segunda opinión">{'Segunda opinión' if PAGE_LANG=='es' else 'Second Opinion'}</a>
+    <a class="btn btn-ghost-light" href="telehealth.html" data-en="Telehealth Visit" data-es="Visita por telesalud">{'Visita por telesalud' if PAGE_LANG=='es' else 'Telehealth Visit'}</a>
+    <a class="btn btn-ghost-light" href="second-opinions.html" data-en="Second Opinion" data-es="Segunda opinión">{'Segunda opinión' if PAGE_LANG=='es' else 'Second Opinion'}</a>
   </div>
   <div class="hero-badges">
     <span data-en="Se habla español" data-es="Se habla español">Se habla español</span>
@@ -1078,7 +1078,7 @@ def guide_shell(title_en, title_es, inner):
 <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-en="{esc(title_en)}" data-es="{esc(title_es)}">{esc(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css"></head>
 <body>
 <div class="wrap no-print" style="padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
@@ -1218,7 +1218,7 @@ def main():
         '<a class="btn btn-teal" href="index.html" data-en="Back to Home" data-es="Volver al inicio">Volver al inicio</a></div></section>')
     write('404.html', notfound)
     # favicon
-    fav = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0d2b45"/><text x="32" y="43" font-family="Georgia,serif" font-size="34" font-weight="bold" fill="#c19a5b" text-anchor="middle">B</text></svg>'''
+    fav = '''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#0a1c33"/><circle cx="32" cy="32" r="29" fill="none" stroke="#d4a24e" stroke-width="2"/><text x="32" y="43" font-family="Georgia,serif" font-size="34" font-weight="bold" fill="#d4a24e" text-anchor="middle">B</text></svg>'''
     with open(os.path.join(ROOT, 'assets', 'favicon.svg'), 'w') as f:
         f.write(fav)
     print('build complete')
