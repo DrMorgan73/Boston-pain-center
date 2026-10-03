@@ -194,6 +194,9 @@ section{padding:68px 0}
 .footer-grid li{margin:.45rem 0}
 .footer-bottom{border-top:1px solid rgba(255,255,255,.12);padding:20px 0;font-size:.82rem;color:#8ea2b9;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .footer-bottom a{color:#8ea2b9}
+.social-row{display:flex;align-items:center;gap:14px;padding:18px 0 4px;font-size:.9rem;color:#8ea2b9}
+.social-row .soc-link{display:inline-flex;align-items:center;justify-content:center;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.07);transition:background .15s,transform .15s}
+.social-row .soc-link:hover{background:rgba(255,255,255,.16);transform:translateY(-2px)}
 /* ---------- misc ---------- */
 .two-col{display:grid;grid-template-columns:1.6fr 1fr;gap:36px;align-items:start}
 table.clean{width:100%;border-collapse:collapse;font-size:.93rem;background:#fff;border-radius:12px;overflow:hidden;box-shadow:var(--shadow)}

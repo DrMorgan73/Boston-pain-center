@@ -19,6 +19,14 @@ def tph(en, es):
 
 PHONE_DISPLAY = "(617) 555-0100"  # fictional 555 range — MUST be replaced before launch
 
+# Social media presence. Fill in a profile URL to show its icon in the footer
+# (empty string = hidden). Create the accounts first, then paste the links here.
+SOCIAL = {
+    'youtube': 'https://www.youtube.com/@hydeparkpainmanagement1651',
+    'instagram': '',  # e.g. 'https://www.instagram.com/bostonpaincenter'
+    'facebook': '',   # e.g. 'https://www.facebook.com/bostonpaincenter'
+}
+
 NAV = [
     ('home', 'index.html', 'Home', 'Inicio', None),
     ('about', 'about.html', 'About', 'Nosotros', None),
@@ -88,6 +96,27 @@ def header_html(active):
   </div></div>
 </header>'''
 
+def social_html():
+    """Footer social icons — only renders for platforms with a URL in SOCIAL."""
+    icons = {
+        'youtube': ('YouTube',
+            '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><rect x="1.5" y="5" width="21" height="14" rx="4" fill="#FF0000"/><path d="M10 9.25v5.5L14.75 12Z" fill="#fff"/></svg>'),
+        'instagram': ('Instagram',
+            '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="#E1306C" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.3" fill="#E1306C" stroke="none"/></svg>'),
+        'facebook': ('Facebook',
+            '<svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="10.5" fill="#1877F2"/><text x="12" y="16.8" text-anchor="middle" font-size="13" font-weight="bold" fill="#fff" font-family="Arial,sans-serif">f</text></svg>'),
+    }
+    links = []
+    for key, (label, svg) in icons.items():
+        url = SOCIAL.get(key, '')
+        if url:
+            links.append(f'<a href="{esc(url)}" target="_blank" rel="noopener" aria-label="{label}" class="soc-link">{svg}</a>')
+    if not links:
+        return ''
+    follow = 'Síguenos' if PAGE_LANG == 'es' else 'Follow us'
+    return (f'<div class="social-row"><span data-en="Follow us" data-es="Síguenos">{follow}</span>'
+            + ''.join(links) + '</div>')
+
 def footer_html():
     return f'''<div class="emergency-strip" role="alert"><span data-en="Medical emergency? Call " data-es="¿Emergencia médica? Llame al ">¿Emergencia médica? Llame al </span><a href="tel:911">911</a><span data-en=" or go to your nearest emergency department." data-es=" o acuda al departamento de emergencias más cercano."> o acuda al departamento de emergencias más cercano.</span></div>
 <footer class="site-footer"><div class="wrap">
@@ -122,6 +151,7 @@ def footer_html():
       <li><a href="privacy-disclaimer.html" data-en="Privacy &amp; Medical Disclaimer" data-es="Privacidad y descargo médico">Privacidad y descargo médico</a></li>
     </ul></div>
   </div>
+{social_html()}
   <div class="footer-bottom">
     <span>© <span data-year></span> <span data-en="Boston Pain Center. All rights reserved." data-es="Boston Pain Center. Todos los derechos reservados.">Boston Pain Center. Todos los derechos reservados.</span></span>
     <span><a href="privacy-disclaimer.html" data-en="Privacy &amp; Disclaimer" data-es="Privacidad y descargo">Privacidad y descargo</a> · <span data-en="Educational content only — not medical advice." data-es="Contenido educativo únicamente — no es consejo médico.">Contenido educativo únicamente — no es consejo médico.</span></span>
@@ -140,6 +170,13 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title data-en="{esc(title_en)}" data-es="{esc(title_es)}">{esc(title)}</title>
 <meta name="description" data-en="{esc(desc_en)}" data-es="{esc(desc_es)}" content="{esc(desc)}">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Boston Pain Center">
+<meta property="og:title" content="{esc(title)}">
+<meta property="og:description" content="{esc(desc)}">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="{esc(title)}">
+<meta name="twitter:description" content="{esc(desc)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -935,6 +972,10 @@ def build_resources():
 <section><div class="wrap">
   {t('Downloadable guides', 'Guías descargables', 'h2')}<div class="gold-rule"></div>
   <div class="grid grid-3">{gc}</div>
+  <div id="moreResources" style="margin-top:26px" hidden>
+    {t('More resources', 'Más recursos', 'h2')}<div class="gold-rule"></div>
+    <div class="grid grid-3" id="moreResourcesGrid"></div>
+  </div>
   <div class="grid grid-2" style="margin-top:26px">
     <div class="card">{t('Your first visit', 'Su primera visita', 'h3')}
     {t('Bring prior imaging, procedure reports, a full medication list, and notes on what has — and has not — helped your pain.',
@@ -944,6 +985,54 @@ def build_resources():
        '¿Cuál es el diagnóstico? ¿Cuáles son mis opciones con beneficios y riesgos? ¿Qué pasa si no hago nada? ¿Cuál es el plazo realista?', 'p')}</div>
   </div>
 </div></section>
+'''
+    body += '''
+<script>
+/* "More resources" — files uploaded as "Other" in the back office. */
+(function () {
+  var wrap = document.getElementById('moreResources');
+  var grid = document.getElementById('moreResourcesGrid');
+  if (!wrap || !grid) return;
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function langNow(){return document.documentElement.getAttribute('lang')==='en'?'en':'es';}
+  function pick(o){var l=langNow();return (o&&(o[l]||o.en||o.es))||'';}
+  function iconFor(url){
+    if (/\.pdf(\?|$)/i.test(url)) return '📄';
+    if (/\.(png|jpe?g|webp|gif)(\?|$)/i.test(url)) return '🖼️';
+    return '📎';
+  }
+  function fileLabel(url){
+    var m = url.split('?')[0].split('/').pop() || '';
+    return m.replace(/^[0-9a-f-]{36}-/i, '');
+  }
+  function render(data){
+    var items = (data.items || []);
+    if (!items.length) return;
+    wrap.hidden = false;
+    grid.innerHTML = items.map(function (i) {
+      var isImg = /\.(png|jpe?g|webp|gif)(\?|$)/i.test(i.fileUrl || '');
+      var preview = isImg
+        ? '<a href="' + esc(i.fileUrl) + '" target="_blank" rel="noopener"><img src="' + esc(i.fileUrl) + '" alt="" style="width:100%;border-radius:10px;margin-bottom:.6rem" loading="lazy"></a>'
+        : '<div class="icon-badge">' + iconFor(i.fileUrl || '') + '</div>';
+      return '<div class="card">' + preview +
+        '<h3>' + esc(pick(i.title)) + '</h3>' +
+        (pick(i.description) ? '<p>' + esc(pick(i.description)) + '</p>' : '') +
+        '<p style="font-size:.85rem;color:var(--muted)">' + esc(i.date || '') + '</p>' +
+        '<a class="btn btn-outline btn-sm" href="' + esc(i.fileUrl) + '" target="_blank" rel="noopener" download>' +
+        '<span data-en="Download" data-es="Descargar">Descargar</span>' +
+        (fileLabel(i.fileUrl) ? ' · ' + esc(fileLabel(i.fileUrl)) : '') + '</a></div>';
+    }).join('');
+  }
+  function load(){
+    fetch('/api/bpc-media-public?type=other')
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(render)
+      .catch(function () {});
+  }
+  load();
+  document.addEventListener('bpc-lang', load);
+})();
+</script>
 '''
     return page('Patient Resources | Boston Pain Center', 'Recursos para pacientes | Boston Pain Center', 'resources', body,
                 desc_en='Preparation checklists and downloadable guides.',
