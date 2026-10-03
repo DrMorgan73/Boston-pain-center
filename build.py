@@ -23,8 +23,8 @@ PHONE_DISPLAY = "(617) 555-0100"  # fictional 555 range — MUST be replaced bef
 # (empty string = hidden). Create the accounts first, then paste the links here.
 SOCIAL = {
     'youtube': 'https://www.youtube.com/@hydeparkpainmanagement1651',
-    'instagram': '',  # e.g. 'https://www.instagram.com/bostonpaincenter'
-    'facebook': '',   # e.g. 'https://www.facebook.com/bostonpaincenter'
+    'instagram': 'https://www.instagram.com/robertofelizmd',
+    'facebook': 'https://www.facebook.com/Bostonpaincenter',
 }
 
 NAV = [
