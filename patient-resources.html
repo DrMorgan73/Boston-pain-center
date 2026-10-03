@@ -62,6 +62,10 @@
       <h3 data-en="Ketamine visit preparation guide" data-es="Guía de preparación para la visita de ketamina">Guía de preparación para la visita de ketamina</h3>
       <p data-en="Screening, what to expect, and aftercare." data-es="Evaluación, qué esperar y cuidados posteriores.">Evaluación, qué esperar y cuidados posteriores.</p>
       <a class="btn btn-outline btn-sm" href="guides/ketamine-preparation-guide.html" data-en="View &amp; Print" data-es="Ver e imprimir">Ver e imprimir</a></div></div>
+  <div id="moreResources" style="margin-top:26px" hidden>
+    <h2 data-en="More resources" data-es="Más recursos">Más recursos</h2><div class="gold-rule"></div>
+    <div class="grid grid-3" id="moreResourcesGrid"></div>
+  </div>
   <div class="grid grid-2" style="margin-top:26px">
     <div class="card"><h3 data-en="Your first visit" data-es="Su primera visita">Su primera visita</h3>
     <p data-en="Bring prior imaging, procedure reports, a full medication list, and notes on what has — and has not — helped your pain." data-es="Traiga imágenes previas, informes de procedimientos, una lista completa de medicamentos y notas sobre lo que ha ayudado — y lo que no — a su dolor.">Traiga imágenes previas, informes de procedimientos, una lista completa de medicamentos y notas sobre lo que ha ayudado — y lo que no — a su dolor.</p></div>
@@ -109,5 +113,53 @@
   </div>
 </div></footer>
 <script src="assets/js/main.js"></script>
+<script>
+/* "More resources" — files uploaded as "Other" in the back office. */
+(function () {
+  var wrap = document.getElementById('moreResources');
+  var grid = document.getElementById('moreResourcesGrid');
+  if (!wrap || !grid) return;
+  function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+  function langNow(){return document.documentElement.getAttribute('lang')==='en'?'en':'es';}
+  function pick(o){var l=langNow();return (o&&(o[l]||o.en||o.es))||'';}
+  function iconFor(url){
+    if (/\.pdf(\?|$)/i.test(url)) return '📄';
+    if (/\.(png|jpe?g|webp|gif)(\?|$)/i.test(url)) return '🖼️';
+    return '📎';
+  }
+  function fileLabel(url){
+    var m = url.split('?')[0].split('/').pop() || '';
+    return m.replace(/^[0-9a-f-]{36}-/i, '');
+  }
+  function render(data){
+    var items = (data.items || []);
+    if (!items.length) return;
+    wrap.hidden = false;
+    grid.innerHTML = items.map(function (i) {
+      var isImg = /\.(png|jpe?g|webp|gif)(\?|$)/i.test(i.fileUrl || '');
+      var preview = isImg
+        ? '<a href="' + esc(i.fileUrl) + '" target="_blank" rel="noopener"><img src="' + esc(i.fileUrl) + '" alt="" style="width:100%;border-radius:10px;margin-bottom:.6rem" loading="lazy"></a>'
+        : '<div class="icon-badge">' + iconFor(i.fileUrl || '') + '</div>';
+      return '<div class="card">' + preview +
+        '<h3>' + esc(pick(i.title)) + '</h3>' +
+        (pick(i.description) ? '<p>' + esc(pick(i.description)) + '</p>' : '') +
+        '<p style="font-size:.85rem;color:var(--muted)">' + esc(i.date || '') + '</p>' +
+        '<a class="btn btn-outline btn-sm" href="' + esc(i.fileUrl) + '" target="_blank" rel="noopener" download>' +
+        '<span data-en="Download" data-es="Descargar">Descargar</span>' +
+        (fileLabel(i.fileUrl) ? ' · ' + esc(fileLabel(i.fileUrl)) : '') + '</a></div>';
+    }).join('');
+  }
+  fetch('/api/bpc-media-public?type=other')
+    .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+    .then(render)
+    .catch(function () {});
+  document.addEventListener('bpc-lang', function () {
+    fetch('/api/bpc-media-public?type=other')
+      .then(function (r) { if (!r.ok) throw 0; return r.json(); })
+      .then(render)
+      .catch(function () {});
+  });
+})();
+</script>
 </body>
 </html>

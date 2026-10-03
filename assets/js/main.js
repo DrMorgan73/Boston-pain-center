@@ -136,6 +136,7 @@ function loadMedia(cfg){
           '<p class="media-meta">'+esc(f.date||'')+(f.duration?' · '+esc(f.duration):'')+'</p><p>'+esc(pick(f.description))+'</p>'+
           (f.youtubeId?'<div style="margin:1rem 0"><a class="btn btn-teal btn-sm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+esc(f.youtubeId)+'">'+esc(t('watch'))+'</a></div>':'')+
           (f.audioUrl?'<div style="margin:1rem 0"><audio controls preload="none" src="'+esc(f.audioUrl)+'" style="width:100%"></audio></div>':'')+
+          (f.videoUrl?'<div style="margin:1rem 0"><video controls preload="none" src="'+esc(f.videoUrl)+'" style="width:100%;border-radius:10px"></video></div>':'')+
           '</div>';
           featured.style.display='';
         }else{featured.style.display='none';}
@@ -148,6 +149,7 @@ function loadMedia(cfg){
         var media='';
         if(i.youtubeId)media='<a class="btn btn-outline btn-sm" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+esc(i.youtubeId)+'">'+esc(t('watch'))+'</a>';
         else if(i.audioUrl)media='<audio controls preload="none" src="'+esc(i.audioUrl)+'" style="width:100%;margin-top:.6rem"></audio>';
+        else if(i.videoUrl)media='<video controls preload="none" src="'+esc(i.videoUrl)+'" style="width:100%;margin-top:.6rem;border-radius:10px"></video>';
         return '<article class="card media-card"><div class="media-thumb" aria-hidden="true">'+esc(cfg.icon)+'</div>'+
         '<div><p class="media-meta">'+esc(i.date||'')+(i.duration?' · '+esc(i.duration):'')+badge+'</p>'+
         '<h3>'+esc(pick(i.title))+'</h3><p>'+esc(pick(i.description))+'</p><div style="margin-top:.8rem">'+media+'</div></div></article>';
@@ -170,14 +172,14 @@ function loadMedia(cfg){
   }).catch(function(){if(empty)empty.style.display='';});
 }
 
-/* podcast archive */
+/* podcast archive — fed by the back-office media library */
 loadMedia({listId:'podcastList',emptyId:'podcastEmpty',filterId:'podcastFilters',searchId:'podcastSearch',
-  featuredId:'podcastFeatured',json:'content/podcast.json',icon:'🎙️',
+  featuredId:'podcastFeatured',json:'/api/bpc-media-public?type=podcast',icon:'🎙️',
   strings:{latest:{en:'Latest episode',es:'Último episodio'},watch:{en:'Watch on YouTube',es:'Ver en YouTube'},
     all:{en:'All topics',es:'Todos los temas'}}});
-/* daily video tips */
+/* daily video tips — fed by the back-office media library */
 loadMedia({listId:'tipsList',emptyId:'tipsEmpty',filterId:'tipsFilters',searchId:'tipsSearch',
-  featuredId:'tipsFeatured',json:'content/video-tips.json',icon:'▶',
+  featuredId:'tipsFeatured',json:'/api/bpc-media-public?type=video',icon:'▶',
   strings:{latest:{en:"Today's tip",es:'Consejo de hoy'},watch:{en:'Watch on YouTube',es:'Ver en YouTube'},
     all:{en:'All topics',es:'Todos los temas'}}});
 

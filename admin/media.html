@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Media — BPC Back Office</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+<style>
+.media-grid{display:grid;grid-template-columns:380px 1fr;gap:22px;align-items:start}
+@media(max-width:960px){.media-grid{grid-template-columns:1fr}}
+.f-field{margin-bottom:14px}
+.f-field label{display:block;font-size:13px;font-weight:600;margin-bottom:6px;color:#dbe4f0}
+.f-field input[type=text],.f-field textarea,.f-field select{width:100%;padding:11px 13px;border:1px solid var(--line-soft);border-radius:10px;background:#0a1728;color:var(--ink);font-size:14px}
+.f-field textarea{min-height:74px;resize:vertical}
+.f-field input:focus,.f-field textarea:focus,.f-field select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(212,162,78,.25)}
+.type-seg{display:flex;gap:8px}
+.type-seg button{flex:1;padding:10px 6px;border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.04);color:#dbe4f0;font-size:13px;font-weight:600;cursor:pointer}
+.type-seg button.on{border-color:var(--gold);color:var(--gold-bright);background:rgba(212,162,78,.12)}
+.drop{border:1.5px dashed var(--line-soft);border-radius:12px;padding:22px;text-align:center;color:#9fb2c9;font-size:14px;cursor:pointer;transition:border-color .15s}
+.drop:hover,.drop.over{border-color:var(--gold);color:#dbe4f0}
+.drop input{display:none}
+.drop .fname{color:var(--gold-bright);font-weight:600;margin-top:8px;word-break:break-all}
+.progress{height:8px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;margin-top:12px;display:none}
+.progress.show{display:block}
+.progress i{display:block;height:100%;width:0;background:var(--gold-grad);transition:width .2s}
+.media-item{display:flex;gap:14px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--line-soft)}
+.media-item:last-child{border-bottom:0}
+.media-thumb{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;font-size:20px;background:rgba(212,162,78,.12);flex:none}
+.media-meta{flex:1;min-width:0}
+.media-meta strong{display:block;font-size:14.5px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.media-meta small{color:#9fb2c9;font-size:12.5px}
+.type-badge{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:99px;padding:2px 9px;margin-right:6px}
+.type-badge.podcast{background:rgba(94,234,212,.14);color:#5eead4}
+.type-badge.video{background:rgba(212,162,78,.14);color:var(--gold-bright)}
+.type-badge.other{background:rgba(148,163,184,.16);color:#cbd5e1}
+.del-btn{background:none;border:1px solid rgba(248,113,113,.5);color:#fca5a5;border-radius:10px;padding:7px 12px;font-size:12.5px;cursor:pointer;flex:none}
+.del-btn:hover{background:rgba(248,113,113,.12)}
+.hint{font-size:12.5px;color:#8fa3bd;margin-top:6px}
+</style>
+</head>
+<body>
+<header class="admin-top">
+  <div class="mark">B</div>
+  <div><small>Boston Pain Center</small><strong>Back Office</strong></div>
+  <div class="spacer"></div>
+  <a class="pub" href="/admin/">Requests</a>
+  <a class="pub" href="/">View public site</a>
+  <button class="btn btn-ghost btn-sm" id="logoutBtn">Sign out</button>
+</header>
+
+<main class="admin-wrap">
+  <div class="notice err" id="errBox" hidden></div>
+  <div class="notice" id="okBox" hidden style="background:rgba(94,234,212,.08);border:1px solid rgba(94,234,212,.4);color:#99f6e4;border-radius:var(--radius);padding:14px 18px;margin-bottom:20px;font-size:14px"></div>
+
+  <div class="media-grid">
+    <div class="card" style="padding:22px">
+      <h2 style="font-size:18px;margin-bottom:4px;color:#fff">Upload media</h2>
+      <p class="hint" style="margin-top:0;margin-bottom:16px">Podcast episodes appear on the public Podcast page · video tips on Daily Video Tips · other files under Patient Resources.</p>
+
+      <div class="f-field">
+        <label>Media type</label>
+        <div class="type-seg" id="typeSeg">
+          <button type="button" data-t="podcast" class="on">🎙️ Podcast</button>
+          <button type="button" data-t="video">▶ Video</button>
+          <button type="button" data-t="other">📎 Other</button>
+        </div>
+      </div>
+
+      <div class="f-field">
+        <label>File</label>
+        <div class="drop" id="dropZone">
+          <div>Drop a file here or <u>browse</u></div>
+          <div class="fname" id="fileName"></div>
+          <input type="file" id="fileInput">
+        </div>
+        <div class="hint" id="acceptHint"></div>
+        <div class="progress" id="progWrap"><i id="progBar"></i></div>
+      </div>
+
+      <div class="f-field"><label>Title (Español)</label><input type="text" id="titleEs" placeholder="Ej.: Cómo manejar el dolor crónico"></div>
+      <div class="f-field"><label>Title (English)</label><input type="text" id="titleEn" placeholder="E.g.: Managing chronic pain"></div>
+      <div class="f-field"><label>Description (Español)</label><textarea id="descEs" placeholder="Descripción breve del contenido"></textarea></div>
+      <div class="f-field"><label>Description (English)</label><textarea id="descEn" placeholder="Short description of the content"></textarea></div>
+      <div class="f-field"><label>Category <span class="hint" style="display:inline">(optional — used as a filter on the site)</span></label><input type="text" id="category" placeholder="E.g.: Pain Education"></div>
+
+      <button class="btn btn-primary" id="uploadBtn" style="width:100%">Upload &amp; publish</button>
+      <p class="hint">Max 500 MB per file. The file uploads straight to secure storage — large videos may take a few minutes.</p>
+    </div>
+
+    <div class="card" style="padding:22px">
+      <h2 style="font-size:18px;margin-bottom:12px;color:#fff">Published media</h2>
+      <div id="mediaList"><p class="hint">Loading…</p></div>
+    </div>
+  </div>
+</main>
+
+<script src="admin.js"></script>
+<script type="module">
+const A = window.BPCAdmin;
+document.getElementById('logoutBtn').addEventListener('click', A.logout);
+
+const ACCEPT = {
+  podcast: { label: 'Audio files — MP3, M4A, WAV, OGG (max 500 MB)', accept: 'audio/mpeg,audio/mp4,audio/wav,audio/x-wav,audio/ogg,audio/webm,audio/aac,audio/x-m4a,.m4a' },
+  video:   { label: 'Video files — MP4, WebM, MOV (max 500 MB)', accept: 'video/mp4,video/webm,video/quicktime,.mov' },
+  other:   { label: 'PDF or image files (max 500 MB)', accept: 'application/pdf,image/jpeg,image/png,image/webp,.pdf' },
+};
+let mediaType = 'podcast';
+let chosenFile = null;
+
+const seg = document.getElementById('typeSeg');
+const fileInput = document.getElementById('fileInput');
+const dropZone = document.getElementById('dropZone');
+const fileNameEl = document.getElementById('fileName');
+const acceptHint = document.getElementById('acceptHint');
+const errBox = document.getElementById('errBox');
+const okBox = document.getElementById('okBox');
+const progWrap = document.getElementById('progWrap');
+const progBar = document.getElementById('progBar');
+const uploadBtn = document.getElementById('uploadBtn');
+
+function setType(t) {
+  mediaType = t;
+  seg.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.t === t));
+  fileInput.setAttribute('accept', ACCEPT[t].accept);
+  acceptHint.textContent = ACCEPT[t].label;
+  chosenFile = null; fileInput.value = ''; fileNameEl.textContent = '';
+}
+seg.querySelectorAll('button').forEach(b => b.addEventListener('click', () => setType(b.dataset.t)));
+setType('podcast');
+
+dropZone.addEventListener('click', () => fileInput.click());
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault(); dropZone.classList.remove('over');
+  if (e.dataTransfer.files.length) pickFile(e.dataTransfer.files[0]);
+});
+fileInput.addEventListener('change', () => { if (fileInput.files.length) pickFile(fileInput.files[0]); });
+
+function pickFile(f) {
+  chosenFile = f;
+  fileNameEl.textContent = f.name + ' (' + fmtSize(f.size) + ')';
+}
+function fmtSize(n) {
+  if (n > 1048576) return (n / 1048576).toFixed(1) + ' MB';
+  return Math.max(1, Math.round(n / 1024)) + ' KB';
+}
+function showErr(msg) { errBox.textContent = msg; errBox.hidden = false; okBox.hidden = true; }
+function showOk(msg) { okBox.textContent = msg; okBox.hidden = false; errBox.hidden = true; }
+function clearMsg() { errBox.hidden = true; okBox.hidden = true; }
+
+async function blobPut() {
+  const urls = [
+    'https://cdn.jsdelivr.net/npm/@vercel/blob@2/client/+esm',
+    'https://unpkg.com/@vercel/blob@2/client/+esm',
+  ];
+  for (const u of urls) {
+    try { const m = await import(u); if (m && m.put) return m.put; } catch (e) { /* try next */ }
+  }
+  throw new Error('upload_library');
+}
+
+// Read audio/video duration from the file without uploading it.
+function detectDuration(file) {
+  return new Promise(resolve => {
+    if (!/^(audio|video)\//.test(file.type)) return resolve('');
+    const url = URL.createObjectURL(file);
+    const el = document.createElement(/video\//.test(file.type) ? 'video' : 'audio');
+    el.preload = 'metadata';
+    el.onloadedmetadata = () => {
+      URL.revokeObjectURL(url);
+      const s = Math.round(el.duration || 0);
+      resolve(s > 0 ? Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0') : '');
+    };
+    el.onerror = () => { URL.revokeObjectURL(url); resolve(''); };
+    el.src = url;
+    setTimeout(() => resolve(''), 15000);
+  });
+}
+
+uploadBtn.addEventListener('click', async () => {
+  clearMsg();
+  const titleEs = document.getElementById('titleEs').value.trim();
+  const titleEn = document.getElementById('titleEn').value.trim();
+  if (!chosenFile) return showErr('Choose a file first.');
+  if (!titleEs && !titleEn) return showErr('Add a title (Spanish or English).');
+  if (chosenFile.size > 500 * 1024 * 1024) return showErr('File is over the 500 MB limit.');
+
+  uploadBtn.disabled = true;
+  progWrap.classList.add('show'); progBar.style.width = '0';
+  try {
+    const put = await blobPut().catch(() => { throw new Error('upload_library'); });
+    const tok = await A.api(
+      '/api/bpc-media?action=token&type=' + mediaType +
+      '&name=' + encodeURIComponent(chosenFile.name) +
+      '&mime=' + encodeURIComponent(chosenFile.type || 'application/octet-stream')
+    );
+    const duration = await detectDuration(chosenFile);
+    const blob = await put(tok.pathname, chosenFile, {
+      access: 'public',
+      token: tok.token,
+      contentType: chosenFile.type,
+      multipart: chosenFile.size > 8 * 1024 * 1024,
+      onUploadProgress: ({ percentage }) => { progBar.style.width = Math.round(percentage) + '%'; },
+    });
+    await A.api('/api/bpc-media', {
+      method: 'POST',
+      body: JSON.stringify({
+        type: mediaType,
+        title_es: titleEs, title_en: titleEn,
+        desc_es: document.getElementById('descEs').value,
+        desc_en: document.getElementById('descEn').value,
+        category: document.getElementById('category').value,
+        url: blob.url, pathname: blob.pathname,
+        contentType: blob.contentType || chosenFile.type,
+        size: chosenFile.size, duration,
+      }),
+    });
+    showOk('Published — it is now live on the public site.');
+    ['titleEs','titleEn','descEs','descEn','category'].forEach(id => document.getElementById(id).value = '');
+    chosenFile = null; fileInput.value = ''; fileNameEl.textContent = '';
+    await loadList();
+  } catch (e) {
+    showErr(e.message === 'upload_library'
+      ? 'Upload library failed to load. Check your connection and try again.'
+      : (e.code === 'blob_not_configured'
+        ? 'Storage is not connected yet. Add the BLOB_READ_WRITE_TOKEN environment variable in Vercel, then redeploy.'
+        : 'Upload failed: ' + (e.message || 'please try again.')));
+  } finally {
+    uploadBtn.disabled = false;
+    setTimeout(() => progWrap.classList.remove('show'), 1200);
+  }
+});
+
+const ICONS = { podcast: '🎙️', video: '▶', other: '📎' };
+async function loadList() {
+  const listEl = document.getElementById('mediaList');
+  try {
+    const data = await A.api('/api/bpc-media');
+    const items = data.items || [];
+    if (!items.length) { listEl.innerHTML = '<p class="hint">Nothing uploaded yet.</p>'; return; }
+    listEl.innerHTML = items.map(i => {
+      const title = i.title.es || i.title.en || '(untitled)';
+      return '<div class="media-item">' +
+        '<div class="media-thumb">' + ICONS[i.type] + '</div>' +
+        '<div class="media-meta"><strong>' + A.esc(title) + '</strong>' +
+        '<small><span class="type-badge ' + i.type + '">' + i.type + '</span>' +
+        A.esc(i.date || '') + (i.duration ? ' · ' + A.esc(i.duration) : '') + ' · ' + fmtSize(i.size || 0) + '</small></div>' +
+        '<button class="del-btn" data-id="' + A.esc(i.id) + '">Delete</button></div>';
+    }).join('');
+    listEl.querySelectorAll('.del-btn').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        if (!confirm('Delete this media? It will be removed from the public site immediately.')) return;
+        btn.disabled = true;
+        try {
+          await A.api('/api/bpc-media?id=' + encodeURIComponent(btn.dataset.id), { method: 'DELETE' });
+          await loadList();
+        } catch (e) { showErr('Delete failed: ' + (e.message || 'try again.')); btn.disabled = false; }
+      });
+    });
+  } catch (e) {
+    if (e.message !== 'auth') listEl.innerHTML = '<p class="hint">Could not load media.</p>';
+  }
+}
+loadList();
+</script>
+</body>
+</html>
