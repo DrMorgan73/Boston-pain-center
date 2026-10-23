@@ -30,6 +30,7 @@ SOCIAL = {
 NAV = [
     ('home', 'index.html', 'Home', 'Inicio', None),
     ('about', 'about.html', 'About', 'Nosotros', None),
+    ('memorial', 'adriana.html', 'In Memory', 'En memoria', None),
     ('physicians', None, 'Physicians', 'Médicos', [
         ('roberto', 'dr-roberto-feliz.html', 'Dr. Roberto Feliz', 'Dr. Roberto Feliz'),
         ('eddie', 'dr-eddie-feliz.html', 'Dr. Eddie Feliz', 'Dr. Eddie Feliz'),
@@ -411,6 +412,200 @@ def build_about():
     return page('About | Boston Pain Center', 'Nosotros | Boston Pain Center', 'about', body,
                 desc_en='Mission, philosophy, and care model of Boston Pain Center.',
                 desc_es='Misión, filosofía y modelo de cuidado de Boston Pain Center.')
+
+# ============================ MEMORIAL ============================
+def build_memorial():
+    A = 'assets/images/adriana/'
+    GFM = 'https://www.gofundme.com/f/adriana-feliz-legacy-fund-comfort-for-icu-families'
+
+    # ---- profile header: cover + circular portrait + name ----
+    body = f'''
+<div class="mv2">
+  <div class="mv2-coverwrap"><img class="mv2-cover" src="{A}fb-ocean-cover.jpg" alt="Adriana at the ocean, holding her child"></div>
+  <div class="wrap mv2-head">
+    <img class="mv2-avatar" src="{A}fb-graduation-portrait.jpg" alt="Dr. Adriana Feliz, MD">
+    {t('Adriana Feliz (Perea), MD, MBS', 'Adriana Feliz (Perea), MD, MBS', 'h1', 'mv2-name')}
+    <div class="mv2-rule"></div>
+    {t('March 25, 1991 – October 16, 2026', '25 de marzo de 1991 – 16 de octubre de 2026', 'p', 'mv2-dates')}
+    {t('Geisinger Commonwealth School of Medicine · Neurology', 'Geisinger Commonwealth School of Medicine · Neurología', 'p', 'mv2-line')}
+    {t('Her family: husband Joey Perea · children Jaelyn and Liam · parents Roberto and Blanca Iris · siblings Alejandra and Tito',
+       'Su familia: su esposo Joey Perea · sus hijos Jaelyn y Liam · sus padres Roberto y Blanca Iris · sus hermanos Alejandra y Tito', 'p', 'mv2-family')}
+  </div>
+'''
+
+    # ---- intro card (condensed from the approved campaign story) ----
+    body += f'''
+  <div class="wrap mv2-block"><div class="mv2-card mv2-intro">
+    {t('She cared until her last breath.', 'Ella cuidó hasta su último aliento.', 'p', 'mv2-lede')}
+    {t('Dr. Adriana Feliz, MD was a 35-year-old physician and mother who devoted her life to caring for others — and she kept caring until her last breath. Her illness began with a viral infection; after it passed, her immune system did not switch off and began attacking her own organs — a rare condition called HLH. Her father, Dr. Roberto Feliz, stood beside her ICU team and fought for her with everything medicine has — in his words, “Le tiré todo!!!” (“I threw everything at it.”) Despite all of it, Adriana passed away on October 16, 2026 — and no one who loved her left anything undone.',
+       'La Dra. Adriana Feliz, MD fue una médica de 35 años y madre que dedicó su vida a cuidar a los demás — y cuidó hasta su último aliento. Su enfermedad comenzó con una infección viral; después de que la infección pasó, su sistema inmunológico no se apagó y comenzó a atacar sus propios órganos — una enfermedad rara llamada HLH (linfohistiocitosis hemofagocítica). Su padre, el Dr. Roberto Feliz, estuvo junto a su equipo de la UCI y luchó por ella con todo lo que la medicina puede ofrecer — en sus palabras: «Le tiré todo!!!». A pesar de todo, Adriana falleció el 16 de octubre de 2026 — y nadie que la amaba dejó algo sin intentar.', 'p')}
+  </div></div>
+'''
+
+    # ---- memorial video ----
+    body += f'''
+  <div class="wrap mv2-block">
+    {t('Her memorial video', 'Su video conmemorativo', 'h2', 'mv2-h')}
+    <video class="mv2-video" controls preload="metadata" poster="{A}adriana-feliz-portrait.jpg" src="{A}memorial-video.mp4"></video>
+  </div>
+'''
+
+    # ---- the wall: timeline feed of her moments, oldest to newest ----
+    moments = [
+        ('December 10, 2018', '10 de diciembre de 2018',
+         'DREAMS DO COME TRUE!!!! … And on December 10, 2018 my door finally opened!! I am going to be a DOCTOR!!!',
+         '¡¡¡LOS SUEÑOS SE HACEN REALIDAD!!! … ¡Y el 10 de diciembre de 2018 mi puerta por fin se abrió! ¡¡Voy a ser MÉDICA!!',
+         '', '',
+         'https://www.facebook.com/photo?fbid=10211371766164486&set=p.10211371766164486',
+         'View on Facebook →', 'Ver en Facebook →'),
+        ('May 6, 2019', '6 de mayo de 2019',
+         'Exactly one year ago, I earned a Masters of Biomedical Sciences degree at Geisinger Commonwealth… Dreams do come true!!',
+         'Hace exactamente un año, obtuve una maestría en Ciencias Biomédicas en Geisinger Commonwealth… ¡¡Los sueños se hacen realidad!!',
+         '', A + '06-adriana-honor-certificate.jpg',
+         'https://www.facebook.com/adriana.feliz.73/posts/pfbid0AuRtcZcnkMuDaGadSS6NCHK3Bh2q2eLJi6dLW6FEJnX5tZcHosCuX3XXhT5kFFfZl',
+         'View on Facebook →', 'Ver en Facebook →'),
+        ('August 2, 2019', '2 de agosto de 2019',
+         'Today I can say loud and proud that I am going to be a Doctor!!',
+         '¡Hoy puedo decir alto y con orgullo que voy a ser médica!',
+         '', A + '07-adriana-white-coat-geisinger.jpg',
+         'https://www.facebook.com/adriana.feliz.73/posts/pfbid02g3thaSG5YfeZ7jiYv1cTpEbhcTYMxqPbZbxjwRc3Hv2oj2Jv7v1MkhfDtij4iK1nl',
+         'View on Facebook →', 'Ver en Facebook →'),
+        ('May 4, 2024', '4 de mayo de 2024',
+         'So proud to continue your legacy of being a physician! … Dr. Feliz 2.0 has entered the chat',
+         '¡Tan orgullosa de continuar tu legado como médica! … La Dra. Feliz 2.0 ha entrado al chat',
+         '', A + '08-physician-legacy-roberto.jpg',
+         'https://www.facebook.com/adriana.feliz.73/posts/pfbid034VgBB14Xsa8t8wa2BXTrzxN6omCDdM6HvYrBtniM3Lnf9hExdoQPL8eWfsvhUwgTl',
+         'View on Facebook →', 'Ver en Facebook →'),
+        ('May 5, 2024', '5 de mayo de 2024',
+         'Allow me to reintroduce myself — Dr. Adriana Feliz, MD, MBS',
+         'Permítanme presentarme de nuevo: Dra. Adriana Feliz, MD, MBS',
+         '', A + '09-graduation-diploma-roberto.jpg',
+         'https://www.facebook.com/adriana.feliz.73/posts/pfbid0kMSMKX6ATvDuXe9FEsVCNtZeF16ebrnq1pbDaa7HBVAhuSu3d9jr1MTxrnq4uLbol',
+         'View on Facebook →', 'Ver en Facebook →'),
+        ('January 11, 2026', '11 de enero de 2026',
+         'Being a doctor is kinda crazy…',
+         'Ser médica es una locura…',
+         'Her reflection on switching between breaking devastating news to a patient’s family and being Mom at home — within the same hour.',
+         '',
+         'https://www.facebook.com/reel/1907322623203547',
+         'Watch the reel on Facebook →', 'Ver el reel en Facebook →'),
+        ('February 5, 2026', '5 de febrero de 2026',
+         "What I've been up to lately on top of neurology residency…. BAKING!! … It's become my happy place!",
+         'Lo que he estado haciendo últimamente, además de la residencia de neurología… ¡¡HORNEAR!! … ¡Se ha convertido en mi lugar feliz!',
+         '', '',
+         'https://www.facebook.com/adriana.feliz.73/posts/pfbid0MVJKvXLsGsqkbHRzLvtvwWifE7zuX4hmAW5ucY7awuJVLDNqnpCabQEpjggjaHK4l',
+         'View on Facebook →', 'Ver en Facebook →'),
+    ]
+    alts = {
+        A + '06-adriana-honor-certificate.jpg': 'Adriana holding her Alpha Epsilon Lambda honor certificate',
+        A + '07-adriana-white-coat-geisinger.jpg': 'Adriana in her white coat at the Geisinger Commonwealth sign',
+        A + '08-physician-legacy-roberto.jpg': 'Adriana with her father at Geisinger Commonwealth, wearing her Physician Legacy sash',
+        A + '09-graduation-diploma-roberto.jpg': 'Adriana with her father on graduation day, holding her diploma',
+    }
+    cards = []
+    for d_en, d_es, q_en, q_es, x_en, img, url, l_en, l_es in moments:
+        # x_en doubles as the ES description slot when it is a tuple; here plain EN-only note handled below
+        photo = ''
+        if img:
+            photo = f'\n    <img class="mv2-pimg" src="{img}" alt="{esc(alts.get(img, "Adriana Feliz"))}" loading="lazy">'
+        note = ''
+        cards.append(f'''<article class="mv2-post">
+    <div class="mv2-posthead"><img class="mv2-thumb" src="{A}fb-graduation-portrait.jpg" alt="Adriana Feliz">
+      <div><span class="mv2-pname">Adriana Feliz</span>{t(d_en, d_es, 'span', 'mv2-pdate')}</div>
+    </div>
+    {t(q_en, q_es, 'p', 'mv2-ptext')}{note}{photo}
+    <a class="mv2-plink" href="{url}" target="_blank" rel="noopener" data-en="{esc(l_en)}" data-es="{esc(l_es)}">{esc(l_es if PAGE_LANG=='es' else l_en)}</a>
+  </article>''')
+    # reel card (index 5) gets its reflection note, in both languages
+    reel_note = f'''<article class="mv2-post">
+    <div class="mv2-posthead"><img class="mv2-thumb" src="{A}fb-graduation-portrait.jpg" alt="Adriana Feliz">
+      <div><span class="mv2-pname">Adriana Feliz</span>{t('January 11, 2026', '11 de enero de 2026', 'span', 'mv2-pdate')}</div>
+    </div>
+    {t('Being a doctor is kinda crazy…', 'Ser médica es una locura…', 'p', 'mv2-ptext')}
+    {t('Her reflection on switching between breaking devastating news to a patient’s family and being Mom at home — within the same hour.',
+       'Su reflexión sobre pasar de dar una noticia devastadora a la familia de un paciente a ser mamá en casa — en la misma hora.', 'p', 'mv2-pnote')}
+    <a class="mv2-plink" href="https://www.facebook.com/reel/1907322623203547" target="_blank" rel="noopener" data-en="Watch the reel on Facebook →" data-es="Ver el reel en Facebook →">{'Ver el reel en Facebook →' if PAGE_LANG=='es' else 'Watch the reel on Facebook →'}</a>
+  </article>'''
+    cards[5] = reel_note
+    feed = '\n  '.join(cards)
+    body += f'''
+  <div class="wrap mv2-block">
+    {t('Her wall', 'Su muro', 'h2', 'mv2-h')}
+    {t('Moments from her own timeline, in her own words.', 'Momentos de su propia línea de tiempo, en sus propias palabras.', 'p', 'mv2-feedsub')}
+    <div class="mv2-feed">
+  {feed}
+    </div>
+  </div>
+'''
+
+    # ---- photo strip ----
+    shots = [
+        (A + '01-family-home-group.jpg', 'Family', 'Familia', 'The Feliz family together at home'),
+        (A + '02-roberto-adriana-dog.jpg', 'With her father', 'Con su padre', 'Adriana with her father, Dr. Roberto Feliz, at home'),
+        (A + '03-adriana-red-blouse.jpg', '', '', 'Adriana outdoors'),
+        (A + '04-adriana-young-selfie.jpg', '', '', 'Adriana in her younger years'),
+        (A + '05-adriana-event-black.jpg', '', '', 'Adriana at an event'),
+        (A + 'adriana-feliz-portrait.jpg', '', '', 'Dr. Adriana Feliz, MD'),
+    ]
+    shot_html = '\n'.join(
+        f'<figure class="mv2-shot"><img src="{src}" alt="{esc(alt)}" loading="lazy">'
+        + (t(cap_en, cap_es, 'figcaption') if cap_en else '')
+        + '</figure>'
+        for src, cap_en, cap_es, alt in shots)
+    body += f'''
+  <div class="wrap mv2-block">
+    {t('Photos', 'Fotos', 'h2', 'mv2-h')}
+    <img class="mv2-banner" src="{A}adriana-feliz-banner-en.jpg" alt="Adriana Feliz Legacy Fund — Comfort for ICU Families">
+    <div class="mv2-grid">{shot_html}</div>
+  </div>
+'''
+
+    # ---- closing cards: the fund (Dr. Roberto's message) + services ----
+    body += f'''
+  <div class="wrap mv2-block"><div class="mv2-duo">
+    <div class="mv2-card">
+      {t('Adriana Feliz Legacy Fund', 'Fondo Legado Adriana Feliz', 'h2', 'mv2-cardh')}
+      {t('A message from her father, Dr. Roberto Feliz', 'Un mensaje de su padre, el Dr. Roberto Feliz', 'p', 'mv2-from')}
+      {t('My daughter, Adriana Feliz, MD, passed away at the age of 35 after a courageous fight for her life in the Intensive Care Unit at Duke University Hospital. During her hospitalization, our family endured days and nights filled with uncertainty, prayer, and hope — and we came to understand how much support families need while staying close to someone they love in intensive care.',
+         'Mi hija, Adriana Feliz, MD, falleció a los 35 años después de una valiente lucha por su vida en la Unidad de Cuidados Intensivos del Hospital Universitario de Duke. Durante su hospitalización, nuestra familia vivió días y noches llenos de incertidumbre, oración y esperanza, y comprendimos cuánto apoyo necesitan las familias mientras permanecen cerca de un ser querido en cuidados intensivos.', 'p')}
+      {t('In memory of our beloved Adriana, we want to turn our grief into an act of love for other families. This family-led fundraiser will coordinate with Duke to provide appropriate beds or sleeper chairs for family members and improve designated family rest areas, based on the hospital’s needs and requirements. We will share updates about coordination with the hospital and how the funds are used, so donors can see the difference their generosity makes.',
+         'En memoria de nuestra amada Adriana, queremos convertir nuestro dolor en un acto de amor para otras familias. Esta iniciativa, liderada por la familia, se coordinará con Duke para proporcionar camas o sillones cama apropiados para los familiares y mejorar las áreas designadas de descanso familiar, según las necesidades y los requisitos del hospital. Compartiremos actualizaciones sobre la coordinación con el hospital y sobre cómo se utilizan los fondos, para que los donantes vean la diferencia que hace su generosidad.', 'p')}
+      {t('Every donation, large or small, will be deeply appreciated. If you cannot donate, sharing this fundraiser is another meaningful way to help.',
+         'Cada donación, grande o pequeña, será profundamente agradecida. Si no puede donar, compartir esta recaudación es otra forma significativa de ayudar.', 'p')}
+      <div class="mv2-cta"><a class="btn btn-gold" href="{GFM}" target="_blank" rel="noopener" data-en="Donate on GoFundMe" data-es="Donar en GoFundMe">{'Donar en GoFundMe' if PAGE_LANG=='es' else 'Donate on GoFundMe'}</a></div>
+      <div class="mv2-qr"><img src="assets/images/adriana/qr-gofundme.png" alt="QR — GoFundMe" width="180" height="180" loading="lazy">{t('Scan to donate', 'Escanee para donar', 'p', 'mv2-qrcap')}</div>
+    </div>
+    <div class="mv2-card">
+      {t('Services', 'Servicios', 'h2', 'mv2-cardh')}
+      {t('Viewing', 'Velatorio', 'h3', 'mv2-sub')}
+      {t('Friday, October 23, 2026 · 5:00–8:00 PM', 'Viernes, 23 de octubre de 2026 · 5:00–8:00 PM', 'p')}
+      {t('Dockray & Thomas Funeral Home', 'Dockray & Thomas Funeral Home', 'p', 'mv2-place')}
+      {t('455 Washington St, Canton, MA 02021', '455 Washington St, Canton, MA 02021', 'p')}
+      {t('Burial service', 'Servicio de entierro', 'h3', 'mv2-sub')}
+      {t('Saturday, October 24, 2026 · 10:00 AM', 'Sábado, 24 de octubre de 2026 · 10:00 AM', 'p')}
+      {t('Congregational Church of Canton', 'Congregational Church of Canton', 'p', 'mv2-place')}
+      {t('1541 Washington St, Canton, MA 02021', '1541 Washington St, Canton, MA 02021', 'p')}
+    </div>
+  </div></div>
+'''
+
+    # ---- page footer: her pages + permanent line ----
+    body += f'''
+  <div class="wrap mv2-block mv2-foot">
+    {t('Her pages', 'Sus páginas', 'h2', 'mv2-h')}
+    <div class="hero-ctas mv2-pagelinks">
+      <a class="btn btn-navy" href="https://www.facebook.com/adriana.feliz.73" target="_blank" rel="noopener">Facebook — Adriana Feliz</a>
+      <a class="btn btn-outline" href="https://www.linkedin.com/in/adriana-feliz-746923139/" target="_blank" rel="noopener">LinkedIn — Adriana Feliz</a>
+    </div>
+    {t('This page is permanent — her light stays here.', 'Esta página es permanente: su luz permanece aquí.', 'p', 'mv2-permanent')}
+    {t('Organized by friends of the Feliz family.', 'Organizado por amigos de la familia Feliz.', 'p', 'mv2-org')}
+  </div>
+</div>
+'''
+    return page('In Memory — Dr. Adriana Feliz, MD | Boston Pain Center',
+                'En memoria — Dra. Adriana Feliz, MD | Boston Pain Center', 'memorial', body,
+                desc_en='A permanent memorial wall for Dr. Adriana Feliz, MD (March 25, 1991 – October 16, 2026): her photos, her own words, her memorial video, and the Adriana Feliz Legacy Fund.',
+                desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.')
 
 # ============================ PHYSICIANS ============================
 def physician_page(slug, name, initials, extra_sections_en_es):
@@ -1270,6 +1465,7 @@ def main():
     jobs = [
         ('index.html', 'es', build_index),
         ('about.html', 'es', build_about),
+        ('adriana.html', 'es', build_memorial),
         ('dr-roberto-feliz.html', 'es', build_roberto),
         ('dr-eddie-feliz.html', 'es', build_eddie),
         ('pain-management.html', 'es', build_pain),

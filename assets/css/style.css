@@ -236,3 +236,60 @@ table.clean th{background:var(--navy-900);color:#fff;font-size:.85rem;letter-spa
   .main-nav a,.main-nav .nav-parent{padding:12px 11px}
   .card{padding:22px}
 }
+/* ---------- memorial v2 "Her Wall" (adriana.html) ---------- */
+.mv2{padding-bottom:10px}
+.mv2-coverwrap{line-height:0}
+.mv2-cover{display:block;width:100%;height:clamp(210px,36vw,400px);object-fit:cover;object-position:center 32%}
+.mv2-head{text-align:center;margin-top:-84px;position:relative;z-index:2}
+.mv2-avatar{display:block;width:168px;height:168px;margin:0 auto;object-fit:cover;border-radius:50%;border:5px solid #fff;box-shadow:0 14px 34px rgba(8,22,40,.25);background:#fff}
+.mv2-name{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-weight:700;font-size:clamp(2rem,5.2vw,3.1rem);color:var(--navy-900);margin-top:1rem}
+.mv2-rule{width:72px;height:3px;background:var(--gold-grad);border-radius:3px;margin:.85rem auto 0}
+.mv2-dates{font-size:1.08rem;font-weight:700;letter-spacing:.05em;color:var(--gold-deep);margin-top:.8rem}
+.mv2-line{font-size:1.02rem;color:var(--navy-800);font-weight:600;margin-top:.15rem}
+.mv2-family{color:var(--muted);font-size:.96rem;max-width:62ch;margin:.35rem auto 0}
+.mv2-block{margin-top:34px}
+.mv2-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:30px 32px;box-shadow:0 8px 26px rgba(8,22,40,.07)}
+.mv2-card p{color:var(--ink)}
+.mv2-intro{max-width:760px;margin-left:auto;margin-right:auto}
+.mv2-lede{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-size:1.45rem;font-style:italic;color:var(--navy-900);text-align:center;margin:0 0 .6rem}
+.mv2-h{font-size:clamp(1.35rem,2.6vw,1.8rem);text-align:center;margin-bottom:1.1rem}
+.mv2-video{display:block;width:100%;border-radius:20px;box-shadow:0 14px 34px rgba(8,22,40,.16);background:#000}
+.mv2-feedsub{text-align:center;color:var(--muted);margin:-.5rem auto 1.4rem;max-width:52ch}
+.mv2-feed{max-width:680px;margin:0 auto;display:flex;flex-direction:column;gap:20px}
+.mv2-post{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:22px 24px;box-shadow:0 8px 26px rgba(8,22,40,.07)}
+.mv2-posthead{display:flex;align-items:center;gap:12px;margin-bottom:.7rem}
+.mv2-thumb{width:46px;height:46px;border-radius:50%;object-fit:cover;flex:none}
+.mv2-pname{display:block;font-weight:700;color:var(--navy-900);line-height:1.25}
+.mv2-pdate{display:block;font-size:.83rem;color:var(--muted)}
+.mv2-ptext{font-size:1.04rem;color:var(--ink);margin:.2rem 0 .4rem}
+.mv2-pnote{color:var(--muted);font-size:.96rem}
+.mv2-pimg{display:block;width:100%;height:auto;border-radius:14px;margin:.7rem 0 .3rem}
+.mv2-plink{display:inline-block;margin-top:.65rem;font-weight:700;color:var(--gold-deep)}
+.mv2-plink:hover{color:var(--teal-deep)}
+.mv2-banner{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 10px 28px rgba(8,22,40,.1);margin-bottom:20px}
+.mv2-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
+@media(min-width:761px){.mv2-grid{grid-template-columns:repeat(3,1fr)}}
+.mv2-shot{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(8,22,40,.06)}
+.mv2-shot img{display:block;width:100%;height:auto}
+.mv2-shot figcaption{padding:10px 14px;font-size:.9rem;color:var(--muted);text-align:center}
+.mv2-duo{display:grid;grid-template-columns:1fr;gap:20px}
+@media(min-width:901px){.mv2-duo{grid-template-columns:1fr 1fr}}
+.mv2-cardh{font-size:1.4rem;margin-bottom:.4rem}
+.mv2-from{font-style:italic;color:var(--gold-deep);font-weight:600}
+.mv2-sub{margin-top:1.2rem}
+.mv2-place{font-weight:700;color:var(--navy-900)}
+.mv2-cta{margin-top:1.3rem}
+.mv2-qr{margin-top:1.4rem;text-align:center}
+.mv2-qr img{width:180px;height:180px;max-width:60vw;border-radius:12px}
+.mv2-qrcap{margin-top:.5rem;font-size:.92rem;opacity:.75}
+.mv2-foot{text-align:center;padding-bottom:26px}
+.mv2-pagelinks{justify-content:center;margin-bottom:1.2rem}
+.mv2-permanent{font-family:"Playfair Display",Georgia,"Times New Roman",serif;font-size:1.3rem;font-style:italic;color:var(--navy-900)}
+.mv2-org{color:var(--muted);font-size:.92rem}
+@media(max-width:640px){
+  .mv2-head{margin-top:-64px}
+  .mv2-avatar{width:128px;height:128px}
+  .mv2-card{padding:24px 20px}
+  .mv2-post{padding:18px}
+}
+/* ---------- end memorial v2 ---------- */
