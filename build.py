@@ -311,7 +311,7 @@ def build_index():
   {t('Physician-led, patient-first', 'Dirigido por médicos, centrado en el paciente', 'h2')}
   <div class="gold-rule"></div>
   <div class="grid grid-2">
-    <div class="card doc-card"><div class="monogram">RF</div>
+    <div class="card doc-card"><img class="doc-photo" src="assets/images/roberto-feliz-portrait.jpg" alt="Dr. Roberto Feliz — Boston Pain Center">
       {t('Dr. Roberto Feliz', 'Dr. Roberto Feliz', 'h3')}
       {t('Physician — Boston Pain Center', 'Médico — Boston Pain Center', 'p', 'doc-role')}
       {verify_badge()}
@@ -622,21 +622,27 @@ def build_memorial():
                 desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.')
 
 # ============================ PHYSICIANS ============================
-def physician_page(slug, name, initials, extra_sections_en_es):
+def physician_page(slug, name, initials, extra_sections_en_es, photo=None):
     secs = ''
     for h_en, h_es, b_en, b_es in extra_sections_en_es:
         secs += f'''<div class="card">{t(h_en, h_es, 'h3')}{t(b_en, b_es, 'p')}{verify_badge()}</div>'''
     body = page_hero('Our Physicians', 'Nuestros médicos', name, name,
         'Physician — Boston Pain Center. Full biography and credentials are published after verification.',
         'Médico — Boston Pain Center. La biografía completa y las credenciales se publican después de la verificación.')
+    if photo:
+        portrait_html = f'<img class="phys-photo" src="{photo}" alt="{name} — Boston Pain Center">'
+        notice_html = ''
+    else:
+        portrait_html = f'<div class="monogram lg">{initials}</div>'
+        notice_html = '''<div class="notice notice-demo" style="margin-top:1rem"><p style="margin:0" data-en="Portrait placeholder. A verified professional portrait will appear here." data-es="Imagen provisional. Aquí aparecerá un retrato profesional verificado.">''' + ('Imagen provisional. Aquí aparecerá un retrato profesional verificado.' if PAGE_LANG=='es' else 'Portrait placeholder. A verified professional portrait will appear here.') + '''</p></div>'''
     body += f'''
 <section><div class="wrap"><div class="two-col"><div>
   <div class="card doc-card" style="text-align:left;display:flex;gap:24px;align-items:center;flex-wrap:wrap">
-    <div class="monogram lg">{initials}</div>
+    {portrait_html}
     <div>{t(name, name, 'h2')}
     {t('Physician — Boston Pain Center', 'Médico — Boston Pain Center', 'p', 'doc-role')}
     {verify_badge()}
-    <div class="notice notice-demo" style="margin-top:1rem"><p style="margin:0" data-en="Portrait placeholder. A verified professional portrait will appear here." data-es="Imagen provisional. Aquí aparecerá un retrato profesional verificado.">{'Imagen provisional. Aquí aparecerá un retrato profesional verificado.' if PAGE_LANG=='es' else 'Portrait placeholder. A verified professional portrait will appear here.'}</p></div>
+    {notice_html}
     </div>
   </div>
   <div class="grid grid-2" style="margin-top:22px">{secs}</div>
@@ -669,7 +675,7 @@ def build_roberto():
         ('Media & education', 'Medios y educación',
          'Weekly podcast host and daily video tips educator — new content every week.',
          'Presentador del podcast semanal y educador de los consejos diarios en video — contenido nuevo cada semana.'),
-    ])
+    ], photo='assets/images/roberto-feliz-portrait.jpg')
 
 def build_eddie():
     return physician_page('eddie', 'Dr. Eddie Feliz', 'EF', [

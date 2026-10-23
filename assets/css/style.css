@@ -113,6 +113,8 @@ section{padding:68px 0}
 .doc-card{text-align:center}
 .monogram{width:120px;height:120px;border-radius:50%;margin:0 auto 1.1rem;background:linear-gradient(135deg,var(--navy-700),var(--navy-950));color:var(--gold-bright);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:2.4rem;font-weight:800;letter-spacing:.04em;box-shadow:var(--shadow);border:2px solid rgba(212,162,78,.5)}
 .monogram.lg{width:170px;height:170px;font-size:3.2rem}
+.phys-photo{width:170px;height:170px;object-fit:cover;border-radius:20px;box-shadow:var(--shadow);border:2px solid rgba(212,162,78,.5)}
+.doc-photo{width:120px;height:120px;object-fit:cover;border-radius:50%;margin:0 auto 1.1rem;display:block;box-shadow:var(--shadow);border:2px solid rgba(212,162,78,.5)}
 .doc-role{color:var(--teal-deep);font-weight:600;font-size:.95rem}
 .verify-note{display:inline-block;font-size:.75rem;background:var(--gold-tint);border:1px solid #ecd9a8;color:#7a5c17;border-radius:999px;padding:4px 12px;margin-top:.6rem;font-weight:600}
 /* ---------- notices / callouts ---------- */
