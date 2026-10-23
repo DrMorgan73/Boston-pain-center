@@ -554,7 +554,7 @@ def build_memorial():
     body += f'''
   <div class="wrap mv2-block">
     {t('Photos', 'Fotos', 'h2', 'mv2-h')}
-    <img class="mv2-banner" src="{A}adriana-feliz-banner-en.jpg" alt="Adriana Feliz Legacy Fund — Comfort for ICU Families">
+    <img class="mv2-banner" src="{A}banner-en-v3-50k.jpg" alt="Adriana Feliz Legacy Fund — Comfort for Families at Duke's ICU — Goal $50,000">
     <div class="mv2-grid">{shot_html}</div>
   </div>
 '''
