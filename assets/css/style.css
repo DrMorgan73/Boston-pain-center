@@ -276,6 +276,8 @@ table.clean th{background:var(--navy-900);color:#fff;font-size:.85rem;letter-spa
 @media(min-width:901px){.mv2-duo{grid-template-columns:1fr 1fr}}
 .mv2-cardh{font-size:1.4rem;margin-bottom:.4rem}
 .mv2-from{font-style:italic;color:var(--gold-deep);font-weight:600}
+.mv2-sign{margin:.15rem 0;font-weight:600}
+.mv2-sign:first-of-type{margin-top:1.1rem;font-weight:400;font-style:italic}
 .mv2-sub{margin-top:1.2rem}
 .mv2-place{font-weight:700;color:var(--navy-900)}
 .mv2-cta{margin-top:1.3rem}
