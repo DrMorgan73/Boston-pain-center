@@ -433,6 +433,13 @@ def build_memorial():
   </div>
 '''
 
+    # ---- memorial video (TOP of page, per owner 2026-10-22: "keep top long video") ----
+    body += f'''
+  <div class="wrap mv2-block">
+    <video class="mv2-video" controls preload="metadata" poster="{A}adriana-feliz-portrait.jpg" src="{A}memorial-video.mp4"></video>
+  </div>
+'''
+
     # ---- intro card (condensed from the approved campaign story) ----
     body += f'''
   <div class="wrap mv2-block"><div class="mv2-card mv2-intro">
@@ -440,14 +447,6 @@ def build_memorial():
     {t('Dr. Adriana Feliz, MD was a 35-year-old physician and mother who devoted her life to caring for others — and she kept caring until her last breath. Her illness began with a viral infection; after it passed, her immune system did not switch off and began attacking her own organs — a rare condition called HLH. Her father, Dr. Roberto Feliz, stood beside her ICU team and fought for her with everything medicine has — in his words, “Le tiré todo!!!” (“I threw everything at it.”) Despite all of it, Adriana passed away on October 16, 2026 — and no one who loved her left anything undone.',
        'La Dra. Adriana Feliz, MD fue una médica de 35 años y madre que dedicó su vida a cuidar a los demás — y cuidó hasta su último aliento. Su enfermedad comenzó con una infección viral; después de que la infección pasó, su sistema inmunológico no se apagó y comenzó a atacar sus propios órganos — una enfermedad rara llamada HLH (linfohistiocitosis hemofagocítica). Su padre, el Dr. Roberto Feliz, estuvo junto a su equipo de la UCI y luchó por ella con todo lo que la medicina puede ofrecer — en sus palabras: «Le tiré todo!!!». A pesar de todo, Adriana falleció el 16 de octubre de 2026 — y nadie que la amaba dejó algo sin intentar.', 'p')}
   </div></div>
-'''
-
-    # ---- memorial video ----
-    body += f'''
-  <div class="wrap mv2-block">
-    {t('Her memorial video', 'Su video conmemorativo', 'h2', 'mv2-h')}
-    <video class="mv2-video" controls preload="metadata" poster="{A}adriana-feliz-portrait.jpg" src="{A}memorial-video.mp4"></video>
-  </div>
 '''
 
     # ---- the wall: timeline feed of her moments, oldest to newest ----
