@@ -85,7 +85,7 @@ def header_html(active):
     <span><a href="patient-portal.html" data-en="Patient Portal (Demo)" data-es="Portal del paciente (Demostración)">Portal del paciente (Demostración)</a> &nbsp;·&nbsp; <span data-en="Se habla español" data-es="Se habla español">Se habla español</span></span>
   </div></div>
   <div class="header-main"><div class="wrap">
-    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;background:#fff;border-radius:10px;padding:6px 10px;line-height:0"><img src="assets/images/boston-pain-center-logo.png" alt="Boston Pain Center Inc." style="height:clamp(32px,8vw,44px);width:auto;max-width:52vw;display:block"></span></a>
+    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;background:#E2F1F5;border-radius:10px;padding:6px 10px;line-height:0"><img src="assets/images/boston-pain-center-logo-transparent.png" alt="Boston Pain Center Inc." style="height:clamp(32px,8vw,44px);width:auto;max-width:52vw;display:block"></span></a>
     <nav class="main-nav" id="mainNav" aria-label="Main"><ul>{nav_html(active)}</ul></nav>
     <div class="header-actions">
       <div class="lang-toggle" role="group" aria-label="Language / Idioma">
@@ -123,7 +123,7 @@ def footer_html():
 <footer class="site-footer"><div class="wrap">
   <div class="footer-grid">
     <div>
-      <span style="display:inline-block;background:#fff;border-radius:10px;padding:8px 12px;line-height:0"><img src="assets/images/boston-pain-center-logo.png" alt="Boston Pain Center Inc." style="height:52px;width:auto;max-width:100%;display:block"></span>
+      <span style="display:inline-block;background:#E2F1F5;border-radius:10px;padding:8px 12px;line-height:0"><img src="assets/images/boston-pain-center-logo-transparent.png" alt="Boston Pain Center Inc." style="height:52px;width:auto;max-width:100%;display:block"></span>
       <p style="font-size:.92rem;margin-top:.9rem" data-en="Comprehensive pain management and regenerative medicine in Boston, Massachusetts." data-es="Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.">Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.</p>
       <p style="font-size:.92rem"><a href="tel:+16175550100">{PHONE_DISPLAY}</a><br>
       <span data-en="Boston, MA — street address to be verified" data-es="Boston, MA — dirección por verificar">Boston, MA — dirección por verificar</span><br>
