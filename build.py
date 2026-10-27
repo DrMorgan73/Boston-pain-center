@@ -85,13 +85,13 @@ def header_html(active):
     <span><a href="patient-portal.html" data-en="Patient Portal (Demo)" data-es="Portal del paciente (Demostración)">Portal del paciente (Demostración)</a> &nbsp;·&nbsp; <span data-en="Se habla español" data-es="Se habla español">Se habla español</span></span>
   </div></div>
   <div class="header-main"><div class="wrap">
-    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;line-height:0"><img src="assets/images/boston-pain-center-logo-reversed.png" alt="Boston Pain Center Inc." style="height:clamp(32px,8vw,44px);width:auto;max-width:52vw;display:block"></span></a>
+    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;line-height:0"><img src="assets/images/boston-pain-center-logo-reversed.png" alt="Boston Pain Center Inc." style="height:clamp(40px,6vw,64px);width:auto;max-width:52vw;display:block"></span></a>
     <nav class="main-nav" id="mainNav" aria-label="Main"><ul>{nav_html(active)}</ul></nav>
-    <div class="header-actions">
+    <div class="header-actions" style="gap:14px">
       <div class="lang-toggle" role="group" aria-label="Language / Idioma">
         <button data-lang="en" aria-label="English">EN</button><button data-lang="es" aria-label="Español">ES</button>
       </div>
-      <a class="btn btn-gold btn-sm" href="booking.html" data-en="{sched_en}" data-es="{sched_es}">{sched}</a>
+      <a class="btn btn-gold btn-sm" style="padding:11px 20px;font-size:.95rem" href="booking.html" data-en="{sched_en}" data-es="{sched_es}">{sched}</a>
       <button class="menu-btn" aria-label="Menu" data-en-aria="Open menu" data-es-aria="Abrir menú">☰</button>
     </div>
   </div></div>
