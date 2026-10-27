@@ -17,6 +17,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 <link rel="stylesheet" href="assets/css/brand.css">
+<link rel="stylesheet" href="assets/css/bpc-bot.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
@@ -93,6 +94,18 @@
     <span><a href="privacy-disclaimer.html" data-en="Privacy &amp; Disclaimer" data-es="Privacidad y descargo">Privacidad y descargo</a> · <span data-en="Educational content only — not medical advice." data-es="Contenido educativo únicamente — no es consejo médico.">Contenido educativo únicamente — no es consejo médico.</span></span>
   </div>
 </div></footer>
+<div id="bpc-bot" class="no-print">
+  <div id="bpc-bot-panel" hidden>
+    <div id="bpc-bot-head"><span id="bpc-bot-title"></span><button id="bpc-bot-close" type="button" aria-label="Close chat">×</button></div>
+    <div id="bpc-bot-msgs" aria-live="polite"></div>
+    <div id="bpc-bot-chips"></div>
+    <form id="bpc-bot-form"><input id="bpc-bot-input" type="text" autocomplete="off"><button id="bpc-bot-send" type="submit">Send</button></form>
+    <div id="bpc-bot-disc"></div>
+  </div>
+  <button id="bpc-bot-btn" type="button" aria-label="Chat with the visitor assistant"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12l4 4V4c0-1.1-.9-2-2-2Z"/><circle cx="8" cy="11" r="1.4" fill="#0B87AF"/><circle cx="12" cy="11" r="1.4" fill="#0B87AF"/><circle cx="16" cy="11" r="1.4" fill="#0B87AF"/></svg></button>
+</div>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/bpc-bot-data.js"></script>
+<script src="assets/js/bpc-bot.js"></script>
 </body>
 </html>

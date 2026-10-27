@@ -188,13 +188,26 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-{brand_link}<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+{brand_link}<link rel="stylesheet" href="assets/css/bpc-bot.css">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
 {header_html(active)}
 <main id="main">{body}</main>
 {footer_html()}
+<div id="bpc-bot" class="no-print">
+  <div id="bpc-bot-panel" hidden>
+    <div id="bpc-bot-head"><span id="bpc-bot-title"></span><button id="bpc-bot-close" type="button" aria-label="Close chat">×</button></div>
+    <div id="bpc-bot-msgs" aria-live="polite"></div>
+    <div id="bpc-bot-chips"></div>
+    <form id="bpc-bot-form"><input id="bpc-bot-input" type="text" autocomplete="off"><button id="bpc-bot-send" type="submit">Send</button></form>
+    <div id="bpc-bot-disc"></div>
+  </div>
+  <button id="bpc-bot-btn" type="button" aria-label="Chat with the visitor assistant"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12l4 4V4c0-1.1-.9-2-2-2Z"/><circle cx="8" cy="11" r="1.4" fill="#0B87AF"/><circle cx="12" cy="11" r="1.4" fill="#0B87AF"/><circle cx="16" cy="11" r="1.4" fill="#0B87AF"/></svg></button>
+</div>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/bpc-bot-data.js"></script>
+<script src="assets/js/bpc-bot.js"></script>
 </body>
 </html>'''
 
@@ -1392,7 +1405,8 @@ def guide_shell(title_en, title_es, inner):
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../assets/css/style.css">
-<link rel="stylesheet" href="../assets/css/brand.css"></head>
+<link rel="stylesheet" href="../assets/css/brand.css">
+<link rel="stylesheet" href="../assets/css/bpc-bot.css"></head>
 <body>
 <div class="wrap no-print" style="padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
   <a href="../patient-resources.html" style="font-weight:700" data-en="← Back to Resources" data-es="← Volver a recursos">{'← Volver a recursos' if PAGE_LANG=='es' else '← Back to Resources'}</a>
@@ -1409,7 +1423,19 @@ def guide_shell(title_en, title_es, inner):
 </div>
 <div class="emergency-strip no-print" role="alert"><span data-en="Medical emergency? Call " data-es="¿Emergencia médica? Llame al ">¿Emergencia médica? Llame al </span><a href="tel:911">911</a></div>
 </main>
+<div id="bpc-bot" class="no-print">
+  <div id="bpc-bot-panel" hidden>
+    <div id="bpc-bot-head"><span id="bpc-bot-title"></span><button id="bpc-bot-close" type="button" aria-label="Close chat">×</button></div>
+    <div id="bpc-bot-msgs" aria-live="polite"></div>
+    <div id="bpc-bot-chips"></div>
+    <form id="bpc-bot-form"><input id="bpc-bot-input" type="text" autocomplete="off"><button id="bpc-bot-send" type="submit">Send</button></form>
+    <div id="bpc-bot-disc"></div>
+  </div>
+  <button id="bpc-bot-btn" type="button" aria-label="Chat with the visitor assistant"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M20 2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12l4 4V4c0-1.1-.9-2-2-2Z"/><circle cx="8" cy="11" r="1.4" fill="#0B87AF"/><circle cx="12" cy="11" r="1.4" fill="#0B87AF"/><circle cx="16" cy="11" r="1.4" fill="#0B87AF"/></svg></button>
+</div>
 <script src="../assets/js/main.js"></script>
+<script src="../assets/js/bpc-bot-data.js"></script>
+<script src="../assets/js/bpc-bot.js"></script>
 </body></html>'''
 
 def build_guide_crps():
