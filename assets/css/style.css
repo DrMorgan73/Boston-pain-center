@@ -269,6 +269,8 @@ table.clean th{background:var(--navy-900);color:#fff;font-size:.85rem;letter-spa
 .mv2-plink{display:inline-block;margin-top:.65rem;font-weight:700;color:var(--gold-deep)}
 .mv2-plink:hover{color:var(--teal-deep)}
 .mv2-banner{display:block;width:100%;height:auto;border-radius:20px;box-shadow:0 10px 28px rgba(8,22,40,.1);margin-bottom:20px}
+html[lang="en"] .mv2-banner-es{display:none}
+html[lang="es"] .mv2-banner-en{display:none}
 .mv2-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;align-items:start}
 @media(min-width:761px){.mv2-grid{grid-template-columns:repeat(3,1fr)}}
 .mv2-shot{background:var(--card);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 8px 22px rgba(8,22,40,.06)}

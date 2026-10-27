@@ -16,10 +16,11 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/brand.css">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-en="Skip to content" data-es="Ir al contenido">Ir al contenido</a>
 <header class="site-header">
   <div class="header-top"><div class="wrap">
     <span><span data-en="Questions? Call " data-es="¿Preguntas? Llame al ">¿Preguntas? Llame al </span><a href="tel:+16175550100">(617) 555-0100</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Número por verificar</span></span>
@@ -32,7 +33,7 @@
 <li><a href="adriana.html" class="" data-en="In Memory" data-es="En memoria">In Memory</a></li>
 <li class="has-drop"><button class="nav-parent" data-en="Physicians" data-es="Médicos" aria-haspopup="true" aria-expanded="false">Physicians</button><div class="drop"><a href="dr-roberto-feliz.html" class="" data-en="Dr. Roberto Feliz" data-es="Dr. Roberto Feliz">Dr. Roberto Feliz</a><a href="dr-eddie-feliz.html" class="" data-en="Dr. Eddie Feliz" data-es="Dr. Eddie Feliz">Dr. Eddie Feliz</a></div></li>
 <li><a href="pain-management.html" class="" data-en="Pain Management" data-es="Manejo del dolor">Pain Management</a></li>
-<li class="has-drop"><button class="nav-parent" data-en="Regenerative" data-es="Regenerativa" aria-haspopup="true" aria-expanded="false">Regenerative</button><div class="drop"><a href="regenerative-medicine.html" class="" data-en="Overview" data-es="Resumen">Overview</a><a href="prp-therapy.html" class="" data-en="PRP Therapy" data-es="Terapia PRP">PRP Therapy</a><a href="stem-cell-therapy.html" class="" data-en="Stem Cell Therapy" data-es="Terapia con células madre">Stem Cell Therapy</a><a href="exosome-therapy.html" class="" data-en="Exosome Therapy" data-es="Terapia con exosomas">Exosome Therapy</a><a href="peptide-therapy.html" class="" data-en="Terapia con péptidos" data-es="Terapia con péptidos">Terapia con péptidos</a></div></li>
+<li class="has-drop"><button class="nav-parent" data-en="Regenerative" data-es="Regenerativa" aria-haspopup="true" aria-expanded="false">Regenerative</button><div class="drop"><a href="regenerative-medicine.html" class="" data-en="Overview" data-es="Resumen">Overview</a><a href="prp-therapy.html" class="" data-en="PRP Therapy" data-es="Terapia PRP">PRP Therapy</a><a href="stem-cell-therapy.html" class="" data-en="Stem Cell Therapy" data-es="Terapia con células madre">Stem Cell Therapy</a><a href="exosome-therapy.html" class="" data-en="Exosome Therapy" data-es="Terapia con exosomas">Exosome Therapy</a><a href="peptide-therapy.html" class="" data-en="Peptide Therapy" data-es="Terapia con péptidos">Peptide Therapy</a></div></li>
 <li><a href="crps-center.html" class="" data-en="CRPS Center" data-es="Centro de CRPS">CRPS Center</a></li>
 <li><a href="ketamine-infusion.html" class="" data-en="Ketamine" data-es="Ketamina">Ketamine</a></li>
 <li><a href="telehealth.html" class="" data-en="Telehealth" data-es="Telesalud">Telehealth</a></li>
@@ -57,37 +58,37 @@
   <p class="lead" data-en="For physicians, attorneys, employers, insurers, case managers, facilities, and international partners." data-es="Para médicos, abogados, empleadores, aseguradoras, gestores de casos, instituciones y socios internacionales.">For physicians, attorneys, employers, insurers, case managers, facilities, and international partners.</p>
 </div></div>
 <section><div class="wrap"><div class="two-col"><div>
-  <div class="notice notice-demo"><h4>Demonstration intake</h4>
-  <p style="margin:.3rem 0 0">This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information.</p></div>
+  <div class="notice notice-demo"><h4 data-en="Demonstration intake" data-es="Recepción de demostración">Demonstration intake</h4>
+  <p style="margin:.3rem 0 0" data-en="This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information." data-es="Esta es una demostración. Las solicitudes aún no se transmiten a un sistema seguro. No incluya información identificable de pacientes.">This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information.</p></div>
   <div class="form-card"><form class="bpc-form" data-ref-prefix="BPC-PRO" novalidate>
-    <div class="field"><label for="pf-org">Organization type *</label>
-      <select id="pf-org" data-required><option value="">Select…</option>
-      <option>Physician / Practice</option><option>Attorney / Law Firm</option><option>Employer</option>
-      <option>Insurer / Payer</option><option>Case Manager</option><option>Hospital / Rehab Facility</option>
-      <option>International Healthcare Partner</option><option>Media / Sponsorship</option><option>Other</option></select>
-      <span class="err">Please choose an organization type.</span></div>
+    <div class="field"><label for="pf-org" data-en="Organization type *" data-es="Tipo de organización *">Organization type *</label>
+      <select id="pf-org" data-required><option value="" data-en="Select…" data-es="Seleccione…">Select…</option>
+      <option data-en="Physician / Practice" data-es="Médico / Consultorio">Physician / Practice</option><option data-en="Attorney / Law Firm" data-es="Abogado / Bufete">Attorney / Law Firm</option><option data-en="Employer" data-es="Empleador">Employer</option>
+      <option data-en="Insurer / Payer" data-es="Aseguradora / Pagador">Insurer / Payer</option><option data-en="Case Manager" data-es="Gestor de casos">Case Manager</option><option data-en="Hospital / Rehab Facility" data-es="Hospital / Centro de rehabilitación">Hospital / Rehab Facility</option>
+      <option data-en="International Healthcare Partner" data-es="Socio internacional de salud">International Healthcare Partner</option><option data-en="Media / Sponsorship" data-es="Medios / Patrocinio">Media / Sponsorship</option><option data-en="Other" data-es="Otro">Other</option></select>
+      <span class="err" data-en="Please choose an organization type." data-es="Elija un tipo de organización.">Please choose an organization type.</span></div>
     <div class="grid grid-2">
-      <div class="field"><label for="pf-name">Full name *</label><input id="pf-name" data-required autocomplete="name"><span class="err">Required.</span></div>
-      <div class="field"><label for="pf-title">Title / Role</label><input id="pf-title" autocomplete="organization-title"></div>
+      <div class="field"><label for="pf-name" data-en="Full name *" data-es="Nombre completo *">Full name *</label><input id="pf-name" data-required autocomplete="name"><span class="err" data-en="Required." data-es="Requerido.">Required.</span></div>
+      <div class="field"><label for="pf-title" data-en="Title / Role" data-es="Cargo / Función">Title / Role</label><input id="pf-title" autocomplete="organization-title"></div>
     </div>
     <div class="grid grid-2">
-      <div class="field"><label for="pf-email">Work email *</label><input id="pf-email" type="email" data-required autocomplete="email"><span class="err">Enter a valid email.</span></div>
-      <div class="field"><label for="pf-phone">Phone *</label><input id="pf-phone" data-required data-validate="phone" autocomplete="tel"><span class="err">Enter a valid phone.</span></div>
+      <div class="field"><label for="pf-email" data-en="Work email *" data-es="Correo laboral *">Work email *</label><input id="pf-email" type="email" data-required autocomplete="email"><span class="err" data-en="Enter a valid email." data-es="Ingrese un correo válido.">Enter a valid email.</span></div>
+      <div class="field"><label for="pf-phone" data-en="Phone *" data-es="Teléfono *">Phone *</label><input id="pf-phone" data-required data-validate="phone" autocomplete="tel"><span class="err" data-en="Enter a valid phone." data-es="Ingrese un teléfono válido.">Enter a valid phone.</span></div>
     </div>
-    <div class="field"><label for="pf-orgname">Organization name *</label><input id="pf-orgname" data-required autocomplete="organization"><span class="err">Required.</span></div>
-    <div class="field"><label for="pf-req">Describe your request *</label><textarea id="pf-req" rows="5" data-required></textarea><span class="err">Required — do not include patient names or identifiers.</span></div>
-    <div class="field"><label class="checkrow"><input type="checkbox" data-required><span>I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here.</span></label><span class="err">Please acknowledge to continue.</span></div>
-    <button class="btn btn-navy" type="submit">Submit Request</button>
+    <div class="field"><label for="pf-orgname" data-en="Organization name *" data-es="Nombre de la organización *">Organization name *</label><input id="pf-orgname" data-required autocomplete="organization"><span class="err" data-en="Required." data-es="Requerido.">Required.</span></div>
+    <div class="field"><label for="pf-req" data-en="Describe your request *" data-es="Describa su solicitud *">Describe your request *</label><textarea id="pf-req" rows="5" data-required></textarea><span class="err" data-en="Required — do not include patient names or identifiers." data-es="Requerido — no incluya nombres ni identificadores de pacientes.">Required — do not include patient names or identifiers.</span></div>
+    <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here." data-es="Entiendo que este formulario de demostración no es un sistema seguro de registros médicos y no enviaré información identificable de pacientes aquí.">I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here.</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">Please acknowledge to continue.</span></div>
+    <button class="btn btn-navy" type="submit" data-en="Submit Request" data-es="Enviar solicitud">Submit Request</button>
   </form>
-  <div class="form-confirm"><h3>Request received</h3>
-    <p>Thank you — a member of our team will follow up. Your reference number:</p>
+  <div class="form-confirm"><h3 data-en="Demonstration only — request NOT sent" data-es="Solo demostración — solicitud NO enviada">Demonstration only — request NOT sent</h3>
+    <p data-en="This form did not transmit your request, and no follow-up will come from it. Your demonstration reference number:" data-es="Este formulario no transmitió su solicitud y no habrá seguimiento a partir de él. Su número de referencia de demostración:">This form did not transmit your request, and no follow-up will come from it. Your demonstration reference number:</p>
     <div class="ref-number">BPC-PRO-…</div>
-    <p class="kbd-hint">Save this number for your records.</p></div></div>
+    <p class="kbd-hint" data-en="Demonstration reference only — not a clinic record." data-es="Solo referencia de demostración — no es un registro de la clínica.">Demonstration reference only — not a clinic record.</p></div></div>
 </div><div>
-  <div class="card"><h3>Who uses this portal</h3>
-  <p>Referring physicians · Attorneys &amp; law firms · Employers · Insurers · Case managers · Hospitals &amp; rehab facilities · International partners · Media &amp; sponsors</p></div>
-  <div class="card" style="margin-top:18px"><h3>Prefer to talk?</h3>
-  <p>Call <a href="tel:+16175550100">(617) 555-0100</a> <span class="verify-note">Number to be verified</span></p></div>
+  <div class="card"><h3 data-en="Who uses this portal" data-es="Quién usa este portal">Who uses this portal</h3>
+  <p data-en="Referring physicians · Attorneys & law firms · Employers · Insurers · Case managers · Hospitals & rehab facilities · International partners · Media & sponsors" data-es="Médicos remitentes · Abogados y bufetes · Empleadores · Aseguradoras · Gestores de casos · Hospitales y centros de rehabilitación · Socios internacionales · Medios y patrocinadores">Referring physicians · Attorneys &amp; law firms · Employers · Insurers · Case managers · Hospitals &amp; rehab facilities · International partners · Media &amp; sponsors</p></div>
+  <div class="card" style="margin-top:18px"><h3 data-en="Prefer to talk?" data-es="¿Prefiere hablar?">Prefer to talk?</h3>
+  <p><span data-en="Call " data-es="Llame al ">Call </span><a href="tel:+16175550100">(617) 555-0100</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Number to be verified</span></p></div>
 </div></div></div></section>
 </main>
 <div class="emergency-strip" role="alert"><span data-en="Medical emergency? Call " data-es="¿Emergencia médica? Llame al ">¿Emergencia médica? Llame al </span><a href="tel:911">911</a><span data-en=" or go to your nearest emergency department." data-es=" o acuda al departamento de emergencias más cercano."> o acuda al departamento de emergencias más cercano.</span></div>

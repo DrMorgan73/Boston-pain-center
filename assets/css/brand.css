@@ -1,0 +1,57 @@
+/* Boston Pain Center — logo brand layer (official logo palette, sampled from
+   ~/workspace/your_files/Branding/boston-pain-center-logo.png).
+   Loaded AFTER style.css, so these rules win at equal specificity.
+   Color-only change: no layout, spacing, or content change.
+   The memorial page (adriana.html) is EXCLUDED by build.py — it never loads
+   this sheet, so the memorial keeps the Harbor & Ember theme untouched. */
+:root{
+  --gold:#0B87AF; --gold-bright:#A5D9F4; --gold-deep:#0A6B8A;
+  --gold-soft:#E2F1F5; --gold-tint:#E2F1F5;
+  --teal:#0B87AF; --teal-deep:#0A6B8A; --teal-tint:#E2F1F5;
+  --gold-grad:linear-gradient(135deg,#1287a8 0%,#0B87AF 55%,#0A6B8A 130%);
+  --ink:#1E2B2B; --line:#d3e6ec;
+}
+/* Text that sat on the gold gradient was dark brown; on the blue gradient it is white. */
+.btn-gold,.btn-gold:hover,.hero .eyebrow,.page-hero .eyebrow,
+.wordmark .wm-mark,.lang-toggle button.on,.step.on{color:#fff}
+/* Gold rgba(212,162,78) and teal rgba(20,144,134) hardcodes, recolored to logo blue rgba(11,135,175). */
+.gold-rule{box-shadow:0 2px 8px rgba(11,135,175,.4)}
+.btn-gold{box-shadow:0 10px 26px rgba(11,135,175,.38)}
+.btn-gold:hover{box-shadow:0 14px 32px rgba(11,135,175,.5)}
+.btn-teal{background:linear-gradient(135deg,#1293b8,#0A6B8A);box-shadow:0 10px 24px rgba(11,135,175,.3)}
+.btn-teal:hover{box-shadow:0 14px 30px rgba(11,135,175,.42)}
+.site-header{border-bottom:1px solid rgba(11,135,175,.4)}
+.wordmark .wm-mark{box-shadow:0 4px 14px rgba(11,135,175,.45)}
+.main-nav a:hover,.main-nav .nav-parent:hover{background:rgba(11,135,175,.14)}
+.main-nav a.active,.main-nav .nav-parent.active{background:rgba(11,135,175,.16)}
+.drop{border:1px solid rgba(11,135,175,.28)}
+.drop a:hover{background:rgba(11,135,175,.16)}
+.hero{background:
+  radial-gradient(900px 420px at 85% 12%,rgba(11,135,175,.24),transparent 62%),
+  radial-gradient(1100px 480px at 12% 8%,rgba(11,135,175,.22),transparent 60%),
+  var(--navy-grad);
+  border-bottom:1px solid rgba(11,135,175,.35)}
+.hero .eyebrow{box-shadow:0 6px 18px rgba(11,135,175,.4)}
+.page-hero{background:
+  radial-gradient(700px 300px at 88% 20%,rgba(11,135,175,.2),transparent 60%),
+  var(--navy-grad);
+  border-bottom:1px solid rgba(11,135,175,.3)}
+.card:hover{border-color:rgba(11,135,175,.55)}
+.monogram,.phys-photo,.doc-photo{border:2px solid rgba(11,135,175,.5)}
+.faq.open{border-color:rgba(11,135,175,.6)}
+.field input:focus,.field select:focus,.field textarea:focus{box-shadow:0 0 0 3px rgba(11,135,175,.22)}
+.media-thumb{border:1px solid rgba(11,135,175,.35)}
+.service-opt.selected{box-shadow:0 0 0 3px rgba(11,135,175,.22)}
+.step.on{box-shadow:0 6px 16px rgba(11,135,175,.35)}
+.cta-band{background:
+  radial-gradient(600px 260px at 50% 0%,rgba(11,135,175,.28),transparent 65%),
+  linear-gradient(135deg,#0a1c33 0%,#14315a 100%);
+  border:1px solid rgba(11,135,175,.45)}
+.site-footer{border-top:1px solid rgba(11,135,175,.35)}
+/* Hardcoded gold hex accents. */
+.icon-badge{background:linear-gradient(135deg,var(--gold-soft),#A5D9F4);box-shadow:inset 0 0 0 1px rgba(10,107,138,.25)}
+.verify-note{border:1px solid #A5D9F4;color:#0A6B8A}
+.ref-number{color:#0A6B8A}
+@media(max-width:1020px){
+  .main-nav{border-bottom:1px solid rgba(11,135,175,.35)}
+}

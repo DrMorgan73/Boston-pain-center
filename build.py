@@ -41,7 +41,7 @@ NAV = [
         ('prp', 'prp-therapy.html', 'PRP Therapy', 'Terapia PRP'),
         ('stem', 'stem-cell-therapy.html', 'Stem Cell Therapy', 'Terapia con células madre'),
         ('exosome', 'exosome-therapy.html', 'Exosome Therapy', 'Terapia con exosomas'),
-        ('peptide', 'peptide-therapy.html', 'Terapia con péptidos', 'Terapia con péptidos'),
+        ('peptide', 'peptide-therapy.html', 'Peptide Therapy', 'Terapia con péptidos'),
     ]),
     ('crps', 'crps-center.html', 'CRPS Center', 'Centro de CRPS', None),
     ('ketamine', 'ketamine-infusion.html', 'Ketamine', 'Ketamina', None),
@@ -78,7 +78,7 @@ def header_html(active):
     sched = sched_es if PAGE_LANG == 'es' else sched_en
     portal_en, portal_es = 'Patient Portal', 'Portal del paciente'
     portal = portal_es if PAGE_LANG == 'es' else portal_en
-    return f'''<a class="skip-link" href="#main">Skip to content</a>
+    return f'''<a class="skip-link" href="#main" data-en="Skip to content" data-es="Ir al contenido">Ir al contenido</a>
 <header class="site-header">
   <div class="header-top"><div class="wrap">
     <span><span data-en="Questions? Call " data-es="¿Preguntas? Llame al ">¿Preguntas? Llame al </span><a href="tel:+16175550100">{PHONE_DISPLAY}</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Número por verificar</span></span>
@@ -159,11 +159,15 @@ def footer_html():
   </div>
 </div></footer>'''
 
-def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_es=''):
+def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_es='', brand=True):
     global PAGE_LANG
     PAGE_LANG = default_lang
     title = title_es if default_lang == 'es' else title_en
     desc = desc_es if default_lang == 'es' else desc_en
+    # Logo brand layer: every page except the memorial (adriana.html) loads
+    # brand.css after style.css. The memorial is held for family approval, so
+    # build_memorial() passes brand=False and its head stays Harbor & Ember.
+    brand_link = '<link rel="stylesheet" href="assets/css/brand.css">\n' if brand else ''
     return f'''<!DOCTYPE html>
 <html lang="{default_lang}" data-default-lang="{default_lang}">
 <head>
@@ -182,7 +186,7 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+{brand_link}<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 </head>
 <body>
 {header_html(active)}
@@ -554,8 +558,8 @@ def build_memorial():
     body += f'''
   <div class="wrap mv2-block">
     {t('Photos', 'Fotos', 'h2', 'mv2-h')}
-    <img class="mv2-banner" src="{A}banner-en-family-50k.jpg" alt="Dr. Adriana Feliz Legacy Fund — $50,000 for 40 ICU Recliner Beds — She cared until her last breath">
-    <img class="mv2-banner" src="{A}banner-es-family-50k.jpg" alt="Fondo Legado Dra. Adriana Feliz — $50,000 para 40 Sillones Cama UCI — Ella cuidó hasta su último aliento">
+    <img class="mv2-banner mv2-banner-en" src="{A}banner-en-family-50k.jpg" alt="Dr. Adriana Feliz Legacy Fund — $50,000 for 40 ICU Recliner Beds — She cared until her last breath">
+    <img class="mv2-banner mv2-banner-es" src="{A}banner-es-family-50k.jpg" alt="Fondo Legado Dra. Adriana Feliz — $50,000 para 40 Sillones Cama UCI — Ella cuidó hasta su último aliento">
     <div class="mv2-grid">{shot_html}</div>
   </div>
 '''
@@ -620,7 +624,8 @@ def build_memorial():
     return page('In Memory — Dr. Adriana Feliz, MD | Boston Pain Center',
                 'En memoria — Dra. Adriana Feliz, MD | Boston Pain Center', 'memorial', body,
                 desc_en='A permanent memorial wall for Dr. Adriana Feliz, MD (March 25, 1991 – October 16, 2026): her photos, her own words, her memorial video, and the Adriana Feliz Legacy Fund.',
-                desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.')
+                desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.',
+                brand=False)
 
 # ============================ PHYSICIANS ============================
 def physician_page(slug, name, initials, extra_sections_en_es, photo=None):
@@ -702,7 +707,7 @@ def service_page(active, eyebrow_en, eyebrow_es, h1_en, h1_es, lead_en, lead_es,
     for h_en, h_es, b_en, b_es in sections:
         secs += f'''<div class="card">{t(h_en, h_es, 'h3')}{t(b_en, b_es, 'p')}</div>'''
     if guides:
-        glinks = ''.join(f'<li><a href="{h}">{esc(l_es if PAGE_LANG=="es" else l_en)}</a></li>' for h, l_en, l_es in guides)
+        glinks = ''.join(f'<li><a href="{h}" data-en="{esc(l_en)}" data-es="{esc(l_es)}">{esc(l_es if PAGE_LANG=="es" else l_en)}</a></li>' for h, l_en, l_es in guides)
         secs += f'''<div class="card">{t('Preparation guides', 'Guías de preparación', 'h3')}<ul>{glinks}</ul></div>'''
     notice = reg_notice(notice_kind) if notice_kind else ''
     body += f'''
@@ -1030,37 +1035,37 @@ def build_professional():
         'Para médicos, abogados, empleadores, aseguradoras, gestores de casos, instituciones y socios internacionales.')
     body += f'''
 <section><div class="wrap"><div class="two-col"><div>
-  <div class="notice notice-demo"><h4>Demonstration intake</h4>
-  <p style="margin:.3rem 0 0">This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information.</p></div>
+  <div class="notice notice-demo"><h4 data-en="Demonstration intake" data-es="Recepción de demostración">Demonstration intake</h4>
+  <p style="margin:.3rem 0 0" data-en="This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information." data-es="Esta es una demostración. Las solicitudes aún no se transmiten a un sistema seguro. No incluya información identificable de pacientes.">This is a front-end demonstration. Submissions are not transmitted to a secure system yet. Do not include patient-identifiable information.</p></div>
   <div class="form-card"><form class="bpc-form" data-ref-prefix="BPC-PRO" novalidate>
-    <div class="field"><label for="pf-org">Organization type *</label>
-      <select id="pf-org" data-required><option value="">Select…</option>
-      <option>Physician / Practice</option><option>Attorney / Law Firm</option><option>Employer</option>
-      <option>Insurer / Payer</option><option>Case Manager</option><option>Hospital / Rehab Facility</option>
-      <option>International Healthcare Partner</option><option>Media / Sponsorship</option><option>Other</option></select>
-      <span class="err">Please choose an organization type.</span></div>
+    <div class="field"><label for="pf-org" data-en="Organization type *" data-es="Tipo de organización *">Organization type *</label>
+      <select id="pf-org" data-required><option value="" data-en="Select…" data-es="Seleccione…">Select…</option>
+      <option data-en="Physician / Practice" data-es="Médico / Consultorio">Physician / Practice</option><option data-en="Attorney / Law Firm" data-es="Abogado / Bufete">Attorney / Law Firm</option><option data-en="Employer" data-es="Empleador">Employer</option>
+      <option data-en="Insurer / Payer" data-es="Aseguradora / Pagador">Insurer / Payer</option><option data-en="Case Manager" data-es="Gestor de casos">Case Manager</option><option data-en="Hospital / Rehab Facility" data-es="Hospital / Centro de rehabilitación">Hospital / Rehab Facility</option>
+      <option data-en="International Healthcare Partner" data-es="Socio internacional de salud">International Healthcare Partner</option><option data-en="Media / Sponsorship" data-es="Medios / Patrocinio">Media / Sponsorship</option><option data-en="Other" data-es="Otro">Other</option></select>
+      <span class="err" data-en="Please choose an organization type." data-es="Elija un tipo de organización.">Please choose an organization type.</span></div>
     <div class="grid grid-2">
-      <div class="field"><label for="pf-name">Full name *</label><input id="pf-name" data-required autocomplete="name"><span class="err">Required.</span></div>
-      <div class="field"><label for="pf-title">Title / Role</label><input id="pf-title" autocomplete="organization-title"></div>
+      <div class="field"><label for="pf-name" data-en="Full name *" data-es="Nombre completo *">Full name *</label><input id="pf-name" data-required autocomplete="name"><span class="err" data-en="Required." data-es="Requerido.">Required.</span></div>
+      <div class="field"><label for="pf-title" data-en="Title / Role" data-es="Cargo / Función">Title / Role</label><input id="pf-title" autocomplete="organization-title"></div>
     </div>
     <div class="grid grid-2">
-      <div class="field"><label for="pf-email">Work email *</label><input id="pf-email" type="email" data-required autocomplete="email"><span class="err">Enter a valid email.</span></div>
-      <div class="field"><label for="pf-phone">Phone *</label><input id="pf-phone" data-required data-validate="phone" autocomplete="tel"><span class="err">Enter a valid phone.</span></div>
+      <div class="field"><label for="pf-email" data-en="Work email *" data-es="Correo laboral *">Work email *</label><input id="pf-email" type="email" data-required autocomplete="email"><span class="err" data-en="Enter a valid email." data-es="Ingrese un correo válido.">Enter a valid email.</span></div>
+      <div class="field"><label for="pf-phone" data-en="Phone *" data-es="Teléfono *">Phone *</label><input id="pf-phone" data-required data-validate="phone" autocomplete="tel"><span class="err" data-en="Enter a valid phone." data-es="Ingrese un teléfono válido.">Enter a valid phone.</span></div>
     </div>
-    <div class="field"><label for="pf-orgname">Organization name *</label><input id="pf-orgname" data-required autocomplete="organization"><span class="err">Required.</span></div>
-    <div class="field"><label for="pf-req">Describe your request *</label><textarea id="pf-req" rows="5" data-required></textarea><span class="err">Required — do not include patient names or identifiers.</span></div>
-    <div class="field"><label class="checkrow"><input type="checkbox" data-required><span>I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here.</span></label><span class="err">Please acknowledge to continue.</span></div>
-    <button class="btn btn-navy" type="submit">Submit Request</button>
+    <div class="field"><label for="pf-orgname" data-en="Organization name *" data-es="Nombre de la organización *">Organization name *</label><input id="pf-orgname" data-required autocomplete="organization"><span class="err" data-en="Required." data-es="Requerido.">Required.</span></div>
+    <div class="field"><label for="pf-req" data-en="Describe your request *" data-es="Describa su solicitud *">Describe your request *</label><textarea id="pf-req" rows="5" data-required></textarea><span class="err" data-en="Required — do not include patient names or identifiers." data-es="Requerido — no incluya nombres ni identificadores de pacientes.">Required — do not include patient names or identifiers.</span></div>
+    <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here." data-es="Entiendo que este formulario de demostración no es un sistema seguro de registros médicos y no enviaré información identificable de pacientes aquí.">I understand this demonstration form is not a secure medical-record system, and I will not submit patient-identifiable information here.</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">Please acknowledge to continue.</span></div>
+    <button class="btn btn-navy" type="submit" data-en="Submit Request" data-es="Enviar solicitud">Submit Request</button>
   </form>
-  <div class="form-confirm"><h3>Request received</h3>
-    <p>Thank you — a member of our team will follow up. Your reference number:</p>
+  <div class="form-confirm"><h3 data-en="Demonstration only — request NOT sent" data-es="Solo demostración — solicitud NO enviada">Demonstration only — request NOT sent</h3>
+    <p data-en="This form did not transmit your request, and no follow-up will come from it. Your demonstration reference number:" data-es="Este formulario no transmitió su solicitud y no habrá seguimiento a partir de él. Su número de referencia de demostración:">This form did not transmit your request, and no follow-up will come from it. Your demonstration reference number:</p>
     <div class="ref-number">BPC-PRO-…</div>
-    <p class="kbd-hint">Save this number for your records.</p></div></div>
+    <p class="kbd-hint" data-en="Demonstration reference only — not a clinic record." data-es="Solo referencia de demostración — no es un registro de la clínica.">Demonstration reference only — not a clinic record.</p></div></div>
 </div><div>
-  <div class="card"><h3>Who uses this portal</h3>
-  <p>Referring physicians · Attorneys &amp; law firms · Employers · Insurers · Case managers · Hospitals &amp; rehab facilities · International partners · Media &amp; sponsors</p></div>
-  <div class="card" style="margin-top:18px"><h3>Prefer to talk?</h3>
-  <p>Call <a href="tel:+16175550100">{PHONE_DISPLAY}</a> <span class="verify-note">Number to be verified</span></p></div>
+  <div class="card"><h3 data-en="Who uses this portal" data-es="Quién usa este portal">Who uses this portal</h3>
+  <p data-en="Referring physicians · Attorneys & law firms · Employers · Insurers · Case managers · Hospitals & rehab facilities · International partners · Media & sponsors" data-es="Médicos remitentes · Abogados y bufetes · Empleadores · Aseguradoras · Gestores de casos · Hospitales y centros de rehabilitación · Socios internacionales · Medios y patrocinadores">Referring physicians · Attorneys &amp; law firms · Employers · Insurers · Case managers · Hospitals &amp; rehab facilities · International partners · Media &amp; sponsors</p></div>
+  <div class="card" style="margin-top:18px"><h3 data-en="Prefer to talk?" data-es="¿Prefiere hablar?">Prefer to talk?</h3>
+  <p><span data-en="Call " data-es="Llame al ">Call </span><a href="tel:+16175550100">{PHONE_DISPLAY}</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Number to be verified</span></p></div>
 </div></div></div></section>
 '''
     return page('Professional Portal | Boston Pain Center', 'Portal profesional | Boston Pain Center', 'pro', body,
@@ -1129,8 +1134,8 @@ def build_podcast():
       <input type="email" data-required {tph('you@example.com', 'usted@ejemplo.com')}><span class="err" data-en="Enter a valid email." data-es="Ingrese un correo válido.">{'Ingrese un correo válido.' if PAGE_LANG=='es' else 'Enter a valid email.'}</span></div>
       <button class="btn btn-teal btn-sm" type="submit" data-en="Subscribe" data-es="Suscribirse">{'Suscribirse' if PAGE_LANG=='es' else 'Subscribe'}</button>
     </form>
-    <div class="form-confirm">{t('Subscribed!', '¡Suscripción lista!', 'h3')}
-      {t('Your reference:', 'Su referencia:', 'p')}<div class="ref-number">BPC-NEWS-…</div></div></div>
+    <div class="form-confirm">{t('Demonstration only — NOT subscribed', 'Solo demostración — NO suscrito', 'h3')}
+      {t('This form did not subscribe you to anything. Your demonstration reference:', 'Este formulario no lo suscribió a nada. Su referencia de demostración:', 'p')}<div class="ref-number">BPC-NEWS-…</div></div></div>
     <div class="card" style="margin-top:18px">{t('Coming soon', 'Próximamente', 'h3')}
     {t('Spotify, Apple Podcasts, and YouTube integrations are on the roadmap.',
        'Las integraciones con Spotify, Apple Podcasts y YouTube están en camino.', 'p')}</div>
@@ -1257,14 +1262,14 @@ def build_resources():
 def build_booking():
     body = page_hero('Request a Consultation', 'Solicitar una consulta',
         'Request your consultation', 'Solicite su consulta',
-        'Consultations and second opinions for local and international patients — including those without insurance. Send your request and we will contact you to confirm.',
-        'Consultas y segundas opiniones para pacientes locales e internacionales — incluyendo quienes no tienen seguro. Envíe su solicitud y nos pondremos en contacto para confirmar.')
+        'Consultations and second opinions for local and international patients — including those without insurance. This is a demonstration request form: nothing you enter here is sent to the clinic.',
+        'Consultas y segundas opiniones para pacientes locales e internacionales — incluyendo quienes no tienen seguro. Este es un formulario de demostración: nada de lo que ingrese aquí se envía a la clínica.')
     body += f'''
 <section><div class="wrap" id="bookingApp">
   <div class="steps" id="bookSteps">
     <div class="step" data-en="1. Choose service" data-es="1. Elija el servicio">{'1. Elija el servicio' if PAGE_LANG=='es' else '1. Choose service'}</div>
     <div class="step" data-en="2. Your details" data-es="2. Sus datos">{'2. Sus datos' if PAGE_LANG=='es' else '2. Your details'}</div>
-    <div class="step" data-en="3. Request sent" data-es="3. Solicitud enviada">{'3. Solicitud enviada' if PAGE_LANG=='es' else '3. Request sent'}</div>
+    <div class="step" data-en="3. Demo complete" data-es="3. Demostración completada">{'3. Demostración completada' if PAGE_LANG=='es' else '3. Demo complete'}</div>
   </div>
   <div class="notice notice-demo"><h4 data-en="Demonstration request" data-es="Solicitud de demostración">{'Solicitud de demostración' if PAGE_LANG=='es' else 'Demonstration request'}</h4>
   {t('This request form is a demonstration until a HIPAA-compliant backend is connected. Please do not enter sensitive medical details.',
@@ -1289,12 +1294,12 @@ def build_booking():
     </form>
   </div></div>
   <div id="bookStep3" style="display:none"><div class="form-card" style="text-align:center">
-    {t('Request received!', '¡Solicitud recibida!', 'h2')}
+    {t('Demonstration complete — nothing was sent', 'Demostración completada — no se envió nada', 'h2')}
     {t('Service:', 'Servicio:', 'p')}<p><strong id="bookSvcEcho"></strong></p>
     {t('Your request reference:', 'Su referencia de solicitud:', 'p')}<div class="ref-number" id="bookRef">BPC-BOOK-…</div>
-    {t('For international patients without insurance, consultations and second opinions are offered on a self-pay basis. Fees are confirmed when we contact you.',
-       'Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios se confirman cuando nos pongamos en contacto.', 'p')}
-    <p class="kbd-hint" style="margin-top:1.2rem" data-en="We will contact you to confirm your appointment time." data-es="Nos pondremos en contacto para confirmar el horario de su cita.">{'Nos pondremos en contacto para confirmar el horario de su cita.' if PAGE_LANG=='es' else 'We will contact you to confirm your appointment time.'}</p>
+    {t('For international patients without insurance, consultations and second opinions are offered on a self-pay basis. Fees will be confirmed by the clinic when live intake opens.',
+       'Para pacientes internacionales sin seguro, las consultas y segundas opiniones se ofrecen con pago directo. Los honorarios serán confirmados por la clínica cuando se abra la recepción en vivo.', 'p')}
+    <p class="kbd-hint" style="margin-top:1.2rem" data-en="This demonstration did not send your request and did not book an appointment." data-es="Esta demostración no envió su solicitud ni reservó una cita.">{'Esta demostración no envió su solicitud ni reservó una cita.' if PAGE_LANG=='es' else 'This demonstration did not send your request and did not book an appointment.'}</p>
   </div></div>
 </div></section>
 '''
@@ -1334,8 +1339,8 @@ def build_contact():
     <div class="field"><label class="checkrow"><input type="checkbox" data-required><span data-en="I understand this demonstration form is not a secure medical record." data-es="Entiendo que este formulario de demostración no es un registro médico seguro.">{'Entiendo que este formulario de demostración no es un registro médico seguro.' if PAGE_LANG=='es' else 'I understand this demonstration form is not a secure medical record.'}</span></label><span class="err" data-en="Please acknowledge to continue." data-es="Por favor confirme para continuar.">{'Por favor confirme para continuar.' if PAGE_LANG=='es' else 'Please acknowledge to continue.'}</span></div>
     <button class="btn btn-teal" type="submit" data-en="Send Inquiry" data-es="Enviar consulta">{'Enviar consulta' if PAGE_LANG=='es' else 'Send Inquiry'}</button>
   </form>
-  <div class="form-confirm">{t('Inquiry received', 'Consulta recibida', 'h3')}
-    {t('Thank you — we will be in touch. Your reference number:', 'Gracias — nos pondremos en contacto. Su número de referencia:', 'p')}
+  <div class="form-confirm">{t('Demonstration only — inquiry NOT sent', 'Solo demostración — consulta NO enviada', 'h3')}
+    {t('This form did not transmit your inquiry, and no follow-up will come from it. Your demonstration reference number:', 'Este formulario no transmitió su consulta y no habrá seguimiento a partir de él. Su número de referencia de demostración:', 'p')}
     <div class="ref-number">BPC-…</div></div></div>
 </div><div>
   <div class="card">{t('Prefer to request directly?', '¿Prefiere solicitar directamente?', 'h3')}
@@ -1384,7 +1389,8 @@ def guide_shell(title_en, title_es, inner):
 <title data-en="{esc(title_en)}" data-es="{esc(title_es)}">{esc(title)}</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../assets/css/style.css"></head>
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="../assets/css/brand.css"></head>
 <body>
 <div class="wrap no-print" style="padding:18px 22px;display:flex;justify-content:space-between;align-items:center">
   <a href="../patient-resources.html" style="font-weight:700" data-en="← Back to Resources" data-es="← Volver a recursos">{'← Volver a recursos' if PAGE_LANG=='es' else '← Back to Resources'}</a>
