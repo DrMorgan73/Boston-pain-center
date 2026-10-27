@@ -85,7 +85,7 @@ def header_html(active):
     <span><a href="patient-portal.html" data-en="Patient Portal (Demo)" data-es="Portal del paciente (Demostración)">Portal del paciente (Demostración)</a> &nbsp;·&nbsp; <span data-en="Se habla español" data-es="Se habla español">Se habla español</span></span>
   </div></div>
   <div class="header-main"><div class="wrap">
-    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;background:#E2F1F5;border-radius:10px;padding:6px 10px;line-height:0"><img src="assets/images/boston-pain-center-logo-transparent.png" alt="Boston Pain Center Inc." style="height:clamp(32px,8vw,44px);width:auto;max-width:52vw;display:block"></span></a>
+    <a class="wordmark" href="index.html" aria-label="Boston Pain Center — Home"><span style="display:inline-flex;line-height:0"><img src="assets/images/boston-pain-center-logo-reversed.png" alt="Boston Pain Center Inc." style="height:clamp(32px,8vw,44px);width:auto;max-width:52vw;display:block"></span></a>
     <nav class="main-nav" id="mainNav" aria-label="Main"><ul>{nav_html(active)}</ul></nav>
     <div class="header-actions">
       <div class="lang-toggle" role="group" aria-label="Language / Idioma">
@@ -123,7 +123,7 @@ def footer_html():
 <footer class="site-footer"><div class="wrap">
   <div class="footer-grid">
     <div>
-      <span style="display:inline-block;background:#E2F1F5;border-radius:10px;padding:8px 12px;line-height:0"><img src="assets/images/boston-pain-center-logo-transparent.png" alt="Boston Pain Center Inc." style="height:52px;width:auto;max-width:100%;display:block"></span>
+      <span style="display:inline-block;line-height:0"><img src="assets/images/boston-pain-center-logo-reversed.png" alt="Boston Pain Center Inc." style="height:52px;width:auto;max-width:100%;display:block"></span>
       <p style="font-size:.92rem;margin-top:.9rem" data-en="Comprehensive pain management and regenerative medicine in Boston, Massachusetts." data-es="Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.">Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.</p>
       <p style="font-size:.92rem"><a href="tel:+16175550100">{PHONE_DISPLAY}</a><br>
       <span data-en="Boston, MA — street address to be verified" data-es="Boston, MA — dirección por verificar">Boston, MA — dirección por verificar</span><br>
@@ -164,9 +164,9 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
     PAGE_LANG = default_lang
     title = title_es if default_lang == 'es' else title_en
     desc = desc_es if default_lang == 'es' else desc_en
-    # Logo brand layer: every page except the memorial (adriana.html) loads
-    # brand.css after style.css. The memorial is held for family approval, so
-    # build_memorial() passes brand=False and its head stays Harbor & Ember.
+    # Logo brand layer: every page loads brand.css after style.css.
+    # Per DrMorgan's 2026-10-26 order, the memorial (adriana.html) now
+    # carries the same branding as the rest of the site.
     brand_link = '<link rel="stylesheet" href="assets/css/brand.css">\n' if brand else ''
     return f'''<!DOCTYPE html>
 <html lang="{default_lang}" data-default-lang="{default_lang}">
@@ -625,7 +625,7 @@ def build_memorial():
                 'En memoria — Dra. Adriana Feliz, MD | Boston Pain Center', 'memorial', body,
                 desc_en='A permanent memorial wall for Dr. Adriana Feliz, MD (March 25, 1991 – October 16, 2026): her photos, her own words, her memorial video, and the Adriana Feliz Legacy Fund.',
                 desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.',
-                brand=False)
+                brand=True)
 
 # ============================ PHYSICIANS ============================
 def physician_page(slug, name, initials, extra_sections_en_es, photo=None):
