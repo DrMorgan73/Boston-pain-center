@@ -30,6 +30,7 @@ SOCIAL = {
 NAV = [
     ('home', 'index.html', 'Home', 'Inicio', None),
     ('about', 'about.html', 'About', 'Nosotros', None),
+    ('medcity', 'medical-city.html', 'Medical City of Boston', 'Medical City of Boston', None),
     ('memorial', 'adriana.html', 'In Memory', 'En memoria', None),
     ('physicians', None, 'Physicians', 'Médicos', [
         ('roberto', 'dr-roberto-feliz.html', 'Dr. Roberto Feliz', 'Dr. Roberto Feliz'),
@@ -641,6 +642,103 @@ def build_memorial():
                 desc_en='A permanent memorial wall for Dr. Adriana Feliz, MD (March 25, 1991 – October 16, 2026): her photos, her own words, her memorial video, and the Adriana Feliz Legacy Fund.',
                 desc_es='Un muro conmemorativo permanente para la Dra. Adriana Feliz, MD (25 de marzo de 1991 – 16 de octubre de 2026): sus fotos, sus propias palabras, su video conmemorativo y el Fondo Legado Adriana Feliz.',
                 brand=True)
+
+def vision_figure(src, alt_en, alt_es, cap_en, cap_es, wide=False):
+    """Bilingual figure for vision imagery. The alt defaults to the page language;
+    data-en-aria / data-es-aria let the language toggle swap the accessible name,
+    and the visible caption swaps via t() like the rest of the site."""
+    alt = alt_es if PAGE_LANG == 'es' else alt_en
+    ratio = '21/9' if wide else '3/2'
+    return f'''<figure style="margin:0">
+  <img src="{src}" alt="{esc(alt)}" aria-label="{esc(alt)}" data-en-aria="{esc(alt_en)}" data-es-aria="{esc(alt_es)}" loading="lazy" style="width:100%;aspect-ratio:{ratio};object-fit:cover;border-radius:14px;display:block;box-shadow:var(--shadow)">
+  {t(cap_en, cap_es, 'figcaption', '', 'style="font-size:.86rem;color:var(--muted);margin-top:.6rem;text-align:center"')}
+</figure>'''
+
+def build_medical_city():
+    body = page_hero('Our Vision', 'Nuestra visión',
+        'Medical City of Boston', 'Medical City of Boston',
+        'The hub we are building toward: one destination where prevention, treatment, recovery, and advanced care live together — led by physicians, hand by hand.',
+        'El centro que estamos construyendo: un solo destino donde la prevención, el tratamiento, la recuperación y el cuidado avanzado conviven — dirigido por médicos, mano a mano.')
+    body += f'''
+<section><div class="wrap">
+  <div style="margin-bottom:36px">{vision_figure('assets/images/medcity/campus-dawn.jpg',
+    'Concept rendering of the future Medical City of Boston campus at dawn — pavilions and terraced gardens above the river, with the Boston skyline behind',
+    'Representación conceptual del futuro campus de Medical City of Boston al amanecer — pabellones y jardines en terrazas sobre el río, con el horizonte de Boston detrás',
+    'Concept rendering — Medical City of Boston as envisioned: a luminous campus of pavilions and healing gardens, at dawn.',
+    'Representación conceptual — Medical City of Boston tal como se concibe: un campus luminoso de pabellones y jardines curativos, al amanecer.', wide=True)}</div>
+<div class="two-col"><div>
+  {t('Why a medical city', 'Por qué una ciudad médica', 'span', 'eyebrow')}
+  {t('Care today is fragmented. We are building it whole.', 'Hoy el cuidado está fragmentado. Lo estamos construyendo completo.', 'h2')}
+  <div class="gold-rule"></div>
+  {t('Patients with complex conditions move from office to office, repeating their story at every door, while the people treating them rarely share one plan. Medical City of Boston is our answer: a single hub where the specialties, the advanced services, and the human support a patient needs are gathered in one place, under one coordinated plan.',
+     'Los pacientes con condiciones complejas pasan de consultorio en consultorio, repitiendo su historia en cada puerta, mientras quienes los tratan rara vez comparten un solo plan. Medical City of Boston es nuestra respuesta: un único centro donde las especialidades, los servicios avanzados y el apoyo humano que un paciente necesita se reúnen en un solo lugar, bajo un plan coordinado.', 'p')}
+  {t('It is a vision in development — being designed, built, and earned step by step. The care we provide today at Boston Pain Clinic is where it begins.',
+     'Es una visión en desarrollo — que se diseña, se construye y se gana paso a paso. El cuidado que hoy brindamos en Boston Pain Clinic es donde comienza.', 'p')}
+</div><div>
+  <div class="card">{t('Presented by', 'Presentado por', 'h3')}
+  {t('Medical City of Boston is the hub vision of Dr. Roberto Feliz and Dr. Mohammed Morgan, presented by Boston Pain Clinic and IEC, Inc.', 'Medical City of Boston es la visión central del Dr. Roberto Feliz y el Dr. Mohammed Morgan, presentada por Boston Pain Clinic e IEC, Inc.', 'p')}
+  {t('It is built on their combined 50+ years of national and international healthcare experience — national practice rooted in Boston, and international work across borders, brought together in one city of care.', 'Se construye sobre sus más de 50 años combinados de experiencia en salud, nacional e internacional — práctica nacional con raíces en Boston y trabajo internacional a través de fronteras, reunidos en una sola ciudad del cuidado.', 'p')}
+  </div>
+  <div class="card" style="margin-top:18px;text-align:center">{t('The scale of the vision', 'La escala de la visión', 'h3')}
+  <p style="font-size:2rem;font-weight:800;margin:.2rem 0">400,000 <span data-en="sq ft" data-es="pies²">{'pies²' if PAGE_LANG=='es' else 'sq ft'}</span></p>
+  {t('At full build-out, Medical City of Boston is envisioned as a 400,000 square foot medical city — a hub large enough to hold the whole journey of care under one roof.', 'En su desarrollo completo, Medical City of Boston se concibe como una ciudad médica de 400,000 pies cuadrados — un centro con el tamaño para albergar todo el recorrido del cuidado bajo un mismo techo.', 'p')}
+  </div>
+</div></div></div></section>
+<section class="section-alt"><div class="wrap">
+  {t('Vision', 'Visión', 'span', 'eyebrow')}
+  {t('What we see', 'Lo que vemos', 'h2')}<div class="gold-rule"></div>
+  {t('We envision one destination where prevention, treatment, recovery, and advanced care live together — a medical city where every patient is known, every service is connected, and no one faces a complex illness without a team beside them. Neighborhood clinics across the region will feed one central hub, so care begins close to home and continues, without interruption, at the highest level. Within the city, a dedicated Right to Try Infirmary will serve patients with complex, refractory, or life-threatening conditions who have run out of ordinary options — exploring the possibilities that remain with discipline, honesty, and dignity. And alongside the care, research and education will advance — including the FELIZ Foundation’s mission to find answers for HLH — so that what is learned in Boston reaches patients everywhere.',
+     'Visualizamos un solo destino donde la prevención, el tratamiento, la recuperación y el cuidado avanzado conviven — una ciudad médica donde cada paciente es conocido, cada servicio está conectado y nadie enfrenta una enfermedad compleja sin un equipo a su lado. Las clínicas de barrio de toda la región alimentarán un centro principal, para que el cuidado comience cerca de casa y continúe, sin interrupción, al más alto nivel. Dentro de la ciudad, un Right to Try Infirmary dedicado atenderá a pacientes con condiciones complejas, refractarias o potencialmente mortales que han agotado las opciones ordinarias — explorando las posibilidades que quedan con disciplina, honestidad y dignidad. Y junto al cuidado, avanzarán la investigación y la educación — incluyendo la misión de la Fundación FELIZ de encontrar respuestas para la HLH — para que lo que se aprenda en Boston llegue a pacientes en todas partes.', 'p', 'lead')}
+  <div class="grid grid-3" style="margin:0 0 22px">
+    {vision_figure('assets/images/medcity/atrium.jpg',
+    'Concept rendering of the central healing hall — a light-filled atrium with trees, gardens, and a reflecting pool',
+    'Representación conceptual del salón central de sanación — un atrio lleno de luz con árboles, jardines y un estanque de reflejo',
+    'Concept rendering — the healing hall: light and gardens at the heart of the city.',
+    'Representación conceptual — el salón de sanación: luz y jardines en el corazón de la ciudad.')}
+    {vision_figure('assets/images/medcity/garden.jpg',
+    'Concept rendering of a healing garden courtyard with a reflecting pool, between brick-and-glass pavilions',
+    'Representación conceptual de un jardín curativo con un estanque de reflejo, entre pabellones de ladrillo y cristal',
+    'Concept rendering — healing gardens between the pavilions.',
+    'Representación conceptual — jardines curativos entre los pabellones.')}
+    {vision_figure('assets/images/medcity/infirmary.jpg',
+    'Concept rendering of a Right to Try Infirmary suite — calm advanced care with warm wood, family seating, and a garden view',
+    'Representación conceptual de una suite del Right to Try Infirmary — cuidado avanzado y sereno, con madera cálida, espacio para la familia y vista al jardín',
+    'Concept rendering — the Right to Try Infirmary: advanced care, with room for family.',
+    'Representación conceptual — el Right to Try Infirmary: cuidado avanzado, con espacio para la familia.')}
+  </div>
+  <div class="grid grid-2">
+    <div class="card">{t('Integrated, whole-person care', 'Cuidado integral de la persona completa', 'h3')}{t('Prevention, diagnosis, treatment, rehabilitation, and recovery are not separate stops. In the medical city they are one continuous plan, built around the whole person — body, mind, and family.', 'La prevención, el diagnóstico, el tratamiento, la rehabilitación y la recuperación no son paradas separadas. En la ciudad médica son un solo plan continuo, construido alrededor de la persona completa — cuerpo, mente y familia.', 'p')}</div>
+    <div class="card">{t('One hub, neighborhood doors', 'Un centro, puertas en los barrios', 'h3')}{t('A network of neighborhood clinics brings care close to home and feeds one central hub — so a patient can start nearby and, when their condition demands it, continue at the highest level without starting over.', 'Una red de clínicas de barrio acerca el cuidado al hogar y alimenta un centro principal — para que el paciente pueda comenzar cerca y, cuando su condición lo exige, continuar al más alto nivel sin empezar de nuevo.', 'p')}</div>
+    <div class="card">{t('The Right to Try Infirmary', 'El Right to Try Infirmary', 'h3')}{t('A dedicated advanced-care division for patients with complex, refractory, or life-threatening conditions who have run out of ordinary options. Its name describes a mission — exploring remaining options — never a promise: every possibility is weighed with discipline, evidence, and informed consent.', 'Una división dedicada de cuidado avanzado para pacientes con condiciones complejas, refractarias o potencialmente mortales que han agotado las opciones ordinarias. Su nombre describe una misión — explorar las opciones restantes — nunca una promesa: cada posibilidad se evalúa con disciplina, evidencia y consentimiento informado.', 'p')}</div>
+    <div class="card">{t('Research and education', 'Investigación y educación', 'h3')}{t('Care that learns. Research and teaching advance alongside treatment — including the FELIZ Foundation’s HLH research mission, carried in memory of Dr. Adriana Feliz — so each patient benefits from what the last one taught us.', 'Un cuidado que aprende. La investigación y la enseñanza avanzan junto al tratamiento — incluyendo la misión de investigación sobre HLH de la Fundación FELIZ, llevada en memoria de la Dra. Adriana Feliz — para que cada paciente se beneficie de lo que el anterior nos enseñó.', 'p')}</div>
+  </div>
+</div></section>
+<section><div class="wrap">
+  {t('Mission', 'Misión', 'span', 'eyebrow')}
+  {t('What we are here to do', 'Lo que estamos aquí para hacer', 'h2')}<div class="gold-rule"></div>
+  {t('Our mission is to build that city of care in Boston: coordinated, physician-led medicine, practiced hand by hand. We will open the doors of advanced care to the communities we serve — including the Latino and working families who have always been at the heart of our practice. Every patient will follow one personal plan — before, during, and after treatment — carried by a single team that knows their name, their history, and their goals. And when illness is most advanced, we will keep dignity and family at the center of care, always.',
+     'Nuestra misión es construir esa ciudad del cuidado en Boston: medicina coordinada, dirigida por médicos, practicada mano a mano. Abriremos las puertas del cuidado avanzado a las comunidades a las que servimos — incluyendo a las familias latinas y trabajadoras que siempre han estado en el corazón de nuestra práctica. Cada paciente seguirá un solo plan personal — antes, durante y después del tratamiento — llevado por un único equipo que conoce su nombre, su historia y sus metas. Y cuando la enfermedad esté más avanzada, mantendremos la dignidad y a la familia en el centro del cuidado, siempre.', 'p', 'lead')}
+  <div class="grid grid-2">
+    <div class="card">{t('Led by physicians, hand by hand', 'Dirigido por médicos, mano a mano', 'h3')}{t('Physicians lead the care and stay accountable for it — Dr. Roberto Feliz and Dr. Mohammed Morgan, hand by hand, with one team around each patient.', 'Los médicos dirigen el cuidado y responden por él — el Dr. Roberto Feliz y el Dr. Mohammed Morgan, mano a mano, con un solo equipo alrededor de cada paciente.', 'p')}</div>
+    <div class="card">{t('Access for our communities', 'Acceso para nuestras comunidades', 'h3')}{t('Advanced care belongs to the communities we serve — including Latino and working families. Care in English and Spanish, explained in plain language, close to home.', 'El cuidado avanzado pertenece a las comunidades a las que servimos — incluyendo a las familias latinas y trabajadoras. Atención en inglés y español, explicada en lenguaje claro, cerca de casa.', 'p')}</div>
+    <div class="card">{t('One personal plan', 'Un solo plan personal', 'h3')}{t('Before, during, and after treatment, every patient follows one personal plan — no repeated stories, no lost threads, no one navigating the system alone.', 'Antes, durante y después del tratamiento, cada paciente sigue un solo plan personal — sin historias repetidas, sin hilos perdidos, sin nadie navegando el sistema solo.', 'p')}</div>
+    <div class="card">{t('Dignity and family at the center', 'La dignidad y la familia en el centro', 'h3')}{t('Especially in advanced care, dignity is not an extra. Family presence, honest conversation, and comfort stand at the center of how we will practice.', 'Especialmente en el cuidado avanzado, la dignidad no es un extra. La presencia de la familia, la conversación honesta y el consuelo están en el centro de cómo practicaremos.', 'p')}</div>
+  </div>
+  <div class="notice notice-info" style="margin-top:26px"><h4 data-en="Where the vision stands" data-es="Dónde está la visión">Dónde está la visión</h4>
+  <p data-en="{esc('Medical City of Boston is a vision in development. It is not yet open, and no services are offered under its name today. Care is available now at Boston Pain Clinic — and every patient we serve today is part of building toward it.')}" data-es="{esc('Medical City of Boston es una visión en desarrollo. Aún no está abierto y hoy no se ofrece ningún servicio bajo su nombre. La atención está disponible ahora en Boston Pain Clinic — y cada paciente que atendemos hoy es parte de construir hacia ella.')}">{'Medical City of Boston es una visión en desarrollo. Aún no está abierto y hoy no se ofrece ningún servicio bajo su nombre. La atención está disponible ahora en Boston Pain Clinic — y cada paciente que atendemos hoy es parte de construir hacia ella.' if PAGE_LANG=='es' else 'Medical City of Boston is a vision in development. It is not yet open, and no services are offered under its name today. Care is available now at Boston Pain Clinic — and every patient we serve today is part of building toward it.'}</p></div>
+  <div style="margin-top:26px">{vision_figure('assets/images/medcity/boston-skyline.jpg',
+    'Photograph of Boston at dusk — the John Hancock Tower and Back Bay above the Charles River',
+    'Fotografía de Boston al atardecer — la torre John Hancock y Back Bay sobre el río Charles',
+    'Boston, Massachusetts — the city this vision calls home. (Photograph: Andrés García, via Pexels.)',
+    'Boston, Massachusetts — la ciudad que esta visión llama hogar. (Fotografía: Andrés García, vía Pexels.)')}</div>
+</div></section>
+{cta_band('Care today, at Boston Pain Clinic', 'Atención hoy, en Boston Pain Clinic',
+          'The vision is being built. The care is already here — request a consultation with our physicians.',
+          'La visión se está construyendo. La atención ya está aquí — solicite una consulta con nuestros médicos.')}
+'''
+    return page('Medical City of Boston | Boston Pain Center', 'Medical City of Boston | Boston Pain Center', 'medcity', body,
+                desc_en='Medical City of Boston — the hub vision of Dr. Roberto Feliz and Dr. Mohammed Morgan, presented by Boston Pain Clinic and IEC, Inc. Vision and mission.',
+                desc_es='Medical City of Boston — la visión central del Dr. Roberto Feliz y el Dr. Mohammed Morgan, presentada por Boston Pain Clinic e IEC, Inc. Visión y misión.')
 
 # ============================ PHYSICIANS ============================
 def physician_page(slug, name, initials, extra_sections_en_es, photo=None):
@@ -1520,6 +1618,7 @@ def main():
     jobs = [
         ('index.html', 'es', build_index),
         ('about.html', 'es', build_about),
+        ('medical-city.html', 'es', build_medical_city),
         ('adriana.html', 'es', build_memorial),
         ('dr-roberto-feliz.html', 'es', build_roberto),
         ('dr-eddie-feliz.html', 'es', build_eddie),
