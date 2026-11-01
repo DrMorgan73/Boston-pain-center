@@ -7,6 +7,16 @@
 <title>Sign in — BPC Back Office</title>
 <link rel="stylesheet" href="../assets/css/style.css">
 <link rel="stylesheet" href="admin.css">
+<style>
+.forgot-row{margin-top:18px;text-align:center;font-size:13.5px}
+.forgot-row a{color:var(--muted);text-decoration:none}
+.forgot-row a:hover{color:var(--gold-bright);text-decoration:underline}
+.forgot-panel{margin-top:16px;border:1px solid var(--line-soft);border-radius:12px;
+  background:rgba(255,255,255,.03);padding:16px 18px;font-size:14px;color:#dbe4f0}
+.forgot-panel p{margin-bottom:12px}
+.forgot-panel .btn{text-decoration:none}
+.forgot-contact{margin:12px 0 0;font-size:13px;color:var(--muted)}
+</style>
 </head>
 <body class="admin-login">
 <main class="login-card">
@@ -26,6 +36,12 @@
     <div class="login-error" id="loginError" hidden></div>
     <button class="btn btn-primary" type="submit" id="loginBtn">Sign in</button>
   </form>
+  <p class="forgot-row"><a href="#" id="forgotLink" aria-expanded="false" aria-controls="forgotPanel">Forgot password?</a></p>
+  <div class="forgot-panel" id="forgotPanel" hidden>
+    <p>Back Office passwords are managed by <strong>IEC, Inc.</strong>, the developer of this site. Request a reset and IEC will verify your request and issue a new password.</p>
+    <a class="btn btn-ghost btn-sm" href="mailto:info@iecincglobal.com?subject=BPC%20Back%20Office%20%E2%80%94%20password%20reset%20request&amp;body=Clinic%20name%3A%20%0D%0AStaff%20name%3A%20%0D%0ACallback%20number%3A%20%0D%0A%0D%0APlease%20reset%20the%20password%20for%20our%20Boston%20Pain%20Center%20Back%20Office%20sign-in.">Request a reset from IEC</a>
+    <p class="forgot-contact">info@iecincglobal.com · iecincglobal.com</p>
+  </div>
 </main>
 <script>
 (function () {
@@ -57,6 +73,17 @@
       err.textContent = 'Could not reach the server. Check your connection and try again.';
       err.hidden = false;
     });
+  });
+})();
+</script>
+<script>
+(function () {
+  var link = document.getElementById('forgotLink');
+  var panel = document.getElementById('forgotPanel');
+  link.addEventListener('click', function (e) {
+    e.preventDefault();
+    panel.hidden = !panel.hidden;
+    link.setAttribute('aria-expanded', panel.hidden ? 'false' : 'true');
   });
 })();
 </script>
