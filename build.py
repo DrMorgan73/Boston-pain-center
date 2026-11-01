@@ -157,7 +157,7 @@ def footer_html():
 {social_html()}
   <div class="footer-bottom">
     <span>© <span data-year></span> <span data-en="Boston Pain Center. All rights reserved." data-es="Boston Pain Center. Todos los derechos reservados.">Boston Pain Center. Todos los derechos reservados.</span></span>
-    <span><a href="privacy-disclaimer.html" data-en="Privacy &amp; Disclaimer" data-es="Privacidad y descargo">Privacidad y descargo</a> · <span data-en="Educational content only — not medical advice." data-es="Contenido educativo únicamente — no es consejo médico.">Contenido educativo únicamente — no es consejo médico.</span></span>
+    <span><a href="privacy-disclaimer.html" data-en="Privacy &amp; Disclaimer" data-es="Privacidad y descargo">Privacidad y descargo</a> · <a href="/admin/" data-en="Office Login" data-es="Acceso de oficina">Acceso de oficina</a> · <span data-en="Educational content only — not medical advice." data-es="Contenido educativo únicamente — no es consejo médico.">Contenido educativo únicamente — no es consejo médico.</span></span>
   </div>
 </div></footer>'''
 
