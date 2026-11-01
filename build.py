@@ -17,7 +17,7 @@ def t(en, es, tag='p', cls='', extra=''):
 def tph(en, es):
     return f'data-en-ph="{esc(en)}" data-es-ph="{esc(es)}" placeholder="{esc(es if PAGE_LANG=="es" else en)}"'
 
-PHONE_DISPLAY = "(617) 555-0100"  # fictional 555 range — MUST be replaced before launch
+PHONE_DISPLAY = "(617) 361-2166"  # real clinic number (set 2026-11-01)
 
 # Social media presence. Fill in a profile URL to show its icon in the footer
 # (empty string = hidden). Create the accounts first, then paste the links here.
@@ -82,7 +82,7 @@ def header_html(active):
     return f'''<a class="skip-link" href="#main" data-en="Skip to content" data-es="Ir al contenido">Ir al contenido</a>
 <header class="site-header">
   <div class="header-top"><div class="wrap">
-    <span><span data-en="Questions? Call " data-es="¿Preguntas? Llame al ">¿Preguntas? Llame al </span><a href="tel:+16175550100">{PHONE_DISPLAY}</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Número por verificar</span></span>
+    <span><span data-en="Questions? Call " data-es="¿Preguntas? Llame al ">¿Preguntas? Llame al </span><a href="tel:+16173612166">{PHONE_DISPLAY}</a></span>
     <span><a href="patient-portal.html" data-en="Patient Portal (Demo)" data-es="Portal del paciente (Demostración)">Portal del paciente (Demostración)</a> &nbsp;·&nbsp; <span data-en="Se habla español" data-es="Se habla español">Se habla español</span></span>
   </div></div>
   <div class="header-main"><div class="wrap" style="flex-direction:column;align-items:stretch;gap:6px">
@@ -128,9 +128,8 @@ def footer_html():
     <div>
       <span style="display:inline-block;line-height:0"><img src="assets/images/boston-pain-center-logo-reversed.png" alt="Boston Pain Center Inc." style="height:52px;width:auto;max-width:100%;display:block"></span>
       <p style="font-size:.92rem;margin-top:.9rem" data-en="Comprehensive pain management and regenerative medicine in Boston, Massachusetts." data-es="Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.">Manejo integral del dolor y medicina regenerativa en Boston, Massachusetts.</p>
-      <p style="font-size:.92rem"><a href="tel:+16175550100">{PHONE_DISPLAY}</a><br>
-      <span data-en="Boston, MA — street address to be verified" data-es="Boston, MA — dirección por verificar">Boston, MA — dirección por verificar</span><br>
-      <span class="verify-note" data-en="Contact details to be verified before launch" data-es="Datos de contacto por verificar antes del lanzamiento">Datos de contacto por verificar antes del lanzamiento</span></p>
+      <p style="font-size:.92rem"><a href="tel:+16173612166">{PHONE_DISPLAY}</a><br>
+      <span data-en="188 Providence St, Hyde Park, MA 02136" data-es="188 Providence St, Hyde Park, MA 02136">188 Providence St, Hyde Park, MA 02136</span></p>
     </div>
     <div><h4 data-en="Centers" data-es="Centros">Centros</h4><ul>
       <li><a href="pain-management.html" data-en="Pain Management" data-es="Manejo del dolor">Manejo del dolor</a></li>
@@ -1183,7 +1182,7 @@ def build_professional():
   <div class="card"><h3 data-en="Who uses this portal" data-es="Quién usa este portal">Who uses this portal</h3>
   <p data-en="Referring physicians · Attorneys & law firms · Employers · Insurers · Case managers · Hospitals & rehab facilities · International partners · Media & sponsors" data-es="Médicos remitentes · Abogados y bufetes · Empleadores · Aseguradoras · Gestores de casos · Hospitales y centros de rehabilitación · Socios internacionales · Medios y patrocinadores">Referring physicians · Attorneys &amp; law firms · Employers · Insurers · Case managers · Hospitals &amp; rehab facilities · International partners · Media &amp; sponsors</p></div>
   <div class="card" style="margin-top:18px"><h3 data-en="Prefer to talk?" data-es="¿Prefiere hablar?">Prefer to talk?</h3>
-  <p><span data-en="Call " data-es="Llame al ">Call </span><a href="tel:+16175550100">{PHONE_DISPLAY}</a> <span class="verify-note" data-en="Number to be verified" data-es="Número por verificar">Number to be verified</span></p></div>
+  <p><span data-en="Call " data-es="Llame al ">Call </span><a href="tel:+16173612166">{PHONE_DISPLAY}</a></p></div>
 </div></div></div></section>
 '''
     return page('Professional Portal | Boston Pain Center', 'Portal profesional | Boston Pain Center', 'pro', body,
@@ -1433,8 +1432,8 @@ def build_contact():
     body += f'''
 <section><div class="wrap"><div class="two-col"><div>
   <div class="grid grid-2">
-    <div class="card">{t('Call us', 'Llámenos', 'h3')}<p><a href="tel:+16175550100" style="font-size:1.2rem;font-weight:700">{PHONE_DISPLAY}</a></p>{t('Number to be verified before launch.', 'Número por verificar antes del lanzamiento.', 'p', 'kbd-hint')}</div>
-    <div class="card">{t('Visit us', 'Visítenos', 'h3')}{t('Boston, Massachusetts', 'Boston, Massachusetts', 'p')}{t('Street address to be verified before launch.', 'Dirección por verificar antes del lanzamiento.', 'p', 'kbd-hint')}</div>
+    <div class="card">{t('Call us', 'Llámenos', 'h3')}<p><a href="tel:+16173612166" style="font-size:1.2rem;font-weight:700">{PHONE_DISPLAY}</a></p>{t('Call us — we are here to help.', 'Llámenos — estamos para ayudarle.', 'p', 'kbd-hint')}</div>
+    <div class="card">{t('Visit us', 'Visítenos', 'h3')}{t('188 Providence St, Hyde Park, MA 02136', '188 Providence St, Hyde Park, MA 02136', 'p')}</div>
   </div>
   <div class="notice notice-emergency" style="margin-top:22px"><h4 data-en="In an emergency" data-es="En una emergencia">{'En una emergencia' if PAGE_LANG=='es' else 'In an emergency'}</h4>
   {t('Call 911 or go to your nearest emergency department. Do not use this form for urgent medical needs.',
@@ -1519,7 +1518,7 @@ def guide_shell(title_en, title_es, inner):
   </div>
 </div>
 <main class="wrap"><div class="guide" style="margin:10px 0 40px">
-  <p><strong>Boston Pain Center</strong> · <span data-en="Boston, Massachusetts" data-es="Boston, Massachusetts">Boston, Massachusetts</span></p>
+  <p><strong>Boston Pain Center</strong> · <span data-en="188 Providence St, Hyde Park, MA 02136" data-es="188 Providence St, Hyde Park, MA 02136">188 Providence St, Hyde Park, MA 02136</span></p>
   {inner}
   <div class="notice notice-emergency no-print" style="margin-top:24px"><p style="margin:0" data-en="Medical emergency? Call 911." data-es="¿Emergencia médica? Llame al 911.">{'¿Emergencia médica? Llame al 911.' if PAGE_LANG=='es' else 'Medical emergency? Call 911.'}</p></div>
   <p class="kbd-hint" data-en="Educational material — not medical advice. Bring questions to your visit." data-es="Material educativo — no es consejo médico. Lleve sus preguntas a su visita.">{'Material educativo — no es consejo médico. Lleve sus preguntas a su visita.' if PAGE_LANG=='es' else 'Educational material — not medical advice. Bring questions to your visit.'}</p>

@@ -110,8 +110,8 @@ window.BPC_BOT_DATA = {
       id: "contact",
       kw: { en: ["contact", "phone", "call", "email", "address", "where are you", "location", "hours", "open"],
             es: ["contacto", "teléfono", "llamar", "correo", "dirección", "dónde están", "ubicación", "horario", "abren"] },
-      a: { en: "You can reach us in English or Spanish. Our listed phone is (617) 555-0100 — please note this number is marked “to be verified” before launch. We are in Boston, Massachusetts; the street address is also marked “to be verified,” as are our hours. Our contact form is a demonstration and does not send your inquiry or trigger follow-up.",
-           es: "Puede comunicarse con nosotros en inglés o español. Nuestro teléfono publicado es (617) 555-0100 — tenga en cuenta que este número está marcado como “por verificar” antes del lanzamiento. Estamos en Boston, Massachusetts; la dirección también está marcada como “por verificar”, al igual que nuestro horario. Nuestro formulario de contacto es una demostración y no envía su consulta ni genera seguimiento." },
+      a: { en: "You can reach us in English or Spanish. Our phone is (617) 361-2166. You can find us at 188 Providence St, Hyde Park, MA 02136; our hours are still marked “to be verified.” Our contact form is a demonstration and does not send your inquiry or trigger follow-up.",
+           es: "Puede comunicarse con nosotros en inglés o español. Nuestro teléfono es (617) 361-2166. Estamos en 188 Providence St, Hyde Park, MA 02136; nuestro horario aún está marcado como “por verificar”. Nuestro formulario de contacto es una demostración y no envía su consulta ni genera seguimiento." },
       link: { href: "contact.html", en: "Contact Us", es: "Contáctenos" }
     },
     {
