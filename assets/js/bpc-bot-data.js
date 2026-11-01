@@ -1,8 +1,8 @@
 /* Boston Pain Center — visitor assistant knowledge base (v1, FAQ rules-based, $0).
    Every answer is grounded in the site's own published content. No prices,
-   hours, insurance acceptance, or physician credentials are asserted here,
-   because the site does not publish them yet: contact details are flagged
-   "to be verified" exactly as the site flags them. Nothing here is medical
+   insurance acceptance, or physician credentials are asserted here, because
+   the site does not publish them yet. Phone, address, and hours match the
+   site's published contact details. Nothing here is medical
    advice for an individual case. No network requests are made by the bot. */
 window.BPC_BOT_DATA = {
   ui: {
@@ -110,8 +110,8 @@ window.BPC_BOT_DATA = {
       id: "contact",
       kw: { en: ["contact", "phone", "call", "email", "address", "where are you", "location", "hours", "open"],
             es: ["contacto", "teléfono", "llamar", "correo", "dirección", "dónde están", "ubicación", "horario", "abren"] },
-      a: { en: "You can reach us in English or Spanish. Our phone is (617) 361-2166. You can find us at 188 Providence St, Hyde Park, MA 02136; our hours are still marked “to be verified.” Our contact form is a demonstration and does not send your inquiry or trigger follow-up.",
-           es: "Puede comunicarse con nosotros en inglés o español. Nuestro teléfono es (617) 361-2166. Estamos en 188 Providence St, Hyde Park, MA 02136; nuestro horario aún está marcado como “por verificar”. Nuestro formulario de contacto es una demostración y no envía su consulta ni genera seguimiento." },
+      a: { en: "You can reach us in English or Spanish. Our phone is (617) 361-2166. You can find us at 188 Providence St, Hyde Park, MA 02136; our hours are Monday–Friday 9:00 AM – 5:00 PM, Saturday 9:00 AM – 1:00 PM, and Sunday closed. Our contact form is a demonstration and does not send your inquiry or trigger follow-up.",
+           es: "Puede comunicarse con nosotros en inglés o español. Nuestro teléfono es (617) 361-2166. Estamos en 188 Providence St, Hyde Park, MA 02136; nuestro horario es de lunes a viernes de 9:00 AM a 5:00 PM, sábado de 9:00 AM a 1:00 PM y domingo cerrado. Nuestro formulario de contacto es una demostración y no envía su consulta ni genera seguimiento." },
       link: { href: "contact.html", en: "Contact Us", es: "Contáctenos" }
     },
     {

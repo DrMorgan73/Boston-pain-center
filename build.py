@@ -1464,7 +1464,7 @@ def build_contact():
   {t('Request a consultation or second opinion — including for international patients without insurance.', 'Solicite una consulta o segunda opinión — incluyendo para pacientes internacionales sin seguro.', 'p')}
   <a class="btn btn-gold" href="booking.html" data-en="Request a Consultation" data-es="Solicitar una consulta">{'Solicitar una consulta' if PAGE_LANG=='es' else 'Request a Consultation'}</a></div>
   <div class="card" style="margin-top:18px">{t('Hours', 'Horario', 'h3')}
-  {t('Hours to be verified before launch.', 'Horario por verificar antes del lanzamiento.', 'p', 'kbd-hint')}</div>
+  {t('Monday–Friday 9:00 AM – 5:00 PM · Saturday 9:00 AM – 1:00 PM · Sunday closed', 'Lunes a viernes 9:00 AM – 5:00 PM · Sábado 9:00 AM – 1:00 PM · Domingo cerrado', 'p')}</div>
 </div></div></div></section>
 '''
     return page('Contact | Boston Pain Center', 'Contacto | Boston Pain Center', 'contact', body,
