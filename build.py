@@ -212,11 +212,14 @@ def page(title_en, title_es, active, body, default_lang='es', desc_en='', desc_e
 </body>
 </html>'''
 
-def page_hero(eyebrow_en, eyebrow_es, h1_en, h1_es, lead_en, lead_es, crumb_en='Home', crumb_es='Inicio'):
+def page_hero(eyebrow_en, eyebrow_es, h1_en, h1_es, lead_en, lead_es, crumb_en='Home', crumb_es='Inicio', tagline_en=None, tagline_es=None):
+    tagline = ''
+    if tagline_en:
+        tagline = '\n  ' + t(tagline_en, tagline_es, 'p', '', 'style="font-family:var(--font-display);font-weight:700;font-size:1.08rem;letter-spacing:.05em;color:var(--gold-bright);margin:.65rem 0 0"')
     return f'''<div class="page-hero"><div class="wrap">
   <div class="breadcrumb"><a href="index.html" data-en="Home" data-es="Inicio">{crumb_es if PAGE_LANG=='es' else crumb_en}</a> / {esc(h1_es if PAGE_LANG=='es' else h1_en)}</div>
   {t(eyebrow_en, eyebrow_es, 'span', 'eyebrow')}
-  {t(h1_en, h1_es, 'h1')}
+  {t(h1_en, h1_es, 'h1')}{tagline}
   {t(lead_en, lead_es, 'p', 'lead')}
 </div></div>'''
 
@@ -658,7 +661,9 @@ def build_medical_city():
     body = page_hero('Our Vision', 'Nuestra visión',
         'Medical City of Boston', 'Medical City of Boston',
         'The hub we are building toward: one destination where prevention, treatment, recovery, and advanced care live together — led by physicians, hand by hand.',
-        'El centro que estamos construyendo: un solo destino donde la prevención, el tratamiento, la recuperación y el cuidado avanzado conviven — dirigido por médicos, mano a mano.')
+        'El centro que estamos construyendo: un solo destino donde la prevención, el tratamiento, la recuperación y el cuidado avanzado conviven — dirigido por médicos, mano a mano.',
+        tagline_en='MCB · Made to Measure · Free to Choose · Boston',
+        tagline_es='MCB · Hecho a Medida · Libre de Elegir · Boston')
     body += f'''
 <section><div class="wrap">
   <div style="margin-bottom:36px">{vision_figure('assets/images/medcity/campus-dawn.jpg',
