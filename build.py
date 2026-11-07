@@ -576,8 +576,8 @@ def build_memorial():
     body += f'''
   <div class="wrap mv2-block">
     {t('Photos', 'Fotos', 'h2', 'mv2-h')}
-    <img class="mv2-banner mv2-banner-en" src="{A}banner-en-family-50k.jpg" alt="Dr. Adriana Feliz Legacy Fund — $50,000 for 40 ICU Recliner Beds — She cared until her last breath">
-    <img class="mv2-banner mv2-banner-es" src="{A}banner-es-family-50k.jpg" alt="Fondo Legado Dra. Adriana Feliz — $50,000 para 40 Sillones Cama UCI — Ella cuidó hasta su último aliento">
+    <img class="mv2-banner mv2-banner-en" src="{A}banner-en-research.jpg" alt="Adriana Feliz Legacy Fund — HLH Research & Scholarship — Let's stop HLH hyperinflammation">
+    <img class="mv2-banner mv2-banner-es" src="{A}banner-es-research.jpg" alt="Fondo Legado Adriana Feliz — Investigación y Becas HLH — Detengamos la hiperinflamación por HLH">
     <div class="mv2-grid">{shot_html}</div>
   </div>
 '''
@@ -586,29 +586,30 @@ def build_memorial():
     body += f'''
   <div class="wrap mv2-block"><div class="mv2-duo">
     <div class="mv2-card">
-      {t('Adriana Feliz Legacy Fund', 'Fondo Legado Adriana Feliz', 'h2', 'mv2-cardh')}
+      {t('Adriana Feliz Legacy Fund — HLH Research & Scholarship', 'Fondo Legado Adriana Feliz — Investigación y Becas HLH', 'h2', 'mv2-cardh')}
       {t('A message from her father, Dr. Roberto Feliz', 'Un mensaje de su padre, el Dr. Roberto Feliz', 'p', 'mv2-from')}
       {t('My name is Dr. Roberto Feliz. My daughter, Adriana Feliz, MD, passed away at the age of 35 after a courageous fight for her life in the Intensive Care Unit at Duke University Hospital.',
          'Mi nombre es el Dr. Roberto Feliz. Mi hija, Adriana Feliz, MD, falleció a los 35 años después de una valiente lucha por su vida en la Unidad de Cuidados Intensivos del Hospital Universitario de Duke.', 'p')}
       {t('During her hospitalization, our family endured days and nights filled with uncertainty, prayer, and hope. As a father, I experienced the heartbreak of watching my daughter critically ill. I also came to understand how much support families need while staying close to someone they love in intensive care.',
          'Durante su hospitalización, nuestra familia vivió días y noches llenos de incertidumbre, oración y esperanza. Como padre, viví el dolor de ver a mi hija en estado crítico. También comprendí cuánto apoyo necesitan las familias mientras permanecen cerca de un ser querido en cuidados intensivos.', 'p')}
-      {t('During these moments, no one wants to leave. Yet exhaustion builds, and comfortable places to rest are limited. A bed, a reclining chair, or a quiet space can provide tremendous relief to a family facing one of the hardest experiences of their lives.',
-         'En esos momentos, nadie quiere alejarse. Pero el cansancio se acumula, y los lugares cómodos para descansar son limitados. Una cama, un sillón reclinable o un espacio tranquilo pueden brindar un alivio enorme a una familia que enfrenta una de las experiencias más difíciles de su vida.', 'p')}
+      {t('What took Adriana from us was HLH — hemophagocytic lymphohistiocytosis — a rare and devastating hyperinflammatory condition that medicine still cannot reliably stop. Our family lived how fast it moves, and how few answers there are when a life depends on them.',
+         'Lo que nos arrebató a Adriana fue la HLH — linfohistiocitosis hemofagocítica — una condición hiperinflamatoria rara y devastadora que la medicina aún no puede detener de manera confiable. Nuestra familia vivió lo rápido que avanza, y lo pocas que son las respuestas cuando una vida depende de ellas.', 'p')}
       {t('In memory of our beloved Adriana, we want to turn our grief into an act of love for other families.',
          'En memoria de nuestra amada Adriana, queremos convertir nuestro dolor en un acto de amor para otras familias.', 'p')}
-      {t('This fundraiser seeks to improve rest and comfort for families of patients in Duke’s ICU. Our goal is to coordinate with the hospital to provide appropriate beds or sleeper chairs for family members and improve designated family rest areas, based on the hospital’s needs and requirements.',
-         'Esta recaudación busca mejorar el descanso y la comodidad de las familias de los pacientes en la UCI de Duke. Nuestro objetivo es coordinar con el hospital para proporcionar camas o sillones cama apropiados para los familiares y mejorar las áreas designadas de descanso familiar, según las necesidades y los requisitos del hospital.', 'p')}
-      {t('This is a family-led initiative. We will share updates about coordination with the hospital and how the funds are used so that donors can see the difference their generosity makes.',
-         'Esta es una iniciativa liderada por la familia. Compartiremos actualizaciones sobre la coordinación con el hospital y sobre cómo se utilizan los fondos, para que los donantes puedan ver la diferencia que hace su generosidad.', 'p')}
-      {t('We cannot take away the pain of having a loved one in intensive care. But together, we can help families face that pain with greater comfort, dignity, and support.',
-         'No podemos eliminar el dolor de tener a un ser querido en cuidados intensivos. Pero juntos, podemos ayudar a las familias a enfrentar ese dolor con mayor comodidad, dignidad y apoyo.', 'p')}
+      {t('In her memory, this fund now carries two missions under The Dr. Adriana Feliz HLH Research Foundation: of the $50,000 goal, $36,000 funds HLH research, and $12,000 funds the ADRIANA Scholarship — $3,000 each to four medical students every year — with $2,000 covering campaign costs. Let’s stop HLH hyperinflammation.',
+         'En su memoria, este fondo ahora tiene dos misiones bajo The Dr. Adriana Feliz HLH Research Foundation: de la meta de $50,000, $36,000 financian la investigación sobre la HLH, y $12,000 financian la Beca ADRIANA — $3,000 para cada uno de cuatro estudiantes de medicina cada año — con $2,000 para los costos de la campaña. Detengamos la hiperinflamación por HLH.', 'p')}
+      {t('The campaign is live, and this is a family-led initiative. We will share updates on how the funds are used so that donors can see the difference their generosity makes.',
+         'La campaña está activa, y esta es una iniciativa liderada por la familia. Compartiremos actualizaciones sobre cómo se utilizan los fondos, para que los donantes puedan ver la diferencia que hace su generosidad.', 'p')}
+      {t('We cannot take away the pain of losing a loved one. But together, we can fund the research that gives the next family a fighting chance — and support the doctors who will carry that fight.',
+         'No podemos eliminar el dolor de perder a un ser querido. Pero juntos, podemos financiar la investigación que le dé a la próxima familia una oportunidad de luchar — y apoyar a los médicos que llevarán adelante esa lucha.', 'p')}
       {t('Every donation, large or small, will be deeply appreciated. If you cannot donate, sharing this fundraiser is another meaningful way to help.',
          'Cada donación, grande o pequeña, será profundamente agradecida. Si no puede donar, compartir esta recaudación es otra forma significativa de ayudar.', 'p')}
-      {t('May Adriana’s memory live on in every family member who finds a place to rest, regain strength, and remain beside someone they love.',
-         'Que la memoria de Adriana viva en cada familiar que encuentre un lugar para descansar, recuperar fuerzas y permanecer junto a la persona que ama.', 'p')}
+      {t('May Adriana’s memory live on in every advance this research makes possible, and in every student who heals in her name.',
+         'Que la memoria de Adriana viva en cada avance que esta investigación haga posible, y en cada estudiante que sane en su nombre.', 'p')}
       {t('With love and gratitude,', 'Con amor y gratitud,', 'p', 'mv2-sign')}
       {t('Dr. Roberto Feliz and Family', 'Dr. Roberto Feliz y familia', 'p', 'mv2-sign')}
       {t('In loving memory of Adriana Feliz, MD.', 'En memoria de Adriana Feliz, MD.', 'p', 'mv2-sign')}
+      {t('$19,808 raised of the $50,000 goal · 102 donors', '$19,808 recaudados de la meta de $50,000 · 102 donantes', 'p', 'mv2-progress')}
       <div class="mv2-cta"><a class="btn btn-gold" href="{GFM}" target="_blank" rel="noopener" data-en="Donate on GoFundMe" data-es="Donar en GoFundMe">{'Donar en GoFundMe' if PAGE_LANG=='es' else 'Donate on GoFundMe'}</a></div>
       <div class="mv2-qr"><img src="assets/images/adriana/qr-gofundme.png" alt="QR — GoFundMe" width="180" height="180" loading="lazy">{t('Scan to donate', 'Escanee para donar', 'p', 'mv2-qrcap')}</div>
     </div>
