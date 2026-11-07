@@ -438,7 +438,7 @@ def build_about():
 # ============================ MEMORIAL ============================
 def build_memorial():
     A = 'assets/images/adriana/'
-    GFM = 'https://www.gofundme.com/f/adriana-feliz-legacy-fund-comfort-for-icu-families'
+    GFM = 'https://www.gofundme.com/f/adriana-feliz-legacy-fund-hlh-research-scholarship'
 
     # ---- profile header: cover + circular portrait + name ----
     body = f'''
